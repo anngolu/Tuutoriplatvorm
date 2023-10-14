@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
@@ -8,12 +9,13 @@ namespace tuutoriplatvorm.Model
 {
     public class Tutors
     {
+        [Key]
         public required string Name {get;init;}
         public required Town Town {get;init;}
         public required University University {get;init;}
         public required Speciality Speciality {get;init;}
         public required string Mail {get;init;}
-        public required Subject Subject {get;init;}
+        public required Subject Subject {get;init;} //Here should be made an option to choose several subjects
     }
     [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum Subject{

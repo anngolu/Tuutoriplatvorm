@@ -18,12 +18,23 @@ namespace tuutoriplatvorm.Model
                     new Tutors
                     {
                         Name="Levi Faster",
-                        Town=1,
-                        University=2,
-                        Speciality=2,
+                        Town= Town.Tallinn,
+                        University= University.TallinnUniversity,
+                        Speciality= Speciality.CyberSecurity,
                         Mail="mail@gmail.com",
-                        Subject=4,
-                    }
+                        Subject= Subject.DiscMaths,
+                    },
+                    builder.Entity<Students>().HasData(
+                        new Students{
+                        Name="Alar Kaitse",
+                        Town= Town.Tallinn,
+                        University= University.TallinnUniversity,
+                        Speciality= Speciality.CyberSecurity,
+                        Mail="mail1@gmail.com",
+                        Subject = Subject.Maths,
+                        }
+
+                    )
                 );
          }
     }
