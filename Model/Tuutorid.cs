@@ -50,5 +50,6 @@ namespace tuutoriplatvorm.Model
         Tallinn=2,
         Narva=3,
         KohtlaJarva=4,
+        //ready
     }
 }
