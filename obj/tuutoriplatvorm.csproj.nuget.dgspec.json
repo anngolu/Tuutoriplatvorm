@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\HP\\Desktop\\Tuutoriteplatvorm\\tuutoriplatvorm\\tuutoriplatvorm.csproj": {}
+    "c:\\Users\\HP\\Desktop\\Tuutoriteplatvorm\\tuutoriplatvorm\\tuutoriplatvorm.csproj": {}
   },
   "projects": {
-    "C:\\Users\\HP\\Desktop\\Tuutoriteplatvorm\\tuutoriplatvorm\\tuutoriplatvorm.csproj": {
+    "c:\\Users\\HP\\Desktop\\Tuutoriteplatvorm\\tuutoriplatvorm\\tuutoriplatvorm.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\HP\\Desktop\\Tuutoriteplatvorm\\tuutoriplatvorm\\tuutoriplatvorm.csproj",
+        "projectUniqueName": "c:\\Users\\HP\\Desktop\\Tuutoriteplatvorm\\tuutoriplatvorm\\tuutoriplatvorm.csproj",
         "projectName": "tuutoriplatvorm",
-        "projectPath": "C:\\Users\\HP\\Desktop\\Tuutoriteplatvorm\\tuutoriplatvorm\\tuutoriplatvorm.csproj",
+        "projectPath": "c:\\Users\\HP\\Desktop\\Tuutoriteplatvorm\\tuutoriplatvorm\\tuutoriplatvorm.csproj",
         "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\HP\\Desktop\\Tuutoriteplatvorm\\tuutoriplatvorm\\obj\\",
+        "outputPath": "c:\\Users\\HP\\Desktop\\Tuutoriteplatvorm\\tuutoriplatvorm\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -25,8 +25,6 @@
           "net7.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -48,6 +46,10 @@
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[7.0.4, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.12, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
