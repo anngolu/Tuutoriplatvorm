@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace tuutoriplatvorm.Model
 {
-    public class Students 
+    public class Students : Tutors
     {
         public required string Name { get; init; }
         public required Town Town { get; init; }

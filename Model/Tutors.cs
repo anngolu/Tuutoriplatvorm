@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace tuutoriplatvorm.Model
 {
-    public class Tutors
+    public class Tuutorid
     {
         public required string Name {get;init;}
         public required Town Town {get;init;}
