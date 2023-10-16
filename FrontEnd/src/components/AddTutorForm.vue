@@ -12,7 +12,7 @@
               name="code"
               v-model="tutor.code"
               class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-              placeholder="Matrikli nr"
+              placeholder="Tuutori ID"
             />
           </div>
 
@@ -51,22 +51,49 @@
           </div>
 
           <div>
-            <label for="status">Gender</label>
+            <label for="university">Ülikool</label>
+            <input
+              id="university"
+              name="university"
+              v-model="tutor.university"
+              class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              placeholder="Ülikool"
+            />
+          </div>
 
-            <select id="gender" v-model="tutor.gender">
+          <div>
+            <label for="faculty">Teaduskond</label>
+            <input
+              id="faculty"
+              name="faculty"
+              v-model="tutor.faculty"
+              class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              placeholder="Teaduskond"
+            />
+          </div>
+
+          <div>
+            <label for="status">Gender</label>
+            <select
+              id="gender"
+              name="status"
+              v-model="tutor.gender"
+              class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              placeholder="Olek2"
+            >
               <option value="M">Male</option>
               <option value="N">Female</option>
             </select>
           </div>
 
           <div>
-            <label for="birthday">Sünnikuupäev</label>
+            <label for="hourlyPrice">Tunnihind</label>
             <input
-              type="date"
-              id="birthday"
-              name="birthday"
-              v-model="tutor.birthday"
-              class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              type="number"
+              id="hourlyPrice"
+              name="hourlyPrice"
+              v-model="tutor.hourlyPrice"
+              class="appearance-none rounded-none relative block w-full px-3 py-2 border border-blue-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
             />
           </div>
         </div>
@@ -74,7 +101,7 @@
         <div>
           <button
             @click.prevent="submitForm"
-            class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-900 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             <span class="absolute left-0 inset-y-0 flex items-center pl-3">
             </span>
@@ -97,7 +124,7 @@ const tutor: Ref<Tutor> = ref({
   surname: '',
   status: TutorStatus.Active,
   gender: TutorGender.Male,
-  birthday: new Date(),
+  hourlyPrice: 0,
   code: '',
 });
 const { addTutor } = useTutorsStore();
@@ -111,7 +138,7 @@ const submitForm = () => {
   tutor.value.code = '';
   tutor.value.status = TutorStatus.Active;
   tutor.value.gender = TutorGender.Male;
-  tutor.value.birthday = new Date();
+  tutor.value.hourlyPrice = 0;
   router.push({ name: 'Tuutorid' });
 };
 </script>

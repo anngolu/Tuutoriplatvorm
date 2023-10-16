@@ -6,10 +6,12 @@
         <Column field="code" header="Tuutori ID" />
         <Column field="name" header="Nimi" />
         <Column field="surname" header="Perenimi" />
+        <Column field="university" header="Ülikool" />
+        <Column field="faculty" header="Teaduskond" />
         <Column field="status" header="Olek" />
         <Column field="gender" header="Sugu" />
 
-        <Column field="age" header="Tunnihind" />
+        <Column field="hourlyPrice" header="Tunnihind" />
       </DataTable>
     </div>
   </div>
