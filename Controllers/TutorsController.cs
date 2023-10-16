@@ -25,7 +25,7 @@ namespace tuutoriplatvorm.Controllers
                 !subject.HasValue || s.Subject == subject!.Value));
             }
 
-            [HttpGet]
+        [HttpGet]
         public IActionResult GetTutor(){
             return Ok(_context.TutorList);
         }
