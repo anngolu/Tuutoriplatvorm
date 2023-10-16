@@ -7,7 +7,7 @@ import MainPageVue from '@/views/MainPage.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: '/mainpage',
+    path: '/',
     name: 'Avaleht',
     component: MainPageVue,
     props: { title: 'Avaleht' },

@@ -1,5 +1,5 @@
 <script lang='ts' setup>
-import MainPageVue from './MainPage.vue'
+import MainPageVue from '@/components/MainPage.vue'
 </script>
 
 <template>
