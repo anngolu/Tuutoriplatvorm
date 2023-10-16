@@ -23,11 +23,11 @@ namespace tuutoriplatvorm.Model
                     builder.Entity<Students>().HasData(
                         new Students{
                         StName="Alar Kaitse",
-                        StTown= Town.Tallinn,
-                        University= University.TallinnUniversity,
-                        Speciality= Speciality.CyberSecurity,
+                        StTown= StTown.Tallinn,
+                        University= StUniversity.TallinnUniversity,
+                        Speciality= StSpeciality.CyberSecurity,
                         StMail="mail1@gmail.com",
-                        Subject = Subject.Maths,
+                        Subject = StSubject.Maths,
                         }
 
                     )

@@ -4,16 +4,16 @@ namespace tuutoriplatvorm.Model
 {
     public class Students 
     {
-        
+        public int Id {get; init; }
         public required string StName { get; init; }
-        public required Town StTown { get; init; }
-        public required University University { get; init; }
-         public required Speciality Speciality { get; init; }
+        public required StTown StTown { get; init; }
+        public required StUniversity University { get; init; }
+         public required StSpeciality Speciality { get; init; }
         public required string StMail { get; init; }
-        public required Subject Subject { get; init; }
+        public required StSubject Subject { get; init; }
     }
     [JsonConverter(typeof(JsonStringEnumConverter))]
-    public enum Subject{
+    public enum StSubject{
         Economics=1,
         Maths=2,
         Programming=3,
@@ -23,7 +23,7 @@ namespace tuutoriplatvorm.Model
 
     }
     [JsonConverter(typeof(JsonStringEnumConverter))]
-    public enum Speciality{
+    public enum StSpeciality{
         BusinessIt=1,
         Economics=2,
         Informatics=3,
@@ -34,7 +34,7 @@ namespace tuutoriplatvorm.Model
 
     }
     [JsonConverter(typeof(JsonStringEnumConverter))]
-    public enum University{
+    public enum StUniversity{
         UniversityOfTartu =1,
         TallinnTechnicalUniversity =2,
         TallinnUniversity =3,
@@ -42,7 +42,7 @@ namespace tuutoriplatvorm.Model
         TartuHigherArtSchool=5,
     }
     [JsonConverter(typeof(JsonStringEnumConverter))]
-    public enum Town{
+    public enum StTown{
         Tartu=1,
         Tallinn=2,
         Narva=3,

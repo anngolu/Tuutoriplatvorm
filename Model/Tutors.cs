@@ -1,15 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace tuutoriplatvorm.Model
 {
     public class Tutors
     {
-        [Key]
+        public int Id {get; init; }
         public required string Name {get;init;}
         public required Town Town {get;init;}
         public required University University {get;init;}
