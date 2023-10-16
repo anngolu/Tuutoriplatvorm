@@ -21,7 +21,11 @@ namespace tuutoriplatvorm.Controllers
         public IActionResult GetStudent(){
             return Ok(_context.StudentList);
         }
-
+        [HttpPost]
+        public IActionResult Create([FromBody] Students student){
+            var dbStudent = _context.StudentList?.Find(student.Id)
+            
+        }
             
     }
 }
