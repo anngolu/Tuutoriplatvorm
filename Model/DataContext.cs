@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
 namespace tuutoriplatvorm.Model
@@ -26,11 +22,11 @@ namespace tuutoriplatvorm.Model
                     },
                     builder.Entity<Students>().HasData(
                         new Students{
-                        Name="Alar Kaitse",
-                        Town= Town.Tallinn,
+                        StName="Alar Kaitse",
+                        StTown= Town.Tallinn,
                         University= University.TallinnUniversity,
                         Speciality= Speciality.CyberSecurity,
-                        Mail="mail1@gmail.com",
+                        StMail="mail1@gmail.com",
                         Subject = Subject.Maths,
                         }
 
