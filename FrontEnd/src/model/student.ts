@@ -11,7 +11,7 @@ export interface Student {
 }
 
 export interface State {
-  Students: Student[];
+  students: Student[];
 }
 
 export enum StudentStatus {

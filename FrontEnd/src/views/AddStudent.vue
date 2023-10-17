@@ -1,5 +1,5 @@
 <template>
-    <AddStudetForm />
+    <AddStudentForm />
   </template>
   
   <script setup lang="ts">

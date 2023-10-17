@@ -126,7 +126,10 @@ const tutor: Ref<Tutor> = ref({
   gender: TutorGender.Male,
   hourlyPrice: 0,
   code: '',
+  university: '', // Add this property
+  faculty: '',    // Add this property
 });
+
 const { addTutor } = useTutorsStore();
 const router = useRouter();
 
