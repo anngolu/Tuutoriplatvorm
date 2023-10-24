@@ -9,6 +9,7 @@ export interface Tutor {
   gender?: TutorGender;
   /*  description: String; */
   hourlyPrice?: number;
+  grade?: number;
 }
 
 export interface State {

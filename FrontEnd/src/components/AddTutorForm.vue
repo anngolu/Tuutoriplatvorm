@@ -96,6 +96,8 @@
               class="appearance-none rounded-none relative block w-full px-3 py-2 border border-blue-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
             />
           </div>
+
+          
         </div>
 
         <div>
@@ -128,6 +130,7 @@ const tutor: Ref<Tutor> = ref({
   code: '',
   university: '', // Add this property
   faculty: '',    // Add this property
+  grade: 0,
 });
 
 const { addTutor } = useTutorsStore();
@@ -142,6 +145,7 @@ const submitForm = () => {
   tutor.value.status = TutorStatus.Active;
   tutor.value.gender = TutorGender.Male;
   tutor.value.hourlyPrice = 0;
+  tutor.value.grade = 0;
   router.push({ name: 'Tuutorid' });
 };
 </script>

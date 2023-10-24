@@ -13,6 +13,7 @@ export const useTutorsStore = defineStore('tutorsStore', () => {
       faculty: 'IT',
       status: TutorStatus.NonActive,
       hourlyPrice: 10,
+      grade: 4.0,
     },
     {
       name: 'Eesnimi2',
@@ -23,6 +24,7 @@ export const useTutorsStore = defineStore('tutorsStore', () => {
       gender: TutorGender.Female,
       status: TutorStatus.Active,
       hourlyPrice: 20,
+      grade: 4.7,
     },
   ]);
 

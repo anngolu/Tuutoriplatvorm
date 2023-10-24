@@ -10,8 +10,8 @@
         <Column field="faculty" header="Teaduskond" />
         <Column field="status" header="Olek" />
         <Column field="gender" header="Sugu" />
-
         <Column field="hourlyPrice" header="Tunnihind" />
+        <Column field="grade" header="Reiting" />
       </DataTable>
     </div>
   </div>
@@ -28,6 +28,7 @@ const tutorsWithAge = tutors.map((tutor) => {
   const birthDate = new Date(tutor.birthday);
   const today = new Date();
   const ageDiff = today.getFullYear() - birthDate.getFullYear();
+  
   const birthMonth = birthDate.getMonth();
   const currentMonth = today.getMonth();
 
