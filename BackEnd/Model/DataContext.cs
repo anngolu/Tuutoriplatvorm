@@ -13,6 +13,7 @@ namespace tuutoriplatvorm.Model
                 builder.Entity<Tutors>().HasData(
                     new Tutors
                     {
+                        Id =1,
                         Name="Levi Faster",
                         Town= Town.Tallinn,
                         University= University.TallinnUniversity,
@@ -22,6 +23,7 @@ namespace tuutoriplatvorm.Model
                     },
                     builder.Entity<Students>().HasData(
                         new Students{
+                        Id = 1,
                         StName="Alar Kaitse",
                         StTown= StTown.Tallinn,
                         University= StUniversity.TallinnUniversity,
