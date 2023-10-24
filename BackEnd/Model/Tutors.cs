@@ -11,6 +11,16 @@ namespace tuutoriplatvorm.Model
         public required Speciality Speciality {get;init;}
         public required string Mail {get;init;}
         public required Subject Subject {get;init;} //Here should be made an option to choose several subjects
+        public required  Quality Grade{get;init;}
+    }
+    [JsonConverter(typeof(JsonStringEnumConverter))]
+        public enum Quality{
+        SuperBad=1,
+        Bad=2,
+        Normal=3,
+        Good=4,
+        Excelent=5,
+
     }
     [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum Subject{
