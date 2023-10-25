@@ -86,9 +86,9 @@ export const useStudentsStore = defineStore('tutorsStore', () => {
   return {
     students,
     load,
-    getExerciseById: getStudentById,
-    addExercise: addStudent,
-    updateExercise: updateStudent,
-    //deleteExercise: deleteStudent,
+    getStudentById,
+    addStudent,
+    updateStudent,
+    //deleteStudent,
   };
 });

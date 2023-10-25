@@ -94,7 +94,7 @@ export const useTutorsStore = defineStore('tutorsStore', () => {
     getTutorById,
     addTutor,
     updateTutors,
-    //deleteExercise: deleteStudent,
-    //filterExercisesByTitle: filterStudentByTitle,
+    //deleteStudent,
+    //filterTutorByTitle,
   };
 });
