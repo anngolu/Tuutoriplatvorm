@@ -127,6 +127,7 @@ const submitForm = () => {
   student.value.code = '';
   student.value.status = StudentStatus.Active;
   student.value.gender = StudentGender.Male;
+  
   router.push({ name: 'Tudengid' });
 };
 </script>
