@@ -1,27 +1,15 @@
 export interface Tutor {
-  code: string;
+  id?: number;
   name: string;
-  surname: string;
+  town: string;
   university: string;
-  faculty: string;
-
-  status?: TutorStatus;
-  gender?: TutorGender;
-  /*  description: String; */
+  speciality: string;
+  mail:string;
+  subject: string;
   hourlyPrice?: number;
   grade?: number;
 }
 
 export interface State {
   Tutors: Tutor[];
-}
-
-export enum TutorStatus {
-  Active = 'aktiivne',
-  NonActive = 'mitteaktiivne',
-}
-
-export enum TutorGender {
-  Male = 'M',
-  Female = 'N',
 }

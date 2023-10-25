@@ -28,10 +28,10 @@ namespace tuutoriplatvorm.Model
                     Id = 1,
                     StName = "Alar Kaitse",
                     StTown = StTown.Tallinn,
-                    University = StUniversity.TallinnUniversity,
-                    Speciality = StSpeciality.CyberSecurity,
+                    StUniversity = StUniversity.TallinnUniversity,
+                    StSpeciality = StSpeciality.CyberSecurity,
                     StMail = "mail1@gmail.com",
-                    Subject = StSubject.Maths,
+                    StSubject = StSubject.Maths,
                 }
             );
         }

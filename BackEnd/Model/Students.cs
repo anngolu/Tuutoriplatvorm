@@ -4,13 +4,13 @@ namespace tuutoriplatvorm.Model
 {
     public class Students
     {
-        public int Id { get; init; }
+        public int? Id { get; init; }
         public required string StName { get; init; }
         public required StTown StTown { get; init; }
-        public required StUniversity University { get; init; }
-        public required StSpeciality Speciality { get; init; }
+        public required StUniversity StUniversity { get; init; }
+        public required StSpeciality StSpeciality { get; init; }
         public required string StMail { get; init; }
-        public required StSubject Subject { get; init; }
+        public required StSubject StSubject { get; init; }
     }
     [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum StSubject
