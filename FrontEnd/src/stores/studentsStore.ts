@@ -1,10 +1,10 @@
 import {  Student } from '@/model/student';
 import { ref } from 'vue';
 import { defineStore } from 'pinia';
-import useApi, { useApiRawRequest } from '@/model/api';
+import useApi from '@/model/api'; //{ useApiRawRequest }
 
-export const useStudentsStore = defineStore('exercisesStore', () => {
-  const apiGetStudents = useApi<Student[]>('exercises');
+export const useStudentsStore = defineStore('tutorsStore', () => {
+  const apiGetStudents = useApi<Student[]>('students');
   const students = ref<Student[]>([]);
   let allStudents: Student[] = [];
 
@@ -27,74 +27,68 @@ export const useStudentsStore = defineStore('exercisesStore', () => {
     return allStudents.find((student) => student.id === id);
   };
 
-  const addExercise = async (exercise: Student) => {
-    const apiAddExercise = useApi<Student>('exercises', {
+  const addStudent = async (student: Student) => {
+    const apiAddSudent = useApi<Student>('students', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(exercise),
+      body: JSON.stringify(student),
     });
 
-    await apiAddExercise.request();
-    if (apiAddExercise.response.value) {
-      allStudents.push(apiAddExercise.response.value!);
+    await apiAddSudent.request();
+    if (apiAddSudent.response.value) {
+      allStudents.push(apiAddSudent.response.value!);
       students.value = allStudents;
     }
   };
 
-  const updateExercise = async (exercise: Student) => {
-    const apiAddExercise = useApi<Student>('exercises/' + exercise.id, {
+  const updateStudent = async (student: Student) => {
+    const apiAddStudent = useApi<Student>('students/' + student.id, {
       method: 'PUT',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(exercise),
+      body: JSON.stringify(student),
     });
 
-    await apiAddExercise.request();
-    if (apiAddExercise.response.value) {
+    await apiAddStudent.request();
+    if (apiAddStudent.response.value) {
       load();
     }
   };
 
-  const deleteExercise = async (exercise: Student) => {
-    const deleteExerciseRequest = useApiRawRequest(`exercises/${exercise.id}`, {
-      method: 'DELETE',
-    });
+  // const deleteStudent = async (student: Student) => {
+  //   const deleteStudentRequest = useApiRawRequest(`students/${student.id}`, {
+  //     method: 'DELETE',
+  //   });
 
-    const res = await deleteExerciseRequest();
+  //   const res = await deleteStudentRequest();
 
-    if (res.status === 204) {
-      let id = allStudents.indexOf(exercise);
+  //   if (res.status === 204) {
+  //     let id = allStudents.indexOf(student);
 
-      if (id !== -1) {
-        allStudents.splice(id, 1);
-      }
+  //     if (id !== -1) {
+  //       allStudents.splice(id, 1);
+  //     }
 
-      id = students.value.indexOf(exercise);
+  //     id = students.value.indexOf(student);
 
-      if (id !== -1) {
-        students.value.splice(id, 1);
-      }
-    }
-  };
+  //     if (id !== -1) {
+  //       students.value.splice(id, 1);
+  //     }
+  //   }
+  // };
 
-  const filterExercisesByTitle = (exerciseTitleFilter: string) => {
-    students.value = allStudents.filter((x) =>
-      x.title.startsWith(exerciseTitleFilter),
-    );
-  };
 
   return {
-    exercises: students,
+    students,
     load,
     getExerciseById: getStudentById,
-    addExercise,
-    updateExercise,
-    deleteExercise,
-    filterExercisesByTitle,
+    addExercise: addStudent,
+    updateExercise: updateStudent,
+    //deleteExercise: deleteStudent,
   };
 });
