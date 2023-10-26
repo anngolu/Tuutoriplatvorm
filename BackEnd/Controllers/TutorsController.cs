@@ -14,18 +14,26 @@ namespace tuutoriplatvorm.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetTutor(
-            [FromQuery] Town? town,
-            [FromQuery] University? university,
-            [FromQuery] Speciality? speciality,
-            [FromQuery] Subject? subject)
+        public IActionResult GetTutor()
         {
-            return Ok(_context.TutorList?.Where(s =>
-            !town.HasValue || s.Town == town.Value &&
-            !university.HasValue! || s.University == university!.Value &&
-            !speciality.HasValue || s.Speciality == speciality!.Value &&
-            !subject.HasValue || s.Subject == subject!.Value));
+            return Ok(_context.TutorList);
         }
+
+
+        // [HttpGet]
+        // public IActionResult GetTutor(
+        //     [FromQuery] Town? town,
+        //     [FromQuery] University? university,
+        //     [FromQuery] Speciality? speciality,
+        //     [FromQuery] Subject? subject)
+        // {
+        //     return Ok(_context.TutorList?.Where(s =>
+        //     !town.HasValue || s.Town == town.Value &&
+        //     !university.HasValue! || s.University == university!.Value &&
+        //     !speciality.HasValue || s.Speciality == speciality!.Value &&
+        //     !subject.HasValue || s.Subject == subject!.Value));
+        // }
+
 
         [HttpGet("{id}")]
         public IActionResult GetDetailById(int? id)

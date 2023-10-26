@@ -13,25 +13,38 @@ namespace tuutoriplatvorm.Model
             builder.Entity<Tutors>().HasData(
                 new Tutors
                 {
-                    Id = 1,
                     Name = "Levi Faster",
-                    Town = Town.Tallinn,
-                    University = University.TallinnUniversity,
-                    Speciality = Speciality.CyberSecurity,
+                    Town = "Tallinn",
+                    University = "TallinnUniversity",
+                    Speciality = "CyberSecurity",
                     Mail = "mail@gmail.com",
-                    Subject = Subject.DiscMaths,
+                    Subject = "DiscMaths",
+                    //Id = 1,
+                    // Name = "Levi Faster",
+                    // Town = Town.Tallinn,
+                    // University = University.TallinnUniversity,
+                    // Speciality = Speciality.CyberSecurity,
+                    // Mail = "mail@gmail.com",
+                    // Subject = Subject.DiscMaths,
                 }
             );
             builder.Entity<Students>().HasData(
                 new Students
                 {
-                    Id = 1,
+                    // Id = 1,
+                    // StName = "Alar Kaitse",
+                    // StTown = StTown.Tallinn,
+                    // StUniversity = StUniversity.TallinnUniversity,
+                    // StSpeciality = StSpeciality.CyberSecurity,
+                    // StMail = "mail1@gmail.com",
+                    // StSubject = StSubject.Maths,
+                    //Id = 1,
                     StName = "Alar Kaitse",
-                    StTown = StTown.Tallinn,
-                    StUniversity = StUniversity.TallinnUniversity,
-                    StSpeciality = StSpeciality.CyberSecurity,
+                    StTown = "Tallinn",
+                    StUniversity = "TallinnUniversity",
+                    StSpeciality = "CyberSecurity",
                     StMail = "mail1@gmail.com",
-                    StSubject = StSubject.Maths,
+                    StSubject = "Maths",
                 }
             );
         }

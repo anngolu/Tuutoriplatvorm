@@ -1,11 +1,11 @@
 export interface Tutor {
   id?: number;
   name: string;
-  town: string;
+  town?: string;
   university?: string;
-  speciality: string;
-  mail: string;
-  subject: string;
+  speciality?: string;
+  mail?: string;
+  subject?: string;
   hourlyPrice?: number;
   grade?: number;
 }
