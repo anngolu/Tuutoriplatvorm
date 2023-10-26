@@ -1,7 +1,7 @@
 export interface Student {
   id?: number;
   stname: string;
-  stTown: string;
+  sttown: string;
   stuniversity: string;
   stspeciality: string;
   stmail: string;

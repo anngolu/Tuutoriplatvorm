@@ -3,7 +3,7 @@ import { ref } from 'vue';
 import { defineStore } from 'pinia';
 import useApi from '@/model/api'; //{ useApiRawRequest }
 
-export const useStudentsStore = defineStore('tutorsStore', () => {
+export const useStudentsStore = defineStore('studentsStore', () => {
   const apiGetStudents = useApi<Student[]>('students');
   const students = ref<Student[]>([]);
   let allStudents: Student[] = [];

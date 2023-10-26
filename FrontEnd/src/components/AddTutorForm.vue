@@ -5,19 +5,9 @@
     <form class="max-w-md w-full space-y-8">
       <div class="rounded-md shadow-sm -space-y-px">
         <div class="mt-8 space-y-6">
-          <div>
-            <label for="code">Tuutori id</label>
-            <input
-              id="code"
-              name="code"
-              v-model="tutor.code"
-              class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-              placeholder="Tuutori ID"
-            />
-          </div>
 
           <div>
-            <label for="name">Eesnimi</label>
+            <label for="name">Nimi</label>
             <input
               id="name"
               name="name"
@@ -27,31 +17,18 @@
             />
           </div>
           <div>
-            <label for="surname">Perenimi</label>
+            <label for="town">Linn</label>
             <input
-              id="surname"
-              name="surname"
-              v-model="tutor.surname"
+              id="town"
+              name="town"
+              v-model="tutor.town"
               class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-              placeholder="Perenimi"
+              placeholder="Linn"
             />
-          </div>
-          <div>
-            <label for="status">Olek</label>
-            <select
-              id="status"
-              name="status"
-              v-model="tutor.status"
-              class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-              placeholder="Olek"
-            >
-              <option value="aktiivne">Aktiivne</option>
-              <option value="mitteaktiivne">Mitteaktiivne</option>
-            </select>
           </div>
 
           <div>
-            <label for="university">Ülikool</label>
+            <label for="university">Ülikool (kui veel õpid)</label>
             <input
               id="university"
               name="university"
@@ -62,28 +39,35 @@
           </div>
 
           <div>
-            <label for="faculty">Teaduskond</label>
+            <label for="faculty">Fakulteet</label>
             <input
               id="faculty"
               name="faculty"
-              v-model="tutor.faculty"
+              v-model="tutor.speciality"
               class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-              placeholder="Teaduskond"
+              placeholder="Fakulteet"
             />
           </div>
 
           <div>
-            <label for="status">Gender</label>
-            <select
-              id="gender"
-              name="status"
-              v-model="tutor.gender"
+            <label for="mail">Mail</label>
+            <input
+              id="mail"
+              name="mail"
+              v-model="tutor.mail"
               class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-              placeholder="Olek2"
-            >
-              <option value="M">Male</option>
-              <option value="N">Female</option>
-            </select>
+              placeholder="mail"
+            />
+          </div>
+          <div>
+            <label for="subject">Aine</label>
+            <input
+              id="subject"
+              name="subject"
+              v-model="tutor.subject"
+              class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              placeholder="Aine"
+            />
           </div>
 
           <div>
@@ -116,21 +100,21 @@
 </template>
 
 <script setup lang="ts">
-import { Tutor, TutorGender, TutorStatus } from '@/model/tutor';
+import { Tutor } from '@/model/tutor';
 import { useTutorsStore } from '@/stores/tutorsStore';
 import { Ref, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 const tutor: Ref<Tutor> = ref({
+
   name: '',
-  surname: '',
-  status: TutorStatus.Active,
-  gender: TutorGender.Male,
-  hourlyPrice: 0,
-  code: '',
-  university: '', // Add this property
-  faculty: '',    // Add this property
-  grade: 0,
+  town: '',
+  university: '',
+  speciality: '',
+  mail: '',
+  subject: '',
+  hourlyPrice: undefined,
+
 });
 
 const { addTutor } = useTutorsStore();
@@ -140,12 +124,13 @@ const submitForm = () => {
   addTutor({ ...tutor.value });
 
   tutor.value.name = '';
-  tutor.value.surname = '';
-  tutor.value.code = '';
-  tutor.value.status = TutorStatus.Active;
-  tutor.value.gender = TutorGender.Male;
+  tutor.value.town = '';
+  tutor.value.university = '';
+  tutor.value.speciality = '';
+  tutor.value.mail = '';
+  tutor.value.subject = '';
   tutor.value.hourlyPrice = 0;
-  tutor.value.grade = 0;
+
   router.push({ name: 'Tuutorid' });
 };
 </script>
