@@ -1,13 +1,12 @@
-<template>
+<!-- <template>
     <div>
-      {{ student.code }} :{{ student.name }} : {{ student.surname }} :
-      {{ student.university }} : {{ student.subject }} {{ student.status }} :
-      {{ student.gender }}
+      {{ student.id }} : {{ student.stname }} :{{ student.sttown }} : {{ student.stuniversity }} :
+      {{ student.stspeciality }} : {{ student.stmail }} {{ student.stsubject }}
     </div>
   </template>
   <script setup lang="ts">
   import { Student } from '@/model/student';
   defineProps<{ student: Student }>();
   </script>
-  @/model/tutor
+  @/model/tutor -->
   

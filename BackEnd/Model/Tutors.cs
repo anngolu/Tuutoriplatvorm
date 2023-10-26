@@ -4,14 +4,22 @@ namespace tuutoriplatvorm.Model
 {
     public class Tutors
     {
-        public int Id {get; init; }
+        public int? Id {get; init; }
         public required string Name {get;init;}
-        public required Town Town {get;init;}
-        public required University University {get;init;}
-        public required Speciality Speciality {get;init;}
-        public required string Mail {get;init;}
-        public required Subject Subject {get;init;} //Here should be made an option to choose several subjects
-        public  Quality? Grade{get;init;}
+        public string? Town {get;init;}
+        public string? University {get;init;}
+        public string? Speciality {get;init;}
+        public string? Mail {get;init;}
+        public string? Subject {get;init;} //Here should be made an option to choose several subjects
+        public double? HourlyPrice { get; init; }
+        public  int? Grade{get;init;}
+        // public Town? Town {get;init;}
+        // public University? University {get;init;}
+        // public Speciality? Speciality {get;init;}
+        // public string? Mail {get;init;}
+        // public Subject? Subject {get;init;} //Here should be made an option to choose several subjects
+        // public double? HourlyPrice { get; init; }
+        // public  Quality? Grade{get;init;}
     }
     [JsonConverter(typeof(JsonStringEnumConverter))]
         public enum Quality{

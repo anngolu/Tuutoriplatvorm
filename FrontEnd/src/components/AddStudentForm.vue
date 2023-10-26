@@ -3,49 +3,27 @@
     <form class="max-w-md w-full space-y-8">
       <div class="rounded-md shadow-sm -space-y-px">
         <div class="mt-8 space-y-6">
-          <div>
-            <label for="code">Tudengi id</label>
-            <input
-              id="code"
-              name="code"
-              v-model="student.code"
-              class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-              placeholder="Tudengi ID"
-            />
-          </div>
 
           <div>
-            <label for="name">Eesnimi</label>
+            <label for="name">Nimi</label>
             <input
               id="name"
               name="name"
-              v-model="student.name"
+              v-model="student.stName"
               class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
               placeholder="Nimi"
             />
           </div>
+
           <div>
-            <label for="surname">Perenimi</label>
+            <label for="town">Linn</label>
             <input
-              id="surname"
-              name="surname"
-              v-model="student.surname"
+              id="town"
+              name="town"
+              v-model="student.stTown"
               class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-              placeholder="Perenimi"
+              placeholder="Linn"
             />
-          </div>
-          <div>
-            <label for="status">Olek</label>
-            <select
-              id="status"
-              name="status"
-              v-model="student.status"
-              class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-              placeholder="Olek"
-            >
-              <option value="aktiivne">Aktiivne</option>
-              <option value="mitteaktiivne">Mitteaktiivne</option>
-            </select>
           </div>
 
           <div>
@@ -53,9 +31,31 @@
             <input
               id="university"
               name="university"
-              v-model="student.university"
+              v-model="student.stUniversity"
               class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
               placeholder="Ülikool"
+            />
+          </div>
+
+          <div>
+            <label for="speciality">Fakulteet</label>
+            <input
+              id="speciality"
+              name="speciality"
+              v-model="student.stSpeciality"
+              class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              placeholder="Fakulteet"
+            />
+          </div>
+
+          <div>
+            <label for="mail">Mail</label>
+            <input
+              id="mail"
+              name="mail"
+              v-model="student.stMail"
+              class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              placeholder="Mail"
             />
           </div>
 
@@ -64,24 +64,10 @@
             <input
               id="subject"
               name="subject"
-              v-model="student.subject"
+              v-model="student.stSubject"
               class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
               placeholder="Ained lisaõppimiseks"
             />
-          </div>
-
-          <div>
-            <label for="status">Gender</label>
-            <select
-              id="gender"
-              name="status"
-              v-model="student.gender"
-              class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-              placeholder="Olek2"
-            >
-              <option value="M">Male</option>
-              <option value="N">Female</option>
-            </select>
           </div>
 
           <div>
@@ -101,33 +87,39 @@
 </template>
 
 <script setup lang="ts">
-import { Student, StudentGender, StudentStatus } from '@/model/student';
-import { useStudentStore } from '@/stores/studentsStore';
+import { Student } from '@/model/student';
+import { useStudentsStore } from '@/stores/studentsStore';
 import { Ref, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 const student: Ref<Student> = ref({
-  name: '',
-  surname: '',
-  status: StudentStatus.Active,
-  gender: StudentGender.Male,
-  code: '',
-  university: '', // Add this property
-  subject: '',    // Add this property
+  
+  stName: '',
+  stTown: '',
+  stUniversity: '',
+  stSpeciality: '',
+  stMail: '',
+  stSubject: '',    // Add this property
 });
 
-const { addStudent } = useStudentStore();
+const { addStudent } = useStudentsStore();
 const router = useRouter();
 
 const submitForm = () => {
   addStudent({ ...student.value });
 
-  student.value.name = '';
-  student.value.surname = '';
-  student.value.code = '';
-  student.value.status = StudentStatus.Active;
-  student.value.gender = StudentGender.Male;
+  student.value.stName = '';
+  student.value.stTown = '';
+  student.value.stUniversity = '';
+  student.value.stSpeciality = '';
+  student.value.stMail = '';
+  student.value.stSubject = ''
+  
   router.push({ name: 'Tudengid' });
 };
 </script>
+
+function useStudentStore(): { addStudent: any; } {
+  throw new Error('Function not implemented.');
+}
 @/model/student @/stores/studentsStore

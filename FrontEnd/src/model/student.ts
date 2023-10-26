@@ -1,25 +1,12 @@
 export interface Student {
-  code: string;
-  name: string;
-  surname: string;
-  university: string;
-  subject: string;
-
-  status?: StudentStatus;
-  gender?: StudentGender;
-  /*  description: String; */
+  id?: number;
+  stName: string;
+  stTown?: string;
+  stUniversity?: string;
+  stSpeciality?: string;
+  stMail?: string;
+  stSubject?: string;
 }
-
 export interface State {
-  students: Student[];
-}
-
-export enum StudentStatus {
-  Active = 'aktiivne',
-  NonActive = 'mitteaktiivne',
-}
-
-export enum StudentGender {
-  Male = 'M',
-  Female = 'N',
+  Students: Student[];
 }

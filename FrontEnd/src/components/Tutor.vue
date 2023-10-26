@@ -1,12 +1,12 @@
-<template>
+<!-- <template>
   <div>
-    {{ tutor.code }} :{{ tutor.name }} : {{ tutor.surname }} :
-    {{ tutor.university }} : {{ tutor.faculty }} {{ tutor.status }} :
-    {{ tutor.gender }} : {{ tutor.hourlyPrice }} : {{ tutor.grade }} 
+    {{ tutor.id}} :{{ tutor.name }} : {{ tutor.town }} :
+    {{ tutor.university }} : {{ tutor.speciality }} {{ tutor.mail }} :
+    {{ tutor.subject }} : {{ tutor.hourlyPrice }} : {{ tutor.grade }} 
   </div>
 </template>
 <script setup lang="ts">
 import { Tutor } from '@/model/tutor';
 defineProps<{ tutor: Tutor }>();
 </script>
-@/model/tutor
+@/model/tutor -->
