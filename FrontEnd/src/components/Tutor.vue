@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div>
     {{ tutor.id}} :{{ tutor.name }} : {{ tutor.town }} :
     {{ tutor.university }} : {{ tutor.speciality }} {{ tutor.mail }} :
@@ -9,4 +9,4 @@
 import { Tutor } from '@/model/tutor';
 defineProps<{ tutor: Tutor }>();
 </script>
-@/model/tutor
+@/model/tutor -->

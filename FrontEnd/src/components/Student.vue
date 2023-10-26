@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
     <div>
       {{ student.id }} : {{ student.stname }} :{{ student.sttown }} : {{ student.stuniversity }} :
       {{ student.stspeciality }} : {{ student.stmail }} {{ student.stsubject }}
@@ -8,5 +8,5 @@
   import { Student } from '@/model/student';
   defineProps<{ student: Student }>();
   </script>
-  @/model/tutor
+  @/model/tutor -->
   

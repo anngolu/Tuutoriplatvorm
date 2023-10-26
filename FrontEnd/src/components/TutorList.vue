@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px=8 text-dark-300">
     <div class="text-center">
-      <h1 class="font-bold">{{ title }}</h1>
+      <h1 class="font-bold">Tuutorite nimekiri</h1>
       <DataTable :value="tutors">
         <Column field="name" header="Nimi" />
         <Column field="university" header="Ülikool" />
@@ -17,11 +17,17 @@
 <script setup lang="ts">
 //import { storeToRefs } from 'pinia';
 import { useTutorsStore } from '@/stores/tutorsStore';
+import { storeToRefs } from 'pinia';
+import { onMounted } from 'vue';
 
-defineProps<{ title: String }>();
-//const { tutors } = storeToRefs(tutorsStore);
+const tutorsStore = useTutorsStore();
+const { tutors } = storeToRefs(tutorsStore);
 
-const { tutors } = useTutorsStore();
+onMounted(() => {
+  tutorsStore.load();
+});
+
+//const { tutors } = useTutorsStore();
 
 // const tutorsWithAge = tutors.map((tutor) => {
 //   const birthDate = new Date(tutor.birthday);

@@ -18,7 +18,6 @@ const routes: Array<RouteRecordRaw> = [
     path: '/tutors',
     name: 'Tuutorid',
     component: TutorsVue,
-    props: { title: 'Tuutorite nimekiri' },
   },
   {
     path: '/newTutor',
@@ -29,7 +28,6 @@ const routes: Array<RouteRecordRaw> = [
     path: '/students',
     name: 'Tudengid',
     component: StudentsVue,
-    props: { title: 'Tuudengite nimekiri' },
   },
   {
     path: '/newStudent',

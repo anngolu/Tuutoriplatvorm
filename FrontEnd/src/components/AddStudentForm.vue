@@ -9,7 +9,7 @@
             <input
               id="name"
               name="name"
-              v-model="student.stname"
+              v-model="student.stName"
               class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
               placeholder="Nimi"
             />
@@ -20,7 +20,7 @@
             <input
               id="town"
               name="town"
-              v-model="student.sttown"
+              v-model="student.stTown"
               class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
               placeholder="Linn"
             />
@@ -31,7 +31,7 @@
             <input
               id="university"
               name="university"
-              v-model="student.stuniversity"
+              v-model="student.stUniversity"
               class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
               placeholder="Ülikool"
             />
@@ -42,7 +42,7 @@
             <input
               id="speciality"
               name="speciality"
-              v-model="student.stspeciality"
+              v-model="student.stSpeciality"
               class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
               placeholder="Fakulteet"
             />
@@ -53,7 +53,7 @@
             <input
               id="mail"
               name="mail"
-              v-model="student.stmail"
+              v-model="student.stMail"
               class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
               placeholder="Mail"
             />
@@ -64,7 +64,7 @@
             <input
               id="subject"
               name="subject"
-              v-model="student.stsubject"
+              v-model="student.stSubject"
               class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
               placeholder="Ained lisaõppimiseks"
             />
@@ -94,12 +94,12 @@ import { useRouter } from 'vue-router';
 
 const student: Ref<Student> = ref({
   
-  stname: '',
-  sttown: '',
-  stuniversity: '',
-  stspeciality: '',
-  stmail: '',
-  stsubject: '',    // Add this property
+  stName: '',
+  stTown: '',
+  stUniversity: '',
+  stSpeciality: '',
+  stMail: '',
+  stSubject: '',    // Add this property
 });
 
 const { addStudent } = useStudentsStore();
@@ -108,12 +108,12 @@ const router = useRouter();
 const submitForm = () => {
   addStudent({ ...student.value });
 
-  student.value.stname = '';
-  student.value.sttown = '';
-  student.value.stuniversity = '';
-  student.value.stspeciality = '';
-  student.value.stmail = '';
-  student.value.stsubject = ''
+  student.value.stName = '';
+  student.value.stTown = '';
+  student.value.stUniversity = '';
+  student.value.stSpeciality = '';
+  student.value.stMail = '';
+  student.value.stSubject = ''
   
   router.push({ name: 'Tudengid' });
 };

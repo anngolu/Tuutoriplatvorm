@@ -3,11 +3,11 @@
     <div class="text-center">
       <h1 class="font-bold">Tudengite nimekiri</h1>
       <DataTable :value="students">
-        <Column field="name" header="Nimi" />
-        <Column field="town" header="Linn" />
-        <Column field="university" header="Ülikool" />
-        <Column field="speciality" header="Fakulteet" />
-        <Column field="subject" header="Ained lisaõppimiseks" />
+        <Column field="stName" header="Nimi" />
+        <Column field="stTown" header="Linn" />
+        <Column field="stUniversity" header="Ülikool" />
+        <Column field="stSpeciality" header="Fakulteet" />
+        <Column field="stSubject" header="Ained lisaõppimiseks" />
       </DataTable>
     </div>
   </div>
