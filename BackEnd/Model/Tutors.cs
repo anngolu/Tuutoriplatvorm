@@ -12,7 +12,9 @@ namespace tuutoriplatvorm.Model
         public string? Mail {get;init;}
         public string? Subject {get;init;} //Here should be made an option to choose several subjects
         public double? HourlyPrice { get; init; }
-        public  int? Grade{get;init;}
+        public decimal? AverageRate { get; set; }
+        public int? RateCount { get; set; }
+
         // public Town? Town {get;init;}
         // public University? University {get;init;}
         // public Speciality? Speciality {get;init;}
@@ -21,15 +23,7 @@ namespace tuutoriplatvorm.Model
         // public double? HourlyPrice { get; init; }
         // public  Quality? Grade{get;init;}
     }
-    [JsonConverter(typeof(JsonStringEnumConverter))]
-        public enum Quality{
-        SuperBad=1,
-        Bad=2,
-        Normal=3,
-        Good=4,
-        Excelent=5,
 
-    }
     [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum Subject{
         Economics=1,

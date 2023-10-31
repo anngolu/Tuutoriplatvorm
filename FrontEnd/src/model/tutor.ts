@@ -7,7 +7,8 @@ export interface Tutor {
   mail?: string;
   subject?: string;
   hourlyPrice?: number;
-  grade?: number;
+  averageRate?: number;
+  rateCount?: number;
 }
 
 export interface State {

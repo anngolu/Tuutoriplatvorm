@@ -60,6 +60,25 @@ export const useTutorsStore = defineStore('tutorsStore', () => {
     }
   };
 
+  const calculateRating = async (id: string, rate: number) => {
+    const apiAddTutorRating = useApi<Tutor>(
+      'tutors/' + id + '/rate',
+      {
+        method: 'PUT',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({rate: rate}),
+      },
+    );
+
+    await apiAddTutorRating.request();
+    if (apiAddTutorRating.response.value) {
+      load();
+    }
+  };
+
   // const deleteStudent = async (student: Student) => {
   //   const deleteStudentRequest = useApiRawRequest(`students/${student.id}`, {
   //     method: 'DELETE',
@@ -94,6 +113,7 @@ export const useTutorsStore = defineStore('tutorsStore', () => {
     getTutorById,
     addTutor,
     updateTutors,
+    calculateRating,
     //deleteStudent,
     //filterTutorByTitle,
   };

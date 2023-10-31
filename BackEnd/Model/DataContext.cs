@@ -7,6 +7,7 @@ namespace tuutoriplatvorm.Model
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
         public DbSet<Tutors>? TutorList { get; set; }
         public DbSet<Students>? StudentList { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -20,6 +21,8 @@ namespace tuutoriplatvorm.Model
                     Speciality = "CyberSecurity",
                     Mail = "mail@gmail.com",
                     Subject = "DiscMaths",
+                    AverageRate = 5,
+                    RateCount = 1,
                     //Id = 1,
                     // Name = "Levi Faster",
                     // Town = Town.Tallinn,
