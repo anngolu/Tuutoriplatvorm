@@ -23,6 +23,10 @@ export const useTutorsStore = defineStore('tutorsStore', () => {
     tutors.value = allTutors;
   };
 
+  const searchTutorByName = (name: string) => {
+    return tutors.value.filter((tutor) => tutor.name.toLowerCase().includes(name.toLowerCase()));
+  };
+
   const getTutorById = (id: number) => {
     return allTutors.find((tutor) => tutor.id === id);
   };
@@ -107,9 +111,12 @@ export const useTutorsStore = defineStore('tutorsStore', () => {
   //   );
   // };
 
+ 
+
   return {
     tutors,
     load,
+    searchTutorByName,
     getTutorById,
     addTutor,
     updateTutors,
@@ -117,4 +124,5 @@ export const useTutorsStore = defineStore('tutorsStore', () => {
     //deleteStudent,
     //filterTutorByTitle,
   };
+
 });
