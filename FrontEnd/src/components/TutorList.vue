@@ -8,7 +8,12 @@
         <Column field="speciality" header="Teaduskond" />
         <Column field="subject" header="Aine" />
         <Column field="hourlyPrice" header="Tunnihind" />
-        <Column field="grade" header="Reiting" />
+        <Column field="averageRate" header="Reiting" />
+        <Column header="Hinda">
+          <template #body="slotProps">
+              <Rating v-on:change="submitRate($event, slotProps.data.id)" :cancel="false" />
+          </template>
+      </Column>
       </DataTable>
     </div>
   </div>
@@ -18,39 +23,19 @@
 //import { storeToRefs } from 'pinia';
 import { useTutorsStore } from '@/stores/tutorsStore';
 import { storeToRefs } from 'pinia';
+import { RatingChangeEvent } from 'primevue/rating';
 import { onMounted } from 'vue';
 
 const tutorsStore = useTutorsStore();
 const { tutors } = storeToRefs(tutorsStore);
+const submitRate = (event: RatingChangeEvent, id: string) => {
+  // console.log(event);
+  tutorsStore.calculateRating(id, event.value)
+  .then(_ => tutorsStore.load());
+}
 
 onMounted(() => {
   tutorsStore.load();
 });
-
-//const { tutors } = useTutorsStore();
-
-// const tutorsWithAge = tutors.map((tutor) => {
-//   const birthDate = new Date(tutor.birthday);
-//   const today = new Date();
-//   const ageDiff = today.getFullYear() - birthDate.getFullYear();
-  
-//   const birthMonth = birthDate.getMonth();
-//   const currentMonth = today.getMonth();
-
-//   if (
-//     currentMonth < birthMonth ||
-//     (currentMonth === birthMonth && today.getDate() < birthDate.getDate())
-//   ) {
-//     return {
-//       ...tutor,
-//       age: ageDiff - 1,
-//     };
-//   }
-
-//   return {
-//     ...tutor,
-//     age: ageDiff,
-//   };
-//});
 </script>
 @/stores/tutorsStore

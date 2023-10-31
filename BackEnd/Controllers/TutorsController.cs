@@ -1,3 +1,4 @@
+using backend.Model;
 using Microsoft.AspNetCore.Mvc;
 using tuutoriplatvorm.Model;
 
@@ -38,12 +39,12 @@ namespace tuutoriplatvorm.Controllers
         [HttpGet("{id}")]
         public IActionResult GetDetailById(int? id)
         {
-            var tutors = _context.TutorList?.FirstOrDefault(s => s.Id == id);
-            if (tutors == null)
+            var tutor = _context.TutorList?.FirstOrDefault(s => s.Id == id);
+            if (tutor == null)
             {
                 return NotFound();
             }
-            return Ok(tutors);
+            return Ok(tutor);
         }
 
         [HttpPost]
@@ -73,6 +74,29 @@ namespace tuutoriplatvorm.Controllers
             _context.SaveChanges();
 
             return NoContent();
+        }
+
+        [HttpPut("{id}/rate")]
+        public IActionResult CalculateRating(int? id, [FromBody] TutorRating? tutorRate)
+        {
+            decimal? rate = tutorRate?.Rate;
+            var tutor = _context.TutorList?.FirstOrDefault(s => s.Id == id);
+            if (tutor == null)
+            {
+                return NotFound();
+            }
+            if(rate == null || rate > 5 || rate < 1 ){
+                return BadRequest();
+            }
+            tutor.AverageRate = tutor.AverageRate == null ? 0 : tutor.AverageRate;
+            tutor.RateCount = tutor.RateCount == null ? 0 : tutor.RateCount;
+            decimal newAverageRate = (decimal)((tutor.AverageRate * tutor.RateCount + rate) / (tutor.RateCount + 1));
+            tutor.AverageRate = Math.Round(newAverageRate, 1);
+            tutor.RateCount += 1;
+            _context.Update(tutor);
+            _context.SaveChanges();
+
+            return Ok(tutor);
         }
     }
 }

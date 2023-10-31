@@ -9,6 +9,7 @@ import 'primeicons/primeicons.css'; //icons
 import router from './router/router';
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
+import Rating from 'primevue/rating';
 import { setApiUrl } from './model/api';
 
 const getRuntimeConf = async () => {
@@ -27,6 +28,7 @@ getRuntimeConf().then((json) => {
   
     app.component('DataTable', DataTable);
     app.component('Column', Column);
+    app.component('Rating', Rating);
   
     app.mount('#app');
   });
