@@ -101,7 +101,7 @@ export const useTutorsStore = defineStore('tutorsStore', () => {
   //   }
   // };
 
-  // const filterTutorByTitle = (exerciseTitleFilter: string) => {
+  // const filterTutorByTitle = (tutorUniFilter: string) => {
   //   students.value = allStudents.filter((x) =>
   //     x.title.startsWith(exerciseTitleFilter),
   //   );
