@@ -85,10 +85,10 @@ export const useStudentsStore = defineStore('studentsStore', () => {
 
   return {
     students,
-    load,
+  load,
     getStudentById,
-    addStudent,
-    updateStudent,
-    //deleteStudent,
+  addStudent,
+   updateStudent,
+ //deleteStudent,
   };
 });

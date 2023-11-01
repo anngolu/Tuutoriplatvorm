@@ -15,20 +15,41 @@ namespace tuutoriplatvorm.Model
                 new Tutors
                 {
                     Id = 1,
-                    Name = "Levi Faster",
+                    Name = "Levi Baster",
                     Town = "Tallinn",
-                    University = "TallinnUniversity",
+                    University = "TartuUniversity",
                     Speciality = "CyberSecurity",
                     Mail = "mail@gmail.com",
                     Subject = "DiscMaths",
                     AverageRate = 5,
-                    RateCount = 1,
+                    RateCount = 1
                     //Id = 1,
                     // Name = "Levi Faster",
                     // Town = Town.Tallinn,
                     // University = University.TallinnUniversity,
                     // Speciality = Speciality.CyberSecurity,
                     // Mail = "mail@gmail.com",
+                    // Subject = Subject.DiscMaths,
+                },
+
+
+                new Tutors
+                {
+                    Id = 2,
+                    Name = "Kevin Costner",
+                    Town = "Tallinn",
+                    University = "TallinnUniversity",
+                    Speciality = "Law",
+                    Mail = "mailKevin@gmail.com",
+                    Subject = "Anti-trust legistlation",
+                    AverageRate = 5,
+                    RateCount = 1
+                    //Id = 1,
+                    // Name = "Levi Faster",
+                    // Town = Town.Tallinn,
+                    // University = University.TallinnUniversity,
+                    // Speciality = Speciality.CyberSecurity,
+                    // Mail = "mailKevin@gmail.com",
                     // Subject = Subject.DiscMaths,
                 }
             );
