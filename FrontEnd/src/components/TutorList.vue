@@ -8,8 +8,8 @@
         <Column field="university" header="Ülikool" />
         <Column field="speciality" header="Teaduskond" />
         <Column field="subject" header="Aine" />
-        <Column field="hourlyPrice" header="Tunnihind" />
-        <Column field="averageRate" header="Reiting" />
+        <Column field="hourlyPrice" header="Tunnihind" sortable style/>
+        <Column field="averageRate" header="Reiting" sortable style/>
         <Column header="Hinda">
           <template #body="slotProps">
               <Rating v-on:change="submitRate($event, slotProps.data.id)" :cancel="false" />
