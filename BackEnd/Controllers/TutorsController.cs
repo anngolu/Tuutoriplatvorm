@@ -48,7 +48,7 @@ namespace tuutoriplatvorm.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] Tutors tutor)
+        public IActionResult Create([FromBody] Tutor tutor)
         {
             var dbTutor = _context.TutorList?.Find(tutor.Id);
             if (dbTutor == null)
@@ -64,7 +64,7 @@ namespace tuutoriplatvorm.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(int? id, [FromBody] Tutors tutors)
+        public IActionResult Update(int? id, [FromBody] Tutor tutors)
         {
             if (id != tutors.Id || !_context.TutorList!.Any(s => s.Id == id))
             {

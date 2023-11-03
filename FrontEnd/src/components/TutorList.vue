@@ -8,8 +8,8 @@
         <Column field="university" header="Ülikool" />
         <Column field="speciality" header="Teaduskond" />
         <Column field="subject" header="Aine" />
-        <Column field="hourlyPrice" header="Tunnihind" />
-        <Column field="averageRate" header="Reiting" />
+        <Column field="hourlyPrice" header="Tunnihind" sortable style />
+        <Column field="averageRate" header="Reiting" sortable style/>
         <Column header="Hinda">
           <template #body="slotProps">
               <Rating v-on:change="submitRate($event, slotProps.data.id)" :cancel="false" />
@@ -23,14 +23,13 @@
 <script setup lang="ts">
 //import { storeToRefs } from 'pinia';
 import { useTutorsStore } from '@/stores/tutorsStore';
-import { storeToRefs } from 'pinia';
 import { RatingChangeEvent } from 'primevue/rating';
-import { onMounted, ref, watch, computed} from 'vue';
+import { onMounted, ref, computed} from 'vue';
 
 
 const tutorsStore = useTutorsStore();
 
-const { tutors } = storeToRefs(tutorsStore);
+//const { tutors } = storeToRefs(tutorsStore);
 const nameSearch=ref("");
 const submitRate = (event: RatingChangeEvent, id: string) => {
   // console.log(event);
