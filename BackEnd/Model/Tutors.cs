@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 
 namespace tuutoriplatvorm.Model
 {
-    public class Tutors
+    public class Tutor
     {
         public int? Id {get; init; }
         public required string Name {get;init;}

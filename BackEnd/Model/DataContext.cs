@@ -5,14 +5,18 @@ namespace tuutoriplatvorm.Model
     public class DataContext : DbContext
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
-        public DbSet<Tutors>? TutorList { get; set; }
-        public DbSet<Students>? StudentList { get; set; }
+        public DbSet<Tutor>? TutorList { get; set; }
+        public DbSet<Student>? StudentList { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            builder.Entity<Tutors>().HasData(
-                new Tutors
+
+            builder.Entity<Tutor>().Property(p => p.Id).HasIdentityOptions(startValue: 3);
+            builder.Entity<Student>().Property(p => p.Id).HasIdentityOptions(startValue: 2);
+
+            builder.Entity<Tutor>().HasData(
+                new Tutor
                 {
                     Id = 1,
                     Name = "Levi Baster",
@@ -23,17 +27,10 @@ namespace tuutoriplatvorm.Model
                     Subject = "DiscMaths",
                     AverageRate = 5,
                     RateCount = 1
-                    //Id = 1,
-                    // Name = "Levi Faster",
-                    // Town = Town.Tallinn,
-                    // University = University.TallinnUniversity,
-                    // Speciality = Speciality.CyberSecurity,
-                    // Mail = "mail@gmail.com",
-                    // Subject = Subject.DiscMaths,
                 },
 
 
-                new Tutors
+                new Tutor
                 {
                     Id = 2,
                     Name = "Kevin Costner",
@@ -42,8 +39,8 @@ namespace tuutoriplatvorm.Model
                     Speciality = "Law",
                     Mail = "mailKevin@gmail.com",
                     Subject = "Anti-trust legistlation",
-                    AverageRate = 5,
-                    RateCount = 1
+                    AverageRate = null,
+                    RateCount = null
                     //Id = 1,
                     // Name = "Levi Faster",
                     // Town = Town.Tallinn,
@@ -53,8 +50,8 @@ namespace tuutoriplatvorm.Model
                     // Subject = Subject.DiscMaths,
                 }
             );
-            builder.Entity<Students>().HasData(
-                new Students
+            builder.Entity<Student>().HasData(
+                new Student
                 {
                      Id = 1,
                     // StName = "Alar Kaitse",
