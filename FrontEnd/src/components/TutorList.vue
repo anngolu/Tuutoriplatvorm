@@ -8,7 +8,11 @@
         <Column field="university" header="Ülikool" />
         <Column field="speciality" header="Teaduskond" />
         <Column field="subject" header="Aine" />
+<<<<<<< HEAD
         <Column field="hourlyPrice" header="Tunnihind" sortable style/>
+=======
+        <Column field="hourlyPrice" header="Tunnihind" sortable style />
+>>>>>>> d8b49ee1fb41e6497b3cff66c03810e26eb1647d
         <Column field="averageRate" header="Reiting" sortable style/>
         <Column header="Hinda">
           <template #body="slotProps">
@@ -23,14 +27,13 @@
 <script setup lang="ts">
 //import { storeToRefs } from 'pinia';
 import { useTutorsStore } from '@/stores/tutorsStore';
-import { storeToRefs } from 'pinia';
 import { RatingChangeEvent } from 'primevue/rating';
-import { onMounted, ref, watch, computed} from 'vue';
+import { onMounted, ref, computed} from 'vue';
 
 
 const tutorsStore = useTutorsStore();
 
-const { tutors } = storeToRefs(tutorsStore);
+//const { tutors } = storeToRefs(tutorsStore);
 const nameSearch=ref("");
 const submitRate = (event: RatingChangeEvent, id: string) => {
   // console.log(event);

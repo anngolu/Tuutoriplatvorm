@@ -31,7 +31,7 @@ namespace tuutoriplatvorm.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] Students student)
+        public IActionResult Create([FromBody] Student student)
         {
             var dbStudent = _context.StudentList?.Find(student.Id);
             if (dbStudent == null)
@@ -47,7 +47,7 @@ namespace tuutoriplatvorm.Controllers
         }
         
         [HttpPut("{id}")]
-        public IActionResult Update(int? id, [FromBody] Students student)
+        public IActionResult Update(int? id, [FromBody] Student student)
         {
             if (id != student.Id || !_context.StudentList!.Any(s => s.Id == id))
             {
