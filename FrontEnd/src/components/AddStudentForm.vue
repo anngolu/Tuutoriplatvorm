@@ -17,35 +17,50 @@
 
           <div>
             <label for="town">Linn</label>
-            <input
+            <select
               id="town"
               name="town"
               v-model="student.stTown"
               class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-              placeholder="Linn"
-            />
+              placeholder="Linn">
+              <option value="Tartu">Tartu</option>
+              <option value="Tallinn">Tallinn</option>
+              <option value="Narva">Narva</option>
+              <option value="KohtlaJarve">Kohtla-Järve</option>
+            </select>
           </div>
 
           <div>
             <label for="university">Ülikool</label>
-            <input
+            <select
               id="university"
               name="university"
               v-model="student.stUniversity"
               class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-              placeholder="Ülikool"
-            />
+              placeholder="Ülikool">
+              <option value="UniversityOfTartu">University of Tartu</option>
+              <option value="TallinnTechnicalUniversity">Tallinn Technical University</option>
+              <option value="TallinnUniversity">Tallinn University</option>
+              <option value="TallinnCollegeOfHealth">Tallinn College Of Health</option>
+              <option value="TartuHigherArtSchool">Tartu Higher Art School</option>
+            </select>
           </div>
 
           <div>
             <label for="speciality">Fakulteet</label>
-            <input
-              id="speciality"
-              name="speciality"
+            <select
+              id="faculty"
+              name="faculty"
               v-model="student.stSpeciality"
               class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-              placeholder="Fakulteet"
-            />
+              placeholder="Fakulteet">
+              <option value="BusinessIt">Business It</option>
+              <option value="Economics">Economics</option>
+              <option value="Informatics">Informatics</option>
+              <option value="Science">Science</option>
+              <option value="CyberSecurity">CyberSecurity</option>
+              <option value="Psychologist">Psychologist</option>
+            </select>
           </div>
 
           <div>
@@ -61,13 +76,19 @@
 
           <div>
             <label for="subject">Ained lisaõppimiseks</label>
-            <input
+            <select
               id="subject"
               name="subject"
               v-model="student.stSubject"
               class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-              placeholder="Ained lisaõppimiseks"
-            />
+              placeholder="Aine">
+              <option value="Economics">Economics</option>
+              <option value="Maths">Maths</option>
+              <option value="Programming">Programming</option>
+              <option value="Startup">Start up</option>
+              <option value="PE">PE</option>
+              <option value="DiscMaths">Discrete Maths</option>
+            </select>
           </div>
 
           <div>
@@ -87,19 +108,18 @@
 </template>
 
 <script setup lang="ts">
-import { Student } from '@/model/student';
+import { StSpeciality, StSubject, StTown, StUniversity, Student } from '@/model/student';
 import { useStudentsStore } from '@/stores/studentsStore';
 import { Ref, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 const student: Ref<Student> = ref({
-  
   stName: '',
-  stTown: '',
-  stUniversity: '',
-  stSpeciality: '',
+  stTown: StTown,
+  stUniversity: StUniversity,
+  stSpeciality: StSpeciality,
   stMail: '',
-  stSubject: '',    // Add this property
+  stSubject: StSubject,    // Add this property
 });
 
 const { addStudent } = useStudentsStore();
@@ -109,11 +129,11 @@ const submitForm = () => {
   addStudent({ ...student.value });
 
   student.value.stName = '';
-  student.value.stTown = '';
-  student.value.stUniversity = '';
-  student.value.stSpeciality = '';
+  student.value.stTown = undefined;
+  student.value.stUniversity = undefined;
+  student.value.stSpeciality = undefined;
   student.value.stMail = '';
-  student.value.stSubject = ''
+  student.value.stSubject = undefined
   
   router.push({ name: 'Tudengid' });
 };

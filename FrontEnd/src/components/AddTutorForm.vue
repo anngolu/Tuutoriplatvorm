@@ -18,35 +18,50 @@
           </div>
           <div>
             <label for="town">Linn</label>
-            <input
+            <select
               id="town"
               name="town"
               v-model="tutor.town"
               class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-              placeholder="Linn"
-            />
+              placeholder="Linn">
+              <option value="Tartu">Tartu</option>
+              <option value="Tallinn">Tallinn</option>
+              <option value="Narva">Narva</option>
+              <option value="KohtlaJarve">Kohtla-Järve</option>
+            </select>
           </div>
 
           <div>
             <label for="university">Ülikool (kui veel õpid)</label>
-            <input
+            <select
               id="university"
               name="university"
               v-model="tutor.university"
               class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-              placeholder="Ülikool"
-            />
+              placeholder="Ülikool">
+              <option value="UniversityOfTartu">University of Tartu</option>
+              <option value="TallinnTechnicalUniversity">Tallinn Technical University</option>
+              <option value="TallinnUniversity">Tallinn University</option>
+              <option value="TallinnCollegeOfHealth">Tallinn College Of Health</option>
+              <option value="TartuHigherArtSchool">Tartu Higher Art School</option>
+            </select>
           </div>
 
           <div>
             <label for="faculty">Fakulteet</label>
-            <input
+            <select
               id="faculty"
               name="faculty"
               v-model="tutor.speciality"
               class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-              placeholder="Fakulteet"
-            />
+              placeholder="Fakulteet">
+              <option value="BusinessIt">Business It</option>
+              <option value="Economics">Economics</option>
+              <option value="Informatics">Informatics</option>
+              <option value="Science">Science</option>
+              <option value="CyberSecurity">CyberSecurity</option>
+              <option value="Psychologist">Psychologist</option>
+            </select>
           </div>
 
           <div>
@@ -59,16 +74,40 @@
               placeholder="mail"
             />
           </div>
+
           <div>
+           <label for="subject">Aine</label>
+           <MultiSelect
+            id="subject"
+            name="subject"
+            v-model="tutor.subjects" 
+            display="chip" 
+            :options="subjects"
+            optionValue="code"
+            optionLabel="name"
+            :maxSelectedLabels="3"
+            class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            placeholder="Aine">
+          </MultiSelect>
+          </div>
+
+          <!-- <div>
             <label for="subject">Aine</label>
-            <input
+            <MultiSelect
               id="subject"
               name="subject"
-              v-model="tutor.subject"
+              v-model="selectedSubjects"
+              :options="subjects"
               class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-              placeholder="Aine"
-            />
-          </div>
+              placeholder="Aine">
+              <option value="Economics">Economics</option>
+              <option value="Maths">Maths</option>
+              <option value="Programming">Programming</option>
+              <option value="Startup">Start up</option>
+              <option value="PE">PE</option>
+              <option value="DiscMaths">Discrete Maths</option>
+            </MultiSelect>
+          </div> -->
 
           <div>
             <label for="hourlyPrice">Tunnihind</label>
@@ -100,38 +139,49 @@
 </template>
 
 <script setup lang="ts">
-import { Tutor } from '@/model/tutor';
-import { useTutorsStore } from '@/stores/tutorsStore';
-import { Ref, ref } from 'vue';
-import { useRouter } from 'vue-router';
+  import { Subject, Tutor } from '@/model/tutor';
+  import { useTutorsStore } from '@/stores/tutorsStore';
+  import { Ref, ref } from 'vue';
+  import { useRouter } from 'vue-router';
+  import { subjects } from '@/model/tutor';
 
-const tutor: Ref<Tutor> = ref({
+  const tutor: Ref<Tutor> = ref({
 
-  name: '',
-  town: '',
-  university: '',
-  speciality: '',
-  mail: '',
-  subject: '',
-  hourlyPrice: undefined,
+    name: '',
+    town: '',
+    university: '',
+    speciality: '',
+    mail: '',
+    subjects: [],
+    hourlyPrice: undefined,
 
-});
+  });
 
-const { addTutor } = useTutorsStore();
-const router = useRouter();
+  const { addTutor } = useTutorsStore();
+  const router = useRouter();
 
-const submitForm = () => {
-  addTutor({ ...tutor.value });
+  const submitForm = () => {
+    addTutor({ ...tutor.value });
 
-  tutor.value.name = '';
-  tutor.value.town = '';
-  tutor.value.university = '';
-  tutor.value.speciality = '';
-  tutor.value.mail = '';
-  tutor.value.subject = '';
-  tutor.value.hourlyPrice = 0;
+    tutor.value.name = '';
+    tutor.value.town = undefined;
+    tutor.value.university = undefined;
+    tutor.value.speciality = undefined;
+    tutor.value.mail = '';
+    tutor.value.subjects = [];
+    tutor.value.hourlyPrice = 0;
 
-  router.push({ name: 'Tuutorid' });
-};
+    router.push({ name: 'Tuutorid' });
+  };
+
+  const subjects = ref([
+      { name: 'Economics', code: Subject.Economics},
+      { name: 'Maths', code: Subject.Maths },
+      { name: 'Programming', code: Subject.Programming },
+      { name: 'Start up', code: Subject.Startup },
+      { name: 'PE', code: Subject.PE },
+      { name: 'Discrete Maths', code: Subject.DiscMaths }
+  ]);
+
 </script>
 @/model/tutor @/stores/tutorsStore
