@@ -24,7 +24,7 @@ export const useTutorsStore = defineStore('tutorsStore', () => {
   };
 
   const searchTutorByName = (name: string) => {
-    return tutors.value.filter((tutor) => tutor.name.toLowerCase().includes(name.toLowerCase()));
+    return tutors.value.filter((tutor) => tutor.name.toLocaleLowerCase().includes(name.toLocaleLowerCase()));
   };
 
   const getTutorById = (id: number) => {

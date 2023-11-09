@@ -2,23 +2,26 @@
   <div class="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px=8 text-dark-300">
     <div class="text-center">
       <h1 class="font-bold">Tuutorite nimekiri</h1>
-      <input placeholder="Otsi nime järgi" v-model="nameSearch"> 
+      <input placeholder="Otsi nime järgi" v-model="nameSearch" />
       <DataTable :value="searchResult">
         <Column field="name" header="Nimi" />
         <Column field="university" header="Ülikool" />
         <Column field="speciality" header="Teaduskond" />
-        <Column field="subject" header="Aine" />
-<<<<<<< HEAD
-        <Column field="hourlyPrice" header="Tunnihind" sortable style/>
-=======
+        <Column header="Aine">
+          <template #body="slotProps">
+            {{ subjectsToStringConvert(slotProps.data.subjects) }}
+          </template>
+        </Column>
         <Column field="hourlyPrice" header="Tunnihind" sortable style />
->>>>>>> d8b49ee1fb41e6497b3cff66c03810e26eb1647d
-        <Column field="averageRate" header="Reiting" sortable style/>
+        <Column field="averageRate" header="Reiting" sortable style />
         <Column header="Hinda">
           <template #body="slotProps">
-              <Rating v-on:change="submitRate($event, slotProps.data.id)" :cancel="false" />
+            <Rating
+              v-on:change="submitRate($event, slotProps.data.id)"
+              :cancel="false"
+            />
           </template>
-      </Column>
+        </Column>
       </DataTable>
     </div>
   </div>
@@ -28,19 +31,17 @@
 //import { storeToRefs } from 'pinia';
 import { useTutorsStore } from '@/stores/tutorsStore';
 import { RatingChangeEvent } from 'primevue/rating';
-import { onMounted, ref, computed} from 'vue';
-
+import { onMounted, ref, computed } from 'vue';
+import { Subject } from '@/model/tutor';
 
 const tutorsStore = useTutorsStore();
 
 //const { tutors } = storeToRefs(tutorsStore);
-const nameSearch=ref("");
+const nameSearch = ref('');
 const submitRate = (event: RatingChangeEvent, id: string) => {
   // console.log(event);
-  tutorsStore.calculateRating(id, event.value)
-  .then(_ => tutorsStore.load());
-}
-
+  tutorsStore.calculateRating(id, event.value).then((_) => tutorsStore.load());
+};
 
 // /* // watch(nameSearch,(val)=>{
 //   const searchResult=tutorsStore.searchTutorByName(val)
@@ -48,8 +49,13 @@ const submitRate = (event: RatingChangeEvent, id: string) => {
 // })
 //  */
 
+const subjectsToStringConvert = (subjects: Subject[]) => {
+  return subjects.join(', ');
+};
 
-const searchResult=computed(()=>{return tutorsStore.searchTutorByName(nameSearch.value)})
+const searchResult = computed(() => {
+  return tutorsStore.searchTutorByName(nameSearch.value);
+});
 
 onMounted(() => {
   tutorsStore.load();
