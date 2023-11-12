@@ -4,12 +4,12 @@
       <h1 class="font-bold">Tuutorite nimekiri</h1>
       <input placeholder="Otsi nime järgi" v-model="nameSearch"> 
       <input placeholder="Otsi ülikooli järgi" v-model="universitySearch" />
+      <input placeholder="Otsi teaduskonna järgi" v-model="specialitySearch"/>
       <DataTable :value="filteredTutors">
         <Column field="name" header="Nimi" />
         <Column field="university" header="Ülikool" />
         <Column field="speciality" header="Teaduskond" />
         <Column field="subject" header="Aine" />
-        <Column field="hourlyPrice" header="Tunnihind" sortable style/>
         <Column field="hourlyPrice" header="Tunnihind" sortable style />
         <Column field="averageRate" header="Reiting" sortable style/>
         <Column header="Hinda">
@@ -32,6 +32,7 @@ import { onMounted, ref, computed} from 'vue';
 const tutorsStore = useTutorsStore();
 const nameSearch = ref("");
 const universitySearch = ref("");
+const specialitySearch = ref("");
 
 const submitRate = (event: RatingChangeEvent, id: string) => {
   tutorsStore.calculateRating(id, event.value)
