@@ -43,8 +43,9 @@ const filteredTutors = computed(() => {
   return tutorsStore.tutors.filter((tutor) => {
     const nameMatch = tutor.name.toLowerCase().includes(nameSearch.value.toLowerCase());
     const universityMatch = tutor.university?.toLowerCase().includes(universitySearch.value.toLowerCase());
+    const specialityMatch = tutor.speciality?.toLowerCase().includes(specialitySearch.value.toLowerCase());
 
-    return nameMatch && universityMatch;
+    return nameMatch && universityMatch && specialityMatch;
   });
 });
 
