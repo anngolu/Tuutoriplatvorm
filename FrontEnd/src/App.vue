@@ -13,34 +13,52 @@
                 class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                 active-class="bg-gray-900 text-white"
                 aria-current="page"
-                >Pealeht</router-link>
+                >Pealeht</router-link
+              >
 
               <router-link
                 to="/tutors"
                 class="text-blue-300 hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                 active-class="bg-blue-900 text-white"
                 aria-current="page"
-                >Tuutorid</router-link>
+                >Tuutorid</router-link
+              >
 
               <router-link
                 to="/newtutor"
                 class="text-blue-300 hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                 active-class="bg-blue-900 text-white"
-                >Lisa tuutor</router-link>
+                >Lisa tuutor</router-link
+              >
 
               <router-link
                 to="/students"
                 class="text-blue-300 hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                 active-class="bg-blue-900 text-white"
                 aria-current="page"
-                >Tudengid</router-link>
+                >Tudengid</router-link
+              >
 
               <router-link
                 to="/newstudent"
                 class="text-blue-300 hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                 active-class="bg-blue-900 text-white"
-                >Lisa tudeng</router-link>
+                >Lisa tudeng</router-link
+              >
 
+              <router-link
+                to="/schedule"
+                class="text-blue-300 hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                active-class="bg-blue-900 text-white"
+                aria-current="page"
+                >Tunniplaan</router-link
+              >
+              <router-link
+                to="/newSchedule"
+                class="text-blue-300 hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                active-class="bg-blue-900 text-white"
+                >Lisa tunniplaan</router-link
+              >
             </div>
           </div>
         </div>
@@ -48,7 +66,7 @@
     </div>
   </nav>
 
-  <router-view/>
+  <router-view />
 </template>
 
 <script setup lang="ts"></script>

@@ -4,8 +4,8 @@ import AddTutorVue from '@/views/AddTutor.vue';
 import StudentsVue from '@/views/Students.vue';
 import AddStudentVue from '@/views/AddStudent.vue';
 import MainPageVue from '@/views/MainPage.vue';
-
-//import MainVue from '@/views/Main.vue';
+import ScheduleVue from '@/views/Schedule.vue';
+import AddScheduleVue from '@/views/AddSchedule.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -33,6 +33,16 @@ const routes: Array<RouteRecordRaw> = [
     path: '/newStudent',
     name: 'Lisa tudeng (tudengite registreerumine)',
     component: AddStudentVue,
+  },
+  {
+    path: '/schedule',
+    name: 'Tunniplaan',
+    component: ScheduleVue
+  },
+  {
+    path: '/newSchedule',
+    name: 'SLisa tunniplaan',
+    component: AddScheduleVue
   },
 ];
 

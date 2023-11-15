@@ -3,5 +3,5 @@
 </template>
 
 <script setup lang="ts">
-import AddTutorForm from '@/components/AddTutorForm.vue'; //A
+import AddTutorForm from '@/components/AddTutorForm.vue'; 
 </script>

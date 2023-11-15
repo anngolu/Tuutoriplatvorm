@@ -1,6 +1,6 @@
 export interface Tutor {
   id?: number;
-  name: string;
+  name?: string;
   town?: Town;
   university?: University;
   speciality?: Speciality;
@@ -9,6 +9,7 @@ export interface Tutor {
   hourlyPrice?: number;
   averageRate?: number;
   rateCount?: number;
+  //schedules?: Schedule[];
 }
 
 export enum Town {

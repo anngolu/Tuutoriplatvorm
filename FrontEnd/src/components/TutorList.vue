@@ -39,6 +39,10 @@ const submitRate = (event: RatingChangeEvent, id: string) => {
     .then(_ => tutorsStore.load());
 }
 
+const subjectsToStringConvert = (subjects: Subject[]) => {
+  return subjects.join(', ');
+};
+
 const filteredTutors = computed(() => {
   return tutorsStore.tutors.filter((tutor) => {
     const nameMatch = tutor.name.toLowerCase().includes(nameSearch.value.toLowerCase());

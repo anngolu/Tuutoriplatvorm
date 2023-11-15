@@ -20,22 +20,6 @@ namespace tuutoriplatvorm.Controllers
             return Ok(_context.TutorList);
         }
 
-
-        // [HttpGet]
-        // public IActionResult GetTutor(
-        //     [FromQuery] Town? town,
-        //     [FromQuery] University? university,
-        //     [FromQuery] Speciality? speciality,
-        //     [FromQuery] Subject? subject)
-        // {
-        //     return Ok(_context.TutorList?.Where(s =>
-        //     !town.HasValue || s.Town == town.Value &&
-        //     !university.HasValue! || s.University == university!.Value &&
-        //     !speciality.HasValue || s.Speciality == speciality!.Value &&
-        //     !subject.HasValue || s.Subject == subject!.Value));
-        // }
-
-
         [HttpGet("{id}")]
         public IActionResult GetDetailById(int? id)
         {
@@ -53,6 +37,7 @@ namespace tuutoriplatvorm.Controllers
             var dbTutor = _context.TutorList?.Find(tutor.Id);
             if (dbTutor == null)
             {
+                tutor.Id = null;
                 _context.Add(tutor);
                 _context.SaveChanges();
                 return CreatedAtAction(nameof(GetDetailById), new { Id = tutor.Id }, tutor);

@@ -24,28 +24,5 @@ const {students} = storeToRefs(studentsStore);
 onMounted(() => {
   studentsStore.load();
 });
-
-// const studentsWithAge = students.map((student) => {
-//   const birthDate = new Date(student.birthday);
-//   const today = new Date();
-//   const ageDiff = today.getFullYear() - birthDate.getFullYear();
-//   const birthMonth = birthDate.getMonth();
-//   const currentMonth = today.getMonth();
-
-//   if (
-//     currentMonth < birthMonth ||
-//     (currentMonth === birthMonth && today.getDate() < birthDate.getDate())
-//   ) {
-//     return {
-//       ...student,
-//       age: ageDiff - 1,
-//     };
-//   }
-
-//   return {
-//     ...student,
-//     age: ageDiff,
-//   };
-// });
 </script>
 @/stores/studentsStore
