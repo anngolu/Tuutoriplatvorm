@@ -12,6 +12,11 @@ import Column from 'primevue/column';
 import Rating from 'primevue/rating';
 import MultiSelect from 'primevue/multiselect';
 import { setApiUrl } from './model/api';
+import Calendar from 'primevue/calendar';
+import Dropdown from 'primevue/dropdown';
+import Button from 'primevue/button';
+
+
 
 const getRuntimeConf = async () => {
     const runtimeConf = await fetch('/config/runtime-config.json');
@@ -31,6 +36,9 @@ getRuntimeConf().then((json) => {
     app.component('Column', Column);
     app.component('Rating', Rating);
     app.component('MultiSelect', MultiSelect)
+    app.component('Calendar', Calendar);
+    app.component('Dropdown', Dropdown);
+    app.component('Button', Button);
   
     app.mount('#app');
   });

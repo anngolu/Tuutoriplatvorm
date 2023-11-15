@@ -108,18 +108,20 @@
 </template>
 
 <script setup lang="ts">
-import { StSpeciality, StSubject, StTown, StUniversity, Student } from '@/model/student';
+import { Student } from '@/model/student';
 import { useStudentsStore } from '@/stores/studentsStore';
 import { Ref, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
+
+
 const student: Ref<Student> = ref({
   stName: '',
-  stTown: StTown,
-  stUniversity: StUniversity,
-  stSpeciality: StSpeciality,
+  stTown: undefined,
+  stUniversity: undefined,
+  stSpeciality: undefined,
   stMail: '',
-  stSubject: StSubject,    // Add this property
+  stSubject: undefined,    
 });
 
 const { addStudent } = useStudentsStore();

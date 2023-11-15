@@ -6,7 +6,7 @@ namespace tuutoriplatvorm.Model
 {
     public class Tutor
     {
-        public int? Id { get; init; }
+        public int? Id { get; set; }
         public required string Name { get; init; }
         public Town? Town { get; init; }
         public University? University { get; init; }
@@ -16,26 +16,10 @@ namespace tuutoriplatvorm.Model
         public double? HourlyPrice { get; init; }
         public decimal? AverageRate { get; set; }
         public int? RateCount { get; set; }
-
-
-        // public Tutor()
-        // {
-        //     Subject = new List<Subjects>();
-        // }
-    }
-
-    [JsonConverter(typeof(JsonStringEnumConverter))]
-    public enum Subject
-    {
-
-        Economics = 1,
-        Maths = 2,
-        Programming = 3,
-        Startup = 4,
-        PE = 5,
-        DiscMaths = 6,
+        public ICollection<Schedule> Schedules { get; } = new List<Schedule>();
 
     }
+
 
     [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum Speciality
