@@ -6,6 +6,14 @@
       <input placeholder="Otsi ülikooli järgi" v-model="universitySearch" />
       <input placeholder="Otsi teaduskonna järgi" v-model="specialitySearch"/>
       <DataTable :value="filteredTutors">
+        <Column field="photoUrlId" header="Photo">
+          <template #body="slotProps">
+            <!-- './Photo${filteredTutors.photoUrlId}.jpg' -->
+            <img :src=" `/Photo${slotProps.data.photoUrlId}.jpg`"  style="width: 60px; height: 60px;">
+            <!-- <img :src="glob.get('Photo101.jpg')" alt="User Photo" style="width: 50px; height: 50px;"> -->
+          
+          </template>
+        </Column>
         <Column field="name" header="Nimi" />
         <Column field="university" header="Ülikool" />
         <Column field="speciality" header="Teaduskond" />

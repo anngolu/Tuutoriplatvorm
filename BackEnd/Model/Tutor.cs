@@ -16,6 +16,7 @@ namespace tuutoriplatvorm.Model
         public double? HourlyPrice { get; init; }
         public decimal? AverageRate { get; set; }
         public int? RateCount { get; set; }
+        public string? PhotoUrlId { get; set; }
         public ICollection<Schedule> Schedules { get; } = new List<Schedule>();
 
     }
