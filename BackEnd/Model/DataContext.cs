@@ -49,7 +49,9 @@ namespace tuutoriplatvorm.Model
                 Subjects = new List<Subject> { Subject.Maths, Subject.PE },
                 HourlyPrice = 10,
                 AverageRate = 5,
-                RateCount = 1
+                RateCount = 1,
+                PhotoUrlId="101"
+
             };
 
             builder.Entity<Tutor>().HasData(
@@ -66,7 +68,8 @@ namespace tuutoriplatvorm.Model
                     Mail = "mailTaveln@gmail.com",
                     Subjects = new List<Subject> { Subject.Maths },
                     AverageRate = null,
-                    RateCount = null
+                    RateCount = null,
+                    PhotoUrlId="102"
                 }
             );
 
