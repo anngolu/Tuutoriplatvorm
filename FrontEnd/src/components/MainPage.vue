@@ -1,39 +1,36 @@
 <template>
-  <div class="header">
-    <section class="header-background">
-      <img src="@/assets/T (2).png" alt="Header Image" />
-    </section>
-  </div>
-  <div class="container"></div>
-  <div class="container">
-    <section class="password-experience">
-      <h1>Tere tulemast tuutoriplatvormile!</h1>
-      <div class="button-container">
-        <router-link to="/tutors" class="btn get-started">Alusta</router-link>
-        <p>või registreeri end</p>
-        <router-link to="/newtutor" class="btn get-started">Tuutor</router-link>
-        <router-link to="/newstudent" class="btn get-started"
-          >Tudeng</router-link
-        >
-      </div>
-    </section>
-    <section class="cloud-security">
-      <p>
-        Meie platvorm on suunatud kõrg- ja kutsehariduse üliõpilastele ja selle
-        peamine eesmärk on aidata neil ülikooli tööga. Inimesed saavad igal ajal
-        abi küsida ja saada personaalset nõu nii veebis kui ka offline režiimis.
-      </p>
-      <div class="features">
-        <div class="feature">
-          <h3>100+</h3>
-          <p>Ained</p>
+  <div>
+    <div class="header">
+      <section class="header-background">
+        <img src="@/assets/T(2).png" alt="Header Image" />
+      </section>
+    </div>
+    <div class="container">
+      <section class="password-experience">
+        <h1>Tere tulemast tuutoriplatvormile!</h1>
+        <div class="button-container">
+          <router-link to="/tutors" class="btn get-started">Alusta</router-link>
+          <p>või registreeri end</p>
+          <router-link to="/newtutor" class="btn get-started">Tuutor</router-link>
+          <router-link to="/newstudent" class="btn get-started">Tudeng</router-link>
         </div>
-        <div class="feature">
-          <h3>24/7</h3>
-          <p>Abi</p>
+      </section>
+      <section class="cloud-security">
+        <p>
+          Meie platvorm on suunatud kõrg- ja kutsehariduse üliõpilastele, ja selle peamine eesmärk on aidata neil ülikooli tööga. Inimesed saavad igal ajal abi küsida ja saada personaalset nõu nii veebis kui ka offline režiimis.
+        </p>
+        <div class="features">
+          <div class="feature">
+            <h3>100+</h3>
+            <p>Ained</p>
+          </div>
+          <div class="feature">
+            <h3>24/7</h3>
+            <p>Abi</p>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   </div>
 </template>
 
@@ -66,13 +63,13 @@
 }
 
 .button-container {
-  display: flex;
-  gap: 20px;
-  text-align: center;
-  justify-content: center;
-  align-items: row;
-  margin-top: 20px;
-  flex-direction: row;
+display: flex;
+gap: 20px;
+text-align: center;
+justify-content: center;
+align-items: row;
+margin-top: 20px;
+flex-direction: row; 
 }
 
 .btn {
