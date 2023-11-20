@@ -9,7 +9,6 @@ export interface Tutor {
   hourlyPrice?: number;
   averageRate?: number;
   rateCount?: number;
-  //schedules?: Schedule[];
 }
 
 export enum Town {

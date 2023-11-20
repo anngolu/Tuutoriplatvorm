@@ -5,18 +5,17 @@
     <form class="max-w-md w-full space-y-8">
       <div class="rounded-md shadow-sm -space-y-px">
         <div class="mt-8 space-y-6">
-
           <div>
             <label for="tutor">Tutori nimi</label>
-            <Dropdown 
-            id="tutor"
-            v-model="schedule.tutorId" 
-            :options="tutors" 
-            filter
-            optionLabel="name" 
-            optionValue="id"
-            class="z-50 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-            placeholder="Vali tuutor"
+            <Dropdown
+              id="tutor"
+              v-model="schedule.tutorId"
+              :options="tutors"
+              filter
+              optionLabel="name"
+              optionValue="id"
+              class="z-50 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              placeholder="Vali tuutor"
             />
           </div>
 
@@ -46,8 +45,6 @@
               class="appearance-none rounded-none relative block w-full px-3 py-2 border border-blue-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
             />
           </div>
-
-
 
           <div class="flex">
             <div class="flex-auto mr-4">
@@ -105,7 +102,20 @@ import { useTutorsStore } from '@/stores/tutorsStore';
 import { storeToRefs } from 'pinia';
 
 const schedule: Ref<Schedule> = ref({
+  id: 0,
   tutorId: 0,
+  tutor: {
+    id: 0,
+    name: '',
+    town: undefined,
+    university: undefined,
+    speciality: undefined,
+    mail: '',
+    subjects: [],
+    hourlyPrice: 0,
+    averageRate: 0,
+    rateCount: 0,
+  },
   name: '',
   subjects: [],
   hourlyPrice: 0,
@@ -116,7 +126,7 @@ const schedule: Ref<Schedule> = ref({
 const { addSchedule } = useScheduleStore();
 const router = useRouter();
 const tutorsStore = useTutorsStore();
-const {tutors} = storeToRefs(tutorsStore);
+const { tutors } = storeToRefs(tutorsStore);
 
 const submitForm = () => {
   addSchedule({ ...schedule.value });
@@ -142,6 +152,5 @@ const subjects = ref([
 onMounted(() => {
   tutorsStore.load();
 });
-
 </script>
 @/model/tutor @/stores/scheduleStore
