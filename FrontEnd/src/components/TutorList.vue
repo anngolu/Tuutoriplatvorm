@@ -17,7 +17,11 @@
         <Column field="name" header="Nimi" />
         <Column field="university" header="Ülikool" />
         <Column field="speciality" header="Teaduskond" />
-        <Column field="subject" header="Aine" />
+        <Column header="Aine">
+          <template #body="slotProps">
+            {{ subjectsToStringConvert(slotProps.data.subjects) }}
+          </template>
+        </Column>
         <Column field="hourlyPrice" header="Tunnihind" sortable style />
         <Column field="averageRate" header="Reiting" sortable style/>
         <Column header="Hinda">
@@ -32,6 +36,7 @@
 
 <script setup lang="ts">
 //import { storeToRefs } from 'pinia';
+import { Subject } from '@/model/schedule';
 import { useTutorsStore } from '@/stores/tutorsStore';
 import { RatingChangeEvent } from 'primevue/rating';
 import { onMounted, ref, computed} from 'vue';
@@ -53,7 +58,7 @@ const subjectsToStringConvert = (subjects: Subject[]) => {
 
 const filteredTutors = computed(() => {
   return tutorsStore.tutors.filter((tutor) => {
-    const nameMatch = tutor.name.toLowerCase().includes(nameSearch.value.toLowerCase());
+    const nameMatch = tutor.name?.toLowerCase().includes(nameSearch.value.toLowerCase());
     const universityMatch = tutor.university?.toLowerCase().includes(universitySearch.value.toLowerCase());
     const specialityMatch = tutor.speciality?.toLowerCase().includes(specialitySearch.value.toLowerCase());
 
