@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
-  >
+  <div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
     <form class="max-w-md w-full space-y-8">
       <div class="rounded-md shadow-sm -space-y-px">
         <div class="mt-8 space-y-6">
@@ -112,20 +110,31 @@
           </div>
         </div>
 
+        
         <div>
           <button
-            @click.prevent="submitForm"
-            class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-900 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          >
-            <span class="absolute left-0 inset-y-0 flex items-center pl-3">
-            </span>
-            Lisa tuutor
-          </button>
+              @click.prevent="submitForm"
+              class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-900 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+              </span>
+              Lisa tuutor
+            </button>
         </div>
+<div>
+  <button
+              @click.prevent="deleteTutorHandler"
+              class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+            >
+              Удалить тьютора
+            </button>
       </div>
+    </div>
+
     </form>
   </div>
 </template>
+
 
 <script setup lang="ts">
 import { Subject, Tutor } from '@/model/tutor';
@@ -141,14 +150,29 @@ const tutor: Ref<Tutor> = ref({
   mail: '',
   subjects: [],
   hourlyPrice: 0,
+  id: 1, // Предполагаем, что у тьютора есть свойство id
 });
 
-const { addTutor } = useTutorsStore();
+const { addTutor, deleteTutor } = useTutorsStore();
 const router = useRouter();
 
 const submitForm = () => {
   addTutor({ ...tutor.value });
+  clearForm();
+  router.push({ name: 'Tuutorid' });
+};
 
+const deleteTutorHandler = () => {
+  if (tutor.value.id) {
+    deleteTutor(tutor.value.id);
+    clearForm();
+    router.push({ name: 'Tuutorid' });
+  } else {
+    console.error('Тьютор не имеет идентификатора (id) для удаления.');
+  }
+};
+
+const clearForm = () => {
   tutor.value.name = '';
   tutor.value.town = undefined;
   tutor.value.university = undefined;
@@ -156,17 +180,12 @@ const submitForm = () => {
   tutor.value.mail = '';
   tutor.value.subjects = [];
   tutor.value.hourlyPrice = 0;
-
-  router.push({ name: 'Tuutorid' });
 };
-
-const subjects = ref([
-  { name: 'Economics', code: Subject.Economics },
-  { name: 'Maths', code: Subject.Maths },
-  { name: 'Programming', code: Subject.Programming },
-  { name: 'Start up', code: Subject.Startup },
-  { name: 'PE', code: Subject.PE },
-  { name: 'Discrete Maths', code: Subject.DiscMaths },
-]);
 </script>
+
+
+<style scoped>
+/* Ваши стили здесь */
+</style>
+
 @/model/tutor @/stores/tutorsStore
