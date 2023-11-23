@@ -88,7 +88,6 @@
               name="subject"
               v-model="tutor.subjects"
               display="chip"
-              :options="subjects"
               optionValue="code"
               optionLabel="name"
               :maxSelectedLabels="3"
@@ -137,7 +136,7 @@
 
 
 <script setup lang="ts">
-import { Subject, Tutor } from '@/model/tutor';
+import {  Tutor } from '@/model/tutor';
 import { useTutorsStore } from '@/stores/tutorsStore';
 import { Ref, ref } from 'vue';
 import { useRouter } from 'vue-router';
