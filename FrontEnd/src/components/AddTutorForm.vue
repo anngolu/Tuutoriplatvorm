@@ -110,19 +110,17 @@
         </div>
 
         <div>
-          <br>
-            <label for="photo">Foto lisamine:</label>
-            <input type="file" 
-            id="photo" 
-            @change="handlePhotoChange" 
-            accept="image/*"
-            class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-            />
-            <button type="submit">Lae üles</button>
-            <br>
-            <br>
-
-          </div>
+        <label for="photo">Foto lisamine:</label>
+        <input
+          type="file"
+          id="photo"
+          @change="handlePhotoChange"
+          accept="image/*"
+          class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+        />
+        <button type="button" @click.prevent="uploadPhoto">Lae üles</button>
+        <br /><br />
+      </div>
         
         
         <div>
@@ -152,7 +150,7 @@
   </div>
 
   <!-- <photo-display :displayedPhoto="'Photo101.jpg'" alt="Tuutori foto (avatar)" /> -->
-  <photo-display :displayedPhoto="'Photo101.jpg'" alt="Tuutori foto (avatar)" />
+  <!-- <photo-display :displayedPhoto="'Photo101.jpg'" alt="Tuutori foto (avatar)" /> -->
 </template>
 
 
@@ -192,22 +190,28 @@ const deleteTutorHandler = () => {
   }
 };
 
-const handlePhotoChange =(event)=> {
-      // Handle photo upload logic
-      const file = event.target.files[0];
-      this.$emit('photo-uploaded', file);
-    }
+
+const displayedPhoto = ref('default-photo.jpg');
+
+const handlePhotoChange = (event) => {
+  // Handle photo change logic
+  const file = event.target.files[0];
+  handlePhotoUploaded(file); // Emit the file to the handlePhotoUploaded function
+};
+
+const handlePhotoUploaded = (file) => {
+  // Handle photo upload logic
+  console.log('Photo uploaded:', file);
+  // For simplicity, update the displayed photo in the client-side only
+  displayedPhoto.value = URL.createObjectURL(file);
+};
+
+const uploadPhoto = () => {
+  // You can add logic here to upload the photo if needed
+  console.log('Photo uploaded:', displayedPhoto.value);
+};
 
 
-    let displayedPhoto : string='default-photo.jpg'
-
-   const handlePhotoUploaded =(file)=> {
-      // Handle photo upload logic
-      console.log('Photo uploaded:', file);
-      // You can upload the photo to your server or perform other actions here
-      // For simplicity, update the displayed photo in the client-side only
-      this.userPhoto = URL.createObjectURL(file);
-    }
 
 const clearForm = () => {
   tutor.value.name = '';
