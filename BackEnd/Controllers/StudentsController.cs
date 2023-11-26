@@ -1,8 +1,11 @@
+using BackEnd.Auth;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using tuutoriplatvorm.Model;
 
 namespace tuutoriplatvorm.Controllers
 {
+    [Authorize(Roles = "Admin, Student")]
     [ApiController]
     [Route("api/[controller]")]
     public class StudentsController : ControllerBase
@@ -45,7 +48,7 @@ namespace tuutoriplatvorm.Controllers
                 return Conflict();
             }
         }
-        
+
         [HttpPut("{id}")]
         public IActionResult Update(int? id, [FromBody] Student student)
         {
