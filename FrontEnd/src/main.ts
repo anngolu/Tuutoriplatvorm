@@ -15,6 +15,8 @@ import { setApiUrl } from './model/api';
 import Calendar from 'primevue/calendar';
 import Dropdown from 'primevue/dropdown';
 import Button from 'primevue/button';
+import Card from 'primevue/card';
+import InputText from 'primevue/inputtext';
 
 
 
@@ -39,6 +41,8 @@ getRuntimeConf().then((json) => {
     app.component('Calendar', Calendar);
     app.component('Dropdown', Dropdown);
     app.component('Button', Button);
+    app.component('Card', Card);
+    app.component('InputText', InputText)
   
     app.mount('#app');
   });
