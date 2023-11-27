@@ -75,6 +75,7 @@
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
+import { onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAuthStore } from './stores/authStore';
 
@@ -87,6 +88,12 @@ const logout = () => {
   authStore.logout();
   router.push({ name: 'Pealeht' });
 }
+
+
+
+onMounted(() => {
+    
+})
 
 </script>
 
@@ -103,4 +110,5 @@ const logout = () => {
 .logo.vue:hover {
   filter: drop-shadow(0 0 2em #12cc78aa);
 }
+
 </style>

@@ -4,11 +4,11 @@ export interface TokenModel{
     roles: string[];
 }
 
-export default function loadToken() : TokenModel|null {
+export default function loadToken() : TokenModel|undefined {
 
     if(localStorage.getItem("token")){
         return JSON.parse(localStorage.getItem("token")!);
     }
   
-    return null;
+    return undefined;
   };

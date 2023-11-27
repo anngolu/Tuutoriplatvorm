@@ -15,9 +15,9 @@ export interface Schedule {
     Economics = "Economics",
     Maths = "Maths",
     Programming = "Programming",
-    Startup = "Start up",
+    Startup = "Startup",
     PE = "PE",
-    DiscMaths = "Discrete Maths",
+    DiscMaths = "DiscMaths",
   }
 
   export interface State {

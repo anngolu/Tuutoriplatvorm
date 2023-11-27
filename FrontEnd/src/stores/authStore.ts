@@ -1,11 +1,12 @@
-import { TokenModel } from '@/model/auth';
+import loadToken, { TokenModel } from '@/model/auth';
 import { defineStore } from 'pinia';
 import useApi from '@/model/api';
 import { ref } from 'vue';
 
 export const useAuthStore = defineStore('authStore', () => {
 
-  const token = ref<TokenModel>();
+  const token = ref<TokenModel|undefined>(loadToken());
+
 
   const login = async (username: string, password: string) => {
     const apiGetToken = useApi<TokenModel>('authenticate/login', {

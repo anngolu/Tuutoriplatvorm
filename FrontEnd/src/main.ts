@@ -17,6 +17,9 @@ import Dropdown from 'primevue/dropdown';
 import Button from 'primevue/button';
 import Card from 'primevue/card';
 import InputText from 'primevue/inputtext';
+import Image from 'primevue/image';
+import Avatar from 'primevue/avatar';
+
 
 
 
@@ -43,6 +46,8 @@ getRuntimeConf().then((json) => {
     app.component('Button', Button);
     app.component('Card', Card);
     app.component('InputText', InputText)
+    app.component('Image', Image)
+    app.component('Avatar', Avatar)
   
     app.mount('#app');
   });
