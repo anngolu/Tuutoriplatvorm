@@ -3,6 +3,7 @@
     <div class="header">
       <section class="header-background">
         <img src="@/assets/T(2).png" alt="Header Image" />
+
       </section>
     </div>
     <div class="container">
@@ -40,26 +41,30 @@
   max-width: 1080px;
   margin: 40px auto;
   padding: 77px 40px;
-  background-color: #ffdd3c;
+  background-color: rgb(30, 58, 138);
   border-radius: 14px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border: 2px solid rgb(30, 58, 138); /* Added border property */
 }
 
 .header-background {
   background-size: cover;
   height: 90vh;
+  background-color: rgb(30, 58, 138);
 }
-
 .password-experience,
 .cloud-security {
   text-align: center;
   margin-bottom: 70px;
   font-weight: 1000;
+  background-color: rgb(30, 58, 138);
+
 }
 
 .password-experience h1 {
   font-size: 34px;
   margin-bottom: 30px;
+  background-color: rgb(30, 58, 138);
 }
 
 .button-container {
@@ -70,6 +75,8 @@ justify-content: center;
 align-items: row;
 margin-top: 20px;
 flex-direction: row; 
+background-color: rgb(30, 58, 138);
+
 }
 
 .btn {
@@ -79,6 +86,8 @@ flex-direction: row;
   cursor: pointer;
   font-size: 18px;
   transition: all 0.2s ease-in-out;
+  background-color: rgb(30, 58, 138);
+
 }
 
 .get-started {
@@ -119,7 +128,9 @@ flex-direction: row;
 .feature p {
   font-size: 20px;
 }
-.password-experience,
+.password-experience{
+  background-color: rgb(30, 58, 138);
+}
 .cloud-security {
   width: 100%;
 }

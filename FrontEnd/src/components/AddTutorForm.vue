@@ -111,6 +111,7 @@
             />
           </div>
         </div>
+      </div>
 
         <div>
         <label for="photo">Foto lisamine:</label>
