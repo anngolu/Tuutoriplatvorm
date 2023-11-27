@@ -1,9 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using backend.Model;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace tuutoriplatvorm.Model
 {
-    public class DataContext : DbContext
+    public class DataContext : IdentityDbContext<IdentityUser>
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
         public DbSet<Tutor>? TutorList { get; set; }
@@ -35,8 +37,7 @@ namespace tuutoriplatvorm.Model
                         .HasForeignKey(e => e.TutorId
                         )
                         .IsRequired();
-            // builder.Entity<Tutor>().Property(p => p.Id).HasIdentityOptions(startValue: 3);
-            // builder.Entity<Student>().Property(p => p.Id).HasIdentityOptions(startValue: 2);
+
 
             var tutor1 = new Tutor
             {
@@ -81,8 +82,8 @@ namespace tuutoriplatvorm.Model
                     Name = tutor1.Name,
                     Subjects = new List<Subject> { Subject.Maths },
                     HourlyPrice = tutor1.HourlyPrice,
-                    StartTime = DateTime.Now.AddDays(1),
-                    EndTime = DateTime.Now.AddDays(1).AddHours(1),
+                    StartTime = DateTime.UtcNow.AddDays(1),
+                    EndTime = DateTime.UtcNow.AddDays(1).AddHours(1),
 
                 }
             );
