@@ -2,7 +2,7 @@
   <div>
     <div class="header">
       <section class="header-background">
-        <img src="@/assets/t.jpg" alt="Header Image" />
+        <img src="@/assets/t.jpg" alt="Header Image" class="center-image" />
 
       </section>
     </div>
@@ -10,10 +10,7 @@
       <section class="password-experience">
         <h1>Tere tulemast tuutoriplatvormile!</h1>
         <div class="button-container">
-          <router-link to="/tutors" class="btn get-started">Alusta</router-link>
-          <p>või registreeri end</p>
-          <router-link to="/newtutor" class="btn get-started">Tuutor</router-link>
-          <router-link to="/newstudent" class="btn get-started">Tudeng</router-link>
+          <router-link to="/Login" class="btn get-started">Alusta</router-link>
         </div>
       </section>
       <section class="cloud-security">
@@ -48,7 +45,7 @@ body {
   background-color: rgb(30, 58, 138);
   border-radius: 14px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  border: 2px solid rgb(30, 58, 138); /* Added border property */
+  border: 2px solid; /* Added border property */
 }
 
 .header-background {
@@ -137,6 +134,10 @@ background-color: rgb(30, 58, 138);
 }
 .cloud-security {
   width: 100%;
+}
+.center-image {
+  max-width: 100%; /* Ensure the image doesn't exceed its container's width */
+  max-height: 100%; /* Ensure the image doesn't exceed its container's height */
 }
 </style>
 
