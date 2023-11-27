@@ -1,8 +1,10 @@
 <template>
-  <div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+  <div
+    class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
+  >
     <form class="max-w-md w-full space-y-8">
-      <div class="rounded-md shadow-sm -space-y-px">
-        <div class="mt-8 space-y-6">
+      <div class="rounded-md shadow-sm">
+        <div>
           <div>
             <label for="name">Nimi</label>
             <input
@@ -87,6 +89,7 @@
               id="subject"
               name="subject"
               v-model="tutor.subjects"
+              :options="subjects"
               display="chip"
               optionValue="code"
               optionLabel="name"
@@ -97,14 +100,14 @@
             </MultiSelect>
           </div>
 
-          <div>
+          <div class="mb-2">
             <label for="hourlyPrice">Tunnihind</label>
             <input
               type="number"
               id="hourlyPrice"
               name="hourlyPrice"
               v-model="tutor.hourlyPrice"
-              class="appearance-none rounded-none relative block w-full px-3 py-2 border border-blue-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              class="appearance-none relative block w-full px-3 py-2 border border-blue-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
             />
           </div>
         </div>
@@ -125,13 +128,19 @@
         
         <div>
           <button
-              @click.prevent="submitForm"
-              class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-900 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-              <span class="absolute left-0 inset-y-0 flex items-center pl-3">
-              </span>
-              Lisa tuutor
-            </button>
+            @click.prevent="submitForm"
+            class="group w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-900 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          >
+            Lisa tuutor
+          </button>
+        </div>
+        <div class="mt-2">
+          <button
+            @click.prevent="deleteTutorHandler"
+            class="group w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+          >
+            Kustuta tuutorit
+          </button>
         </div>
 <div>
   <button
@@ -141,8 +150,6 @@
               Kustuta tuutor
             </button>
       </div>
-    </div>
-
     </form>
     <!-- <img src="default-photo.jpg"  style="width: 500px; height: 500px;"> -->
     <img :src="displayedPhoto"  style="width: 500px; height: 500px;">
@@ -153,12 +160,12 @@
   <!-- <photo-display :displayedPhoto="'Photo101.jpg'" alt="Tuutori foto (avatar)" /> -->
 </template>
 
-
 <script setup lang="ts">
-import {  Tutor } from '@/model/tutor';
+import { Tutor } from '@/model/tutor';
 import { useTutorsStore } from '@/stores/tutorsStore';
 import { Ref, ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { Subject } from '@/model/schedule';
 
 const tutor: Ref<Tutor> = ref({
   name: '',
@@ -168,7 +175,7 @@ const tutor: Ref<Tutor> = ref({
   mail: '',
   subjects: [],
   hourlyPrice: 0,
-  id: 1, // Предполагаем, что у тьютора есть свойство id
+  id: 1,
 });
 
 const { addTutor, deleteTutor } = useTutorsStore();
@@ -179,6 +186,15 @@ const submitForm = () => {
   clearForm();
   router.push({ name: 'Tuutorid' });
 };
+const subjects = ref([
+      { name: 'Economics', code: Subject.Economics},
+      { name: 'Maths', code: Subject.Maths },
+      { name: 'Programming', code: Subject.Programming },
+      { name: 'Start up', code: Subject.Startup },
+      { name: 'PE', code: Subject.PE },
+      { name: 'Discrete Maths', code: Subject.DiscMaths }
+  ]);
+
 
 const deleteTutorHandler = () => {
   if (tutor.value.id) {
@@ -186,7 +202,7 @@ const deleteTutorHandler = () => {
     clearForm();
     router.push({ name: 'Tuutorid' });
   } else {
-    console.error('Тьютор не имеет идентификатора (id) для удаления.');
+    console.error('');
   }
 };
 
@@ -224,12 +240,6 @@ const clearForm = () => {
 };
 </script>
 
-
-
-
-
-<style scoped>
-/* Ваши стили здесь */
-</style>
+<style scoped></style>
 
 @/model/tutor @/stores/tutorsStore
