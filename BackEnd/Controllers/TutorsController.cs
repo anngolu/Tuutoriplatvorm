@@ -89,34 +89,5 @@ namespace tuutoriplatvorm.Controllers
 
             return Ok(tutor);
         }
-        [HttpDelete("{id}")]
-        // public async Task<IActionResult> DeleteTutor(int id)
-        // {
-        //     var tutor = await _context.TutorList.FindAsync(id);
-        //     if (tutor == null)
-        //     {
-        //         return NotFound();
-        //     }
-
-        //     _context.TutorList.Remove(tutor);
-        //     await _context.SaveChangesAsync();
-
-        //     return Ok();
-        // }
-           [HttpDelete("{id}")]
-    public IActionResult Delete(int? id) 
-    {
-        var exercise = _context.TutorList?.Find(id);
-        if (exercise == null)
-        {
-            return NotFound();
-        }
-
-        _context.Remove(exercise);
-        _context.SaveChanges();
-
-        return NoContent();
-    }
-
     }
 }
