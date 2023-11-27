@@ -1,7 +1,7 @@
 <template>
   <div
     class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
-  >
+    >
     <form class="max-w-md w-full space-y-8">
       <div class="rounded-md shadow-sm">
         <div>
@@ -124,8 +124,8 @@
           />
           <button type="button" @click.prevent="uploadPhoto">Lae üles</button>
           <br /><br />
-        </div> -->
-      </div>
+        </div>
+      </div> -->
         
         
         <div>
