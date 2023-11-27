@@ -2,7 +2,7 @@
   <div>
     <div class="header">
       <section class="header-background">
-        <img src="@/assets/T(2).png" alt="Header Image" />
+        <img src="@/assets/t.jpg" alt="Header Image" />
 
       </section>
     </div>
@@ -58,7 +58,7 @@
   margin-bottom: 70px;
   font-weight: 1000;
   background-color: rgb(30, 58, 138);
-
+color:#fff;
 }
 
 .password-experience h1 {
@@ -115,7 +115,7 @@ background-color: rgb(30, 58, 138);
 .feature {
   flex-basis: 32%;
   padding: 40px;
-  background-color: #f7f7f7;
+  background-color:#ff9000;
   border-radius: 10px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
 }
