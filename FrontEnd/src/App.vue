@@ -58,8 +58,13 @@
                 active-class="bg-blue-900 text-white"
                 >Lisa tunniplaan</router-link
               >
+              
             </div>
           </div>
+        </div>
+        <div class="flex flex-1 items-end justify-center sm:items-stretch sm:justify-end">
+          <Button label="Logout" icon="pi pi-sign-out" severity="danger" v-on:click="logout()" v-if="token"/>
+          <Button label="Login" icon="pi pi-sign-in" severity="primary" @click="$router.push('Login')" v-if="!token"/>
         </div>
       </div>
     </div>
@@ -68,7 +73,22 @@
   <router-view />
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { storeToRefs } from 'pinia';
+import { useRouter } from 'vue-router';
+import { useAuthStore } from './stores/authStore';
+
+const router = useRouter();
+const authStore = useAuthStore();
+const { token } = storeToRefs(authStore);
+
+
+const logout = () => {
+  authStore.logout();
+  router.push({ name: 'Pealeht' });
+}
+
+</script>
 
 <style scoped>
 .logo {

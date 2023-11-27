@@ -1,4 +1,5 @@
 using backend.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using tuutoriplatvorm.Model;
 
@@ -14,6 +15,7 @@ namespace tuutoriplatvorm.Controllers
             _context = context;
         }
 
+        [Authorize(Roles = "Admin, Tutor, Student")]
         [HttpGet]
         public IActionResult GetTutor()
         {
@@ -31,6 +33,7 @@ namespace tuutoriplatvorm.Controllers
             return Ok(tutor);
         }
 
+        [Authorize(Roles = "Admin, Tutor")]
         [HttpPost]
         public IActionResult Create([FromBody] Tutor tutor)
         {
@@ -48,6 +51,7 @@ namespace tuutoriplatvorm.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin, Tutor")]
         [HttpPut("{id}")]
         public IActionResult Update(int? id, [FromBody] Tutor tutors)
         {
@@ -61,6 +65,7 @@ namespace tuutoriplatvorm.Controllers
             return NoContent();
         }
 
+        [Authorize(Roles = "Admin, Tutor, Student")]
         [HttpPut("{id}/rate")]
         public IActionResult CalculateRating(int? id, [FromBody] TutorRating? tutorRate)
         {
@@ -70,7 +75,8 @@ namespace tuutoriplatvorm.Controllers
             {
                 return NotFound();
             }
-            if(rate == null || rate > 5 || rate < 1 ){
+            if (rate == null || rate > 5 || rate < 1)
+            {
                 return BadRequest();
             }
             tutor.AverageRate = tutor.AverageRate == null ? 0 : tutor.AverageRate;
@@ -84,18 +90,33 @@ namespace tuutoriplatvorm.Controllers
             return Ok(tutor);
         }
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTutor(int id)
+        // public async Task<IActionResult> DeleteTutor(int id)
+        // {
+        //     var tutor = await _context.TutorList.FindAsync(id);
+        //     if (tutor == null)
+        //     {
+        //         return NotFound();
+        //     }
+
+        //     _context.TutorList.Remove(tutor);
+        //     await _context.SaveChangesAsync();
+
+        //     return Ok();
+        // }
+           [HttpDelete("{id}")]
+    public IActionResult Delete(int? id) 
+    {
+        var exercise = _context.TutorList?.Find(id);
+        if (exercise == null)
         {
-            var tutor = await _context.TutorList.FindAsync(id);
-            if (tutor == null)
-            {
-                return NotFound();
-            }
-
-            _context.TutorList.Remove(tutor);
-            await _context.SaveChangesAsync();
-
-            return Ok();
+            return NotFound();
         }
+
+        _context.Remove(exercise);
+        _context.SaveChanges();
+
+        return NoContent();
+    }
+
     }
 }

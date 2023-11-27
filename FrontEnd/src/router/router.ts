@@ -6,49 +6,92 @@ import AddStudentVue from '@/views/AddStudent.vue';
 import MainPageVue from '@/views/MainPage.vue';
 import ScheduleVue from '@/views/Schedule.vue';
 import AddScheduleVue from '@/views/AddSchedule.vue';
+import LoginFormVue from '@/components/LoginForm.vue';
+import loadToken from '@/model/auth';
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    name: 'Avaleht',
+    name: 'Pealeht',
     component: MainPageVue,
-    props: { title: 'Avaleht' },
+    props: { title: 'Pealeht' },
   },
   {
     path: '/tutors',
     name: 'Tuutorid',
     component: TutorsVue,
+    meta: {
+      requiresAuth: true 
+    }
   },
   {
     path: '/newTutor',
     name: 'Lisa tuutor (tuutori registreerumine)',
     component: AddTutorVue,
+    meta: {
+      requiresAuth: true 
+    }
   },
   {
     path: '/students',
     name: 'Tudengid',
     component: StudentsVue,
+    meta: {
+      requiresAuth: true 
+    }
   },
   {
     path: '/newStudent',
     name: 'Lisa tudeng (tudengite registreerumine)',
     component: AddStudentVue,
+    meta: {
+      requiresAuth: true 
+    }
   },
   {
     path: '/schedule',
     name: 'Tunniplaan',
-    component: ScheduleVue
+    component: ScheduleVue,
+    meta: {
+      requiresAuth: true 
+    }
   },
   {
     path: '/newSchedule',
-    name: 'SLisa tunniplaan',
-    component: AddScheduleVue
+    name: 'Lisa tunniplaan',
+    component: AddScheduleVue,
+    meta: {
+      requiresAuth: true 
+    }
+  },
+
+  {
+    path: '/login',
+    name: 'Login',
+    component: LoginFormVue
   },
 ];
 
 const router = createRouter({
   history: createWebHistory(),
   routes,
+});
+
+
+router.beforeEach( (to, from, next) => {
+  if (to.meta.requiresAuth) {
+    const token = loadToken();
+    if (token) {
+      // User is authenticated, proceed to the route
+      next();
+    } else {
+      // User is not authenticated, redirect to login
+      next('/login');
+    }
+  } else {
+    // Non-protected route, allow access
+    next();
+  }
 });
 
 export default router;
