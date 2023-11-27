@@ -36,6 +36,10 @@
 </template>
 
 <style scoped>
+body {
+  background-color: rgb(30, 58, 138);
+  margin: 0; /* Set margin to 0 to remove default body margin */
+}
 .container {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   max-width: 1080px;
