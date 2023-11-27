@@ -9,6 +9,7 @@ export interface Tutor {
   hourlyPrice?: number;
   averageRate?: number;
   rateCount?: number;
+  photoUrlId?: number;
 }
 
 export enum Town {

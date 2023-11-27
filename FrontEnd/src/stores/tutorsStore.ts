@@ -65,7 +65,7 @@ export const useTutorsStore = defineStore('tutorsStore', () => {
     }
   };
 
-  const calculateRating = async (id: string, rate: number) => {
+  const calculateRating = async (id: number, rate: number) => {
     const apiAddTutorRating = useApi<Tutor>(
       'tutors/' + id + '/rate',
       {
