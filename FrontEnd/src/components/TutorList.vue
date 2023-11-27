@@ -26,9 +26,17 @@
         <Column field="averageRate" header="Reiting" sortable style/>
         <Column header="Hinda">
           <template #body="slotProps">
-              <Rating v-on:change="submitRate($event, slotProps.data.id)" :cancel="false" />
+               <Rating v-on:change="submitRate($event, slotProps.data.id)" :cancel="false" />
           </template>
-      </Column>
+        </Column>
+        <Column>
+          <template #body="slotProps">
+            <button class="border bg-red-400 text-red-900 py-0 px-2 border-red-900 font-bold" @click="remove(slotProps.data.id)">
+
+              
+            </button>
+          </template>
+        </Column>
       </DataTable>
     </div>
   </div>
@@ -36,7 +44,9 @@
 
 <script setup lang="ts">
 //import { storeToRefs } from 'pinia';
+//import { Tutor } from '@/model/tutorlist';
 import { Subject } from '@/model/schedule';
+import { Tutor } from '@/model/tutor';
 import { useTutorsStore } from '@/stores/tutorsStore';
 import { RatingChangeEvent } from 'primevue/rating';
 import { onMounted, ref, computed} from 'vue';
@@ -69,5 +79,12 @@ const filteredTutors = computed(() => {
 onMounted(() => {
   tutorsStore.load();
 });
+
+
+// const remove = (tutor: Tutor) => {
+//   tutorsStore.deleteTutor(tutor);
+// };
+
+
 </script>
 @/stores/tutorsStore
