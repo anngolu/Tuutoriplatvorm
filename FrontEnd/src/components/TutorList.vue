@@ -37,11 +37,7 @@
       >
         <Card style="width: 25em" class="flex">
           <template #header>
-            <img
-              alt="user header"
-              class="w-20 m-2"
-              :src="`/Photo${tutor.photoUrlId}.jpg`"
-            />
+            <Avatar :image="`https://picsum.photos/200/300?random=${tutor.photoUrlId}`"  class="w-20 m-2" size="xlarge" shape="circle" />
           </template>
           <template #title> {{ tutor.name }} </template>
           <template #subtitle>
