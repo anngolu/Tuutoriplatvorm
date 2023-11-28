@@ -111,9 +111,9 @@
             />
           </div>
         </div>
-      </div>
 
-        <!-- <div>
+      
+        <div>
           <label for="photo">Foto lisamine:</label>
           <input
             type="file"
@@ -125,7 +125,7 @@
           <button type="button" @click.prevent="uploadPhoto">Lae üles</button>
           <br /><br />
         </div>
-      </div> -->
+      </div>
         
         
         <div>
@@ -145,7 +145,7 @@
           </button>
         </div>
     </form>
-    <!-- <img :src="displayedPhoto"  style="width: 500px; height: 500px;"> -->
+    <img :src="displayedPhoto"  style="width: 500px; height: 500px;">
   </div>
 </template>
 
