@@ -49,7 +49,7 @@ export const useTutorsStore = defineStore('tutorsStore', () => {
     }
   };
 
-  const updateTutors = async (tutor: Tutor) => {
+  const updateTutor = async (tutor: Tutor) => {  //
     const apiAddTutor = useApi<Tutor>('tutors/' + tutor.id, {
       method: 'PUT',
       headers: {
@@ -60,9 +60,8 @@ export const useTutorsStore = defineStore('tutorsStore', () => {
     });
 
     await apiAddTutor.request();
-    if (apiAddTutor.response.value) {
-      load();
-    }
+       load();
+    
   };
 
   const calculateRating = async (id: number, rate: number) => {
@@ -162,7 +161,7 @@ export const useTutorsStore = defineStore('tutorsStore', () => {
     searchTutorByName,
     getTutorById,
     addTutor,
-    updateTutors,
+    updateTutor,
     calculateRating,
     //deleteStudent,
     //filterTutorByTitle,

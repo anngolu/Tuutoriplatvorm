@@ -1,6 +1,7 @@
 import { RouteRecordRaw, createRouter, createWebHistory } from 'vue-router';
 import TutorsVue from '@/views/Tutors.vue';
 import AddTutorVue from '@/views/AddTutor.vue';
+import UpdateTutor from '@/views/UpdateTutor.vue';
 import StudentsVue from '@/views/Students.vue';
 import AddStudentVue from '@/views/AddStudent.vue';
 import MainPageVue from '@/views/MainPage.vue';
@@ -25,12 +26,17 @@ const routes: Array<RouteRecordRaw> = [
     }
   },
   {
-    path: '/newTutor',
+    path: '/newTutor/:id?',
     name: 'Lisa tuutor (tuutori registreerumine)',
     component: AddTutorVue,
     meta: {
       requiresAuth: true 
     }
+  },
+  {
+    path: '/updateTutor',
+    name: 'Muuda tuutori andmed',
+    component: UpdateTutor,
   },
   {
     path: '/students',

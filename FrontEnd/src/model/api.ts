@@ -31,7 +31,13 @@ export default function useApi<T>(
       options = {...options, headers}
     }
     const res = await fetch(apiUrl + url, options);
-    const data = await res.json();
+    let data;
+    try {
+       data = res.json? await res.json():res;
+    } catch (error) {
+      data=res;
+    }
+   // const data = await res.json();
     const statusCode = await res.status;
     status.value = statusCode;
     response.value = data;

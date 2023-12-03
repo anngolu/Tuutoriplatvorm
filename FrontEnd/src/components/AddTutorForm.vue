@@ -4,7 +4,9 @@
     >
     <form class="max-w-md w-full space-y-8">
       <div class="rounded-md shadow-sm">
+        
         <div>
+          {{tutor.id!==undefined? 'Uuendame andmed: '  :'Lisa tuutor' }} <br>
           <div>
             <label for="name">Nimi</label>
             <input
@@ -133,7 +135,7 @@
             @click.prevent="submitForm"
             class="group w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-900 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
-            Lisa tuutor
+          {{tutor.id!==undefined? 'Uuenda tuutor':'Lisa tuutor' }}
           </button>
         </div>
         <div class="mt-2" v-if="tutor.id">
@@ -152,8 +154,8 @@
 <script setup lang="ts">
 import { Tutor } from '@/model/tutor';
 import { useTutorsStore } from '@/stores/tutorsStore';
-import { Ref, ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { Ref, ref, onMounted, computed , watch } from 'vue';
+import { useRouter,useRoute, onBeforeRouteUpdate } from 'vue-router';
 import { Subject } from '@/model/schedule';
 
 const tutor: Ref<Tutor> = ref({
@@ -167,11 +169,57 @@ const tutor: Ref<Tutor> = ref({
   id: undefined,
 });
 
-const { addTutor, deleteTutor } = useTutorsStore();
+const { addTutor, deleteTutor ,getTutorById, updateTutor} = useTutorsStore();
 const router = useRouter();
+const route = useRoute();
 
+
+onMounted(()=>{
+  const tutorByID=getTutorById(Number(route.params.id));
+  console.log(tutorByID, route.params.id)
+  console.log("onMounted algus")
+  console.log(tutorByID)
+
+  console.log("onMounted lõpp")
+  //tutor.value = {...tutor.value, ...tutorById}
+
+  tutor.value = {...tutor.value, ...tutorByID}
+})
+
+
+watch(
+      () => route.params.id,
+       newId => {
+        const tutorById= getTutorById(Number(newId));
+        console.log("Kontroll: ",tutorByID)
+      }
+    )
+
+onBeforeRouteUpdate(async (to, from) => {console.log("route change", to, from)});
+
+const tutorById = computed(()=>{
+  console.log("1 computed");
+ return getTutorById(Number(route.params.id));
+ // console.log(tutorByID, route.params.id)
+})
+
+watch( tutorById, ( val)=>{
+
+tutor.value={...tutor.value, ...val }
+
+console.log(tutor.value )
+})
+
+//Lisamine või uuendamine 
 const submitForm = () => {
-  addTutor({ ...tutor.value });
+  if(tutor.value.id!==undefined){
+    updateTutor({ ...tutor.value });
+    delete tutor.value.id;
+    
+  } else {
+    addTutor({ ...tutor.value });
+  }
+
   clearForm();
   router.push({ name: 'Tuutorid' });
 };
