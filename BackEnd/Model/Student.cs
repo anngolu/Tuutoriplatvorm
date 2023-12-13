@@ -5,6 +5,8 @@ namespace tuutoriplatvorm.Model
     public class Student
     {
         public int? Id { get; init; }
+
+        public string? Username { get; set; }
         public required string StName { get; init; }
         public StTown? StTown { get; init; }
         public StUniversity? StUniversity { get; init; }

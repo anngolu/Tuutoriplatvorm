@@ -7,6 +7,7 @@ namespace tuutoriplatvorm.Model
     public class Tutor
     {
         public int? Id { get; set; }
+        public string? Username { get; set; }
         public required string Name { get; init; }
         public Town? Town { get; init; }
         public University? University { get; init; }

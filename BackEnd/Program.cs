@@ -1,5 +1,6 @@
 using System.Text;
 using System.Text.Json.Serialization;
+using backend.Boot;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -55,8 +56,15 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 using (var scope = ((IApplicationBuilder)app).ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
-using (var context = scope.ServiceProvider.GetService<DataContext>())
+{
+    using var context = scope.ServiceProvider.GetService<DataContext>();
     context?.Database.EnsureCreated();
+
+    var userManger = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+    var roleManger = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+    DbInitializer.Initialize(context, userManger, roleManger);
+}
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
