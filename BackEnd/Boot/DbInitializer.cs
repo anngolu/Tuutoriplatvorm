@@ -18,12 +18,12 @@ namespace backend.Boot
                 roleManager.CreateAsync(new IdentityRole(UserRoles.Tutor)).Wait();
 
             // Create an admin
-            if (userManager.FindByNameAsync("admin1").Result == null)
+            if (userManager.FindByNameAsync("Admin1").Result == null)
             {
                 IdentityUser user = new()
                 {
                     SecurityStamp = Guid.NewGuid().ToString(),
-                    UserName = "admin1"
+                    UserName = "Admin1"
                 };
 
                 var result = userManager.CreateAsync(user, "Password123!").Result;

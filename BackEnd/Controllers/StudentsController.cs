@@ -5,7 +5,7 @@ using tuutoriplatvorm.Model;
 
 namespace tuutoriplatvorm.Controllers
 {
-    [Authorize(Roles = "Admin, Student")]
+    [Authorize(Roles = "Admin,Student")]
     [ApiController]
     [Route("api/[controller]")]
     public class StudentsController : ControllerBase
