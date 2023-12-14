@@ -89,5 +89,20 @@ namespace tuutoriplatvorm.Controllers
 
             return Ok(tutor);
         }
+        [HttpDelete("{id}")]
+    public IActionResult Delete(int? id) 
+    {
+        var tutor = _context.TutorList?.Find(id);
+        if (tutor == null)
+        {
+            return NotFound();
+        }
+
+        _context.Remove(tutor);
+        _context.SaveChanges();
+
+        return NoContent();
+    }
+
     }
 }

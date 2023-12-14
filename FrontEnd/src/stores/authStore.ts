@@ -32,6 +32,16 @@ export const useAuthStore = defineStore('authStore', () => {
 
     return null;
   };
+  const signup = async (username: string, password: string) => {
+    const apiGetToken = useApi<TokenModel>('authenticate/register-admin', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({username, password}),
+    });
+
 
   const logout = () => {
     localStorage.removeItem('token');
@@ -39,7 +49,8 @@ export const useAuthStore = defineStore('authStore', () => {
   }
 
   return {
-    login, logout, token
+    login, logout, token, signup
   }
   
-});
+  
+}});

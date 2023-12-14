@@ -63,10 +63,18 @@
                 active-class="bg-blue-900 text-white"
                 >Lisa tunniplaan</router-link
               >
+              <!-- <router-link
+                to="/signup"
+                class="text-blue-300 hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                active-class="bg-blue-900 text-white"
+                >Register</router-link
+              > -->
+
               
             </div>
           </div>
         </div>
+      
         <div class="flex flex-1 items-end justify-center sm:items-stretch sm:justify-end">
           <Button label="Logout" icon="pi pi-sign-out" severity="danger" v-on:click="logout()" v-if="token"/>
           <Button label="Login" icon="pi pi-sign-in" severity="primary" @click="$router.push('Login')" v-if="!token"/>
