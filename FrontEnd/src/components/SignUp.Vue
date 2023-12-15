@@ -58,8 +58,13 @@
     username: undefined,
     password: undefined,
   };
-  
-
+  //привести в порядок ауфстор чтобы регистрация работала
+  //привести в порядок сайнап форм чтобы он принимал это
+  //убрать комменты
+  const submitForm = async () => {
+    const token = await authStore.login(user.username!, user.password!);
+    if (token) router.push({ name: 'Pealeht' });
+  };
   </script>
   @/model/auth @/stores/authStore
   
