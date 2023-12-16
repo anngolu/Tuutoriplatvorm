@@ -61,7 +61,7 @@ namespace JWTAuthentication.NET6._0.Controllers
 
         [HttpPost]
         [Route("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterModel model, Roles role)
+        public async Task<IActionResult> Register([FromBody] RegisterModel model)
         {
             var userExists = await _userManager.FindByNameAsync(model.Username);
             if (userExists != null)
@@ -76,15 +76,15 @@ namespace JWTAuthentication.NET6._0.Controllers
             if (!result.Succeeded)
                 return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User creation failed! Please check user details and try again." });
 
-            if (Roles.Admin == role)
+            if (Roles.Admin == model.Role)
             {
                 await _userManager.AddToRoleAsync(user, UserRoles.Admin);
             }
-            if (Roles.Student == role)
+            if (Roles.Student == model.Role)
             {
                 await _userManager.AddToRoleAsync(user, UserRoles.Student);
             }
-            if (Roles.Tutor == role)
+            if (Roles.Tutor == model.Role)
             {
                 await _userManager.AddToRoleAsync(user, UserRoles.Tutor);
             }

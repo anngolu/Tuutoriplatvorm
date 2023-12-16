@@ -67,7 +67,7 @@ namespace tuutoriplatvorm.Controllers
 
         [Authorize(Roles = "Student")]
         [HttpPost("tutors/{tutorId}/rates")]
-        public IActionResult CalculateRating(int? tutorId, [FromBody] TutorRating? tutorRate)
+        public IActionResult RateTutor(int? tutorId, [FromBody] TutorRating? tutorRate)
         {
             int? rate = tutorRate?.Rate;
             if (rate == null || rate > 5 || rate < 1)
@@ -114,7 +114,7 @@ namespace tuutoriplatvorm.Controllers
                 studentRateTutor.Rate = (int)rate!;
 
                 // calculate new tutor average based on updated rate
-                decimal newAverageRate = (decimal)((tutor.AverageRate * tutor.RateCount + rate - previousRate) / (tutor.RateCount));
+                decimal newAverageRate = (decimal)((tutor.AverageRate * tutor.RateCount + rate - previousRate) / (tutor.RateCount == 0 ? 1 : tutor.RateCount));
                 tutor.AverageRate = Math.Round(newAverageRate, 1);
             }
 
@@ -127,7 +127,7 @@ namespace tuutoriplatvorm.Controllers
 
         [Authorize(Roles = "Student")]
         [HttpGet("tutors/rates")]
-        public IActionResult GetStudentRates()
+        public IActionResult GetTutorRates()
         {
             string studentUsername = User.FindFirstValue(ClaimTypes.Name)!;
 

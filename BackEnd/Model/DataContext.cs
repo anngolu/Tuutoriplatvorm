@@ -51,8 +51,8 @@ namespace tuutoriplatvorm.Model
                 Mail = "mailKevin@gmail.com",
                 Subjects = new List<Subject> { Subject.Maths, Subject.PE },
                 HourlyPrice = 10,
-                AverageRate = null,
-                RateCount = null,
+                AverageRate = 3,
+                RateCount = 1,
                 PhotoUrlId = "101"
 
             };
@@ -70,8 +70,8 @@ namespace tuutoriplatvorm.Model
                     Speciality = Speciality.Science,
                     Mail = "mailTaveln@gmail.com",
                     Subjects = new List<Subject> { Subject.Maths },
-                    AverageRate = null,
-                    RateCount = null,
+                    AverageRate = 4,
+                    RateCount = 1,
                     PhotoUrlId = "102"
                 }
             );

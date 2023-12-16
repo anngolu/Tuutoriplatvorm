@@ -7,7 +7,6 @@
 
 //   const token = ref<TokenModel|undefined>(loadToken());
 
-
 //   const login = async (username: string, password: string) => {
 //     const apiGetToken = useApi<TokenModel>('authenticate/login', {
 //         method: 'POST',
@@ -22,11 +21,11 @@
 
 //     const responseValue = apiGetToken.response.value;
 //     if (responseValue && apiGetToken.status.value === 200) {
-//       localStorage.setItem("token", JSON.stringify(responseValue));  
+//       localStorage.setItem("token", JSON.stringify(responseValue));
 //       token.value = responseValue;
 //       return responseValue;
-//     } 
-      
+//     }
+
 //     token.value = undefined;
 //     localStorage.removeItem('token');
 
@@ -42,7 +41,6 @@
 //         body: JSON.stringify({username, password}),
 //     });
 
-
 //   const logout = () => {
 //     localStorage.removeItem('token');
 //     token.value = undefined;
@@ -51,10 +49,8 @@
 //   return {
 //     login, logout, token, signup
 //   }
-  
-  
-// }});
 
+// }});
 
 import loadToken, { TokenModel } from '@/model/auth';
 import { defineStore } from 'pinia';
@@ -89,13 +85,13 @@ export const useAuthStore = defineStore('authStore', () => {
   // Метод для регистрации нового пользователя
   const signup = async (username: string, password: string) => {
     // Использование API для регистрации
-    const apiRegister = useApi<TokenModel>('authenticate/register-admin', {
+    const apiRegister = useApi<TokenModel>('authenticate/register', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ username, password }),
+      body: JSON.stringify({ username, password, role: 'Admin' }),
     });
 
     // Отправка запроса на сервер
@@ -116,16 +112,26 @@ export const useAuthStore = defineStore('authStore', () => {
 
     return null;
   };
+
   const logout = () => {
     localStorage.removeItem('token');
     token.value = undefined;
   };
+
+  const isStudent = () => {
+    const tokenString = localStorage.getItem('token');
+    if (!tokenString) {
+      false;
+    }
+    const tokenJSON = JSON.parse(tokenString!);
+    return tokenJSON.roles?.includes('Student');
+  };
+
   return {
     login,
     logout,
     token,
     signup,
+    isStudent,
   };
 });
-
-
