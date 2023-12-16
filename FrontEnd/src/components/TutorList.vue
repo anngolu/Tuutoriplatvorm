@@ -27,6 +27,19 @@
           size="small"
           placeholder="Otsi teaduskonna järgi"
         />
+        
+        <Column field="description" header="Kirjeldus" />
+        <Column>
+          <template #body="{ data }">
+            <button
+              class="border bg-red-400 text-red-900 py-0 px-2 border-red-900 font-bold"
+              @click="remove(data)"
+            >
+              X
+            </button>
+          </template>
+        </Column>
+
       </span>
     </div>
     <div class="flex flex-wrap flex-start gap-3">
@@ -69,16 +82,13 @@
 </template>
 
 <script setup lang="ts">
-//import { storeToRefs } from 'pinia';
-//import { Tutor } from '@/model/tutorlist';
-import { Subject } from '@/model/schedule';
-import { RatingChangeEvent } from 'primevue/rating';
-import { onMounted, ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { useTutorsStore } from '@/stores/tutorsStore';
-//import { storeToRefs } from 'pinia';
+import { RatingChangeEvent } from 'primevue/rating';
+import { Tutor } from '@/model/tutor';
+import { Subject } from '@/model/schedule';
 
 const tutorsStore = useTutorsStore();
-//const { tutors } = storeToRefs(tutorsStore);
 const nameSearch = ref('');
 const universitySearch = ref('');
 const specialitySearch = ref('');
@@ -93,15 +103,9 @@ const subjectsToStringConvert = (subjects: Subject[] = []) => {
 
 const filteredTutors = computed(() => {
   return tutorsStore.tutors.filter((tutor) => {
-    const nameMatch = tutor.name
-      ?.toLowerCase()
-      .includes(nameSearch.value.toLowerCase());
-    const universityMatch = tutor.university
-      ?.toLowerCase()
-      .includes(universitySearch.value.toLowerCase());
-    const specialityMatch = tutor.speciality
-      ?.toLowerCase()
-      .includes(specialitySearch.value.toLowerCase());
+    const nameMatch = tutor.name?.toLowerCase().includes(nameSearch.value.toLowerCase());
+    const universityMatch = tutor.university?.toLowerCase().includes(universitySearch.value.toLowerCase());
+    const specialityMatch = tutor.speciality?.toLowerCase().includes(specialitySearch.value.toLowerCase());
 
     return nameMatch && universityMatch && specialityMatch;
   });
@@ -110,4 +114,8 @@ const filteredTutors = computed(() => {
 onMounted(() => {
   tutorsStore.load();
 });
+
+const remove = (tutor: Tutor) => {
+  tutorsStore.deleteTutor(tutor);
+};
 </script>
