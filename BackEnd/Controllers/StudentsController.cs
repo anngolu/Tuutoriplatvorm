@@ -66,7 +66,7 @@ namespace tuutoriplatvorm.Controllers
         }
 
         [Authorize(Roles = "Student")]
-        [HttpPost("/tutor/{tutorId}/rate")]
+        [HttpPost("tutors/{tutorId}/rates")]
         public IActionResult CalculateRating(int? tutorId, [FromBody] TutorRating? tutorRate)
         {
             int? rate = tutorRate?.Rate;
@@ -123,6 +123,19 @@ namespace tuutoriplatvorm.Controllers
             _context.SaveChanges();
 
             return Ok();
+        }
+
+        [Authorize(Roles = "Student")]
+        [HttpGet("tutors/rates")]
+        public IActionResult GetStudentRates()
+        {
+            string studentUsername = User.FindFirstValue(ClaimTypes.Name)!;
+
+            var student = _context.StudentList!
+                .Include(s => s.StudentRateTutors)
+                .First(s => studentUsername.Equals(s.Username));
+            
+            return Ok(student.StudentRateTutors.ToList());
         }
 
     }
