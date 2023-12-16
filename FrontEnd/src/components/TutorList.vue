@@ -27,7 +27,7 @@
           size="small"
           placeholder="Otsi teaduskonna järgi"
         />
-        
+
         <Column field="description" header="Kirjeldus" />
         <Column>
           <template #body="{ data }">
@@ -39,7 +39,6 @@
             </button>
           </template>
         </Column>
-
       </span>
     </div>
     <div class="flex flex-wrap flex-start gap-3">
@@ -50,7 +49,12 @@
       >
         <Card style="width: 25em" class="flex">
           <template #header>
-            <Avatar :image="`https://picsum.photos/200/300?random=${tutor.photoUrlId}`"  class="w-20 m-2" size="xlarge" shape="circle" />
+            <Avatar
+              :image="`https://picsum.photos/200/300?random=${tutor.photoUrlId}`"
+              class="w-20 m-2"
+              size="xlarge"
+              shape="circle"
+            />
           </template>
           <template #title> {{ tutor.name }} </template>
           <template #subtitle>
@@ -71,7 +75,9 @@
           </template>
           <template #footer>
             <Rating
+              v-if="authStore.isStudent()"
               v-on:change="submitRate($event, tutor.id)"
+              :modelValue="getTutorRate(tutor.id)"
               :cancel="false"
             />
           </template>
@@ -87,15 +93,32 @@ import { useTutorsStore } from '@/stores/tutorsStore';
 import { RatingChangeEvent } from 'primevue/rating';
 import { Tutor } from '@/model/tutor';
 import { Subject } from '@/model/schedule';
+import { useStudentsStore } from '@/stores/studentsStore';
+import { useAuthStore } from '@/stores/authStore';
 
 const tutorsStore = useTutorsStore();
 const nameSearch = ref('');
 const universitySearch = ref('');
 const specialitySearch = ref('');
 
+const studentsStore = useStudentsStore();
+const authStore = useAuthStore();
+
+let tutorRates: any = ref({});
+
 const submitRate = (event: RatingChangeEvent, id?: number) => {
-  tutorsStore.calculateRating(id!, event.value).then((_) => tutorsStore.load());
+  studentsStore.rateTutor(id!, event.value).then((_) => {
+    loadRates();
+    tutorsStore.load();
+  });
 };
+
+const getTutorRate = (tutorId?: number) => {
+  if (!tutorId) {
+    return null;
+  }
+  return tutorRates.value[tutorId!];
+}
 
 const subjectsToStringConvert = (subjects: Subject[] = []) => {
   return subjects.join(', ');
@@ -103,19 +126,40 @@ const subjectsToStringConvert = (subjects: Subject[] = []) => {
 
 const filteredTutors = computed(() => {
   return tutorsStore.tutors.filter((tutor) => {
-    const nameMatch = tutor.name?.toLowerCase().includes(nameSearch.value.toLowerCase());
-    const universityMatch = tutor.university?.toLowerCase().includes(universitySearch.value.toLowerCase());
-    const specialityMatch = tutor.speciality?.toLowerCase().includes(specialitySearch.value.toLowerCase());
+    const nameMatch = tutor.name
+      ?.toLowerCase()
+      .includes(nameSearch.value.toLowerCase());
+    const universityMatch = tutor.university
+      ?.toLowerCase()
+      .includes(universitySearch.value.toLowerCase());
+    const specialityMatch = tutor.speciality
+      ?.toLowerCase()
+      .includes(specialitySearch.value.toLowerCase());
 
     return nameMatch && universityMatch && specialityMatch;
   });
 });
 
 onMounted(() => {
+  loadRates();
   tutorsStore.load();
 });
 
 const remove = (tutor: Tutor) => {
   tutorsStore.deleteTutor(tutor);
+};
+
+const loadRates = async () => {
+  if (!authStore.isStudent()) {
+    return;
+  }
+  studentsStore.getTutorRates().then(
+    (rates) =>
+      (tutorRates.value = rates.reduce((acc, value) => {
+        acc[value.tutorId] = value.rate;
+        return acc;
+      }, {})),
+  );
+
 };
 </script>

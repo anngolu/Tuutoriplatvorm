@@ -44,3 +44,9 @@ export enum StSubject {
 export interface State {
   Students: Student[];
 }
+
+export interface StudentRateTutor {
+  tuturId: number;
+  rate: number;
+  studentId: number;
+}

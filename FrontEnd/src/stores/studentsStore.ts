@@ -1,4 +1,4 @@
-import {  Student } from '@/model/student';
+import { Student, StudentRateTotor as StudentRateTutor } from '@/model/student';
 import { ref } from 'vue';
 import { defineStore } from 'pinia';
 import useApi from '@/model/api'; //{ useApiRawRequest }
@@ -60,35 +60,49 @@ export const useStudentsStore = defineStore('studentsStore', () => {
     }
   };
 
-  // const deleteStudent = async (student: Student) => {
-  //   const deleteStudentRequest = useApiRawRequest(`students/${student.id}`, {
-  //     method: 'DELETE',
-  //   });
+  const rateTutor = async (tutorId: number, rate: number) => {
+    const apiRateTutor = useApi<Student>(
+      'students/tutors/' + tutorId + '/rates',
+      {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ rate }),
+      },
+    );
 
-  //   const res = await deleteStudentRequest();
+    await apiRateTutor.request();
+  };
 
-  //   if (res.status === 204) {
-  //     let id = allStudents.indexOf(student);
+  const getTutorRates = async () => {
+    const apiGetTutorRates = useApi<StudentRateTutor[]>(
+      'students/tutors/rates',
+      {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json'
+        },
+      },
+    );
 
-  //     if (id !== -1) {
-  //       allStudents.splice(id, 1);
-  //     }
+    await apiGetTutorRates.request();
 
-  //     id = students.value.indexOf(student);
+    if (apiGetTutorRates.response.value) {
+      return apiGetTutorRates.response.value!;
+    }
 
-  //     if (id !== -1) {
-  //       students.value.splice(id, 1);
-  //     }
-  //   }
-  // };
-
+    return [];
+  };
 
   return {
     students,
-  load,
+    load,
     getStudentById,
-  addStudent,
-   updateStudent,
- //deleteStudent,
+    addStudent,
+    updateStudent,
+    rateTutor,
+    getTutorRates
   };
 });

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace BackEnd.Auth
 {
+
     public class UserRoles
     {
         public const string Admin = "Admin";

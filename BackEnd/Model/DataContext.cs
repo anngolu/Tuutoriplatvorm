@@ -34,10 +34,12 @@ namespace tuutoriplatvorm.Model
             builder.Entity<Tutor>()
                         .HasMany(e => e.Schedules)
                         .WithOne(e => e.Tutor)
-                        .HasForeignKey(e => e.TutorId
-                        )
+                        .HasForeignKey(e => e.TutorId)
                         .IsRequired();
 
+            builder.Entity<StudentRateTutor>()
+            .ToTable("StudentRateTutor")
+            .HasKey(key => new { key.StudentId, key.TutorId });
 
             var tutor1 = new Tutor
             {
@@ -49,9 +51,9 @@ namespace tuutoriplatvorm.Model
                 Mail = "mailKevin@gmail.com",
                 Subjects = new List<Subject> { Subject.Maths, Subject.PE },
                 HourlyPrice = 10,
-                AverageRate = 5,
+                AverageRate = 3,
                 RateCount = 1,
-                PhotoUrlId="101"
+                PhotoUrlId = "101"
 
             };
 
@@ -68,9 +70,9 @@ namespace tuutoriplatvorm.Model
                     Speciality = Speciality.Science,
                     Mail = "mailTaveln@gmail.com",
                     Subjects = new List<Subject> { Subject.Maths },
-                    AverageRate = null,
-                    RateCount = null,
-                    PhotoUrlId="102"
+                    AverageRate = 4,
+                    RateCount = 1,
+                    PhotoUrlId = "102"
                 }
             );
 
@@ -98,8 +100,24 @@ namespace tuutoriplatvorm.Model
                     StSpeciality = StSpeciality.CyberSecurity,
                     StMail = "mail1@gmail.com",
                     StSubject = StSubject.Maths,
+                },
+                new Student
+                {
+                    Id = 2,
+                    StName = "Magnus Ott",
+                    StTown = StTown.Narva,
+                    StUniversity = StUniversity.TartuHigherArtSchool,
+                    StSpeciality = StSpeciality.Psycho,
+                    StMail = "mail2@gmail.com",
+                    StSubject = StSubject.Economics,
                 }
             );
+
+            builder.Entity<StudentRateTutor>().HasData(
+            new StudentRateTutor() { TutorId = 1, StudentId = 1, Rate = 3 },
+            new StudentRateTutor() { TutorId = 2, StudentId = 1, Rate = 4 }
+            );
+
         }
     }
 }
