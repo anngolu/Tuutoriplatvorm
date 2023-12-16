@@ -7,6 +7,7 @@ namespace tuutoriplatvorm.Model
     public class Tutor
     {
         public int? Id { get; set; }
+        [JsonIgnore]
         public string? Username { get; set; }
         public required string Name { get; init; }
         public Town? Town { get; init; }
@@ -19,6 +20,8 @@ namespace tuutoriplatvorm.Model
         public int? RateCount { get; set; }
         public string? PhotoUrlId { get; set; }
         public ICollection<Schedule> Schedules { get; } = new List<Schedule>();
+        [JsonIgnore]
+        public virtual List<StudentRateTutor> StudentRateTutors { get; set; } = new();
 
     }
 
