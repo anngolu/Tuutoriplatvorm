@@ -76,7 +76,7 @@
           <template #footer>
             <Rating
               v-if="authStore.isStudent()"
-              v-on:change="submitRate($event, tutor.id)"
+              v-on:change="confirmRate($event, tutor.id, getTutorRate(tutor.id))"
               :modelValue="getTutorRate(tutor.id)"
               :cancel="false"
             />
@@ -84,6 +84,7 @@
         </Card>
       </div>
     </div>
+    <ConfirmPopup></ConfirmPopup>
   </div>
 </template>
 
@@ -95,11 +96,13 @@ import { Tutor } from '@/model/tutor';
 import { Subject } from '@/model/schedule';
 import { useStudentsStore } from '@/stores/studentsStore';
 import { useAuthStore } from '@/stores/authStore';
+import { useConfirm } from "primevue/useconfirm";
 
 const tutorsStore = useTutorsStore();
 const nameSearch = ref('');
 const universitySearch = ref('');
 const specialitySearch = ref('');
+const confirm = useConfirm();
 
 const studentsStore = useStudentsStore();
 const authStore = useAuthStore();
@@ -111,6 +114,20 @@ const submitRate = (event: RatingChangeEvent, id?: number) => {
     loadRates();
     tutorsStore.load();
   });
+};
+
+const confirmRate = (event: RatingChangeEvent, id?: number, prevRate?: number) => {
+    confirm.require({
+        target: event.originalEvent.currentTarget as HTMLElement,
+        message: prevRate ? `Kinnitage, et teie muudetud hinne on ${event.value}` : `Kinnitage, et teie hinne on ${event.value}`,
+        icon: 'pi pi-exclamation-triangle',
+        acceptLabel: 'Jah',
+        rejectLabel: 'Ei',
+        accept: () => {
+          submitRate(event, id);
+        },
+        reject: () => {}
+    });
 };
 
 const getTutorRate = (tutorId?: number) => {
