@@ -76,7 +76,9 @@
           <template #footer>
             <Rating
               v-if="authStore.isStudent()"
-              v-on:change="confirmRate($event, tutor.id, getTutorRate(tutor.id))"
+              v-on:change="
+                confirmRate($event, tutor.id, getTutorRate(tutor.id))
+              "
               :modelValue="getTutorRate(tutor.id)"
               :cancel="false"
             />
@@ -96,7 +98,7 @@ import { Tutor } from '@/model/tutor';
 import { Subject } from '@/model/schedule';
 import { useStudentsStore } from '@/stores/studentsStore';
 import { useAuthStore } from '@/stores/authStore';
-import { useConfirm } from "primevue/useconfirm";
+import { useConfirm } from 'primevue/useconfirm';
 
 const tutorsStore = useTutorsStore();
 const nameSearch = ref('');
@@ -116,18 +118,24 @@ const submitRate = (event: RatingChangeEvent, id?: number) => {
   });
 };
 
-const confirmRate = (event: RatingChangeEvent, id?: number, prevRate?: number) => {
-    confirm.require({
-        target: event.originalEvent.currentTarget as HTMLElement,
-        message: prevRate ? `Kinnitage, et teie muudetud hinne on ${event.value}` : `Kinnitage, et teie hinne on ${event.value}`,
-        icon: 'pi pi-exclamation-triangle',
-        acceptLabel: 'Jah',
-        rejectLabel: 'Ei',
-        accept: () => {
-          submitRate(event, id);
-        },
-        reject: () => {}
-    });
+const confirmRate = (
+  event: RatingChangeEvent,
+  id?: number,
+  prevRate?: number,
+) => {
+  confirm.require({
+    target: event.originalEvent.currentTarget as HTMLElement,
+    message: prevRate
+      ? `Kinnitage, et teie muudetud hinne on ${event.value}`
+      : `Kinnitage, et teie hinne on ${event.value}`,
+    icon: 'pi pi-exclamation-triangle',
+    acceptLabel: 'Jah',
+    rejectLabel: 'Ei',
+    accept: () => {
+      submitRate(event, id);
+    },
+    reject: () => {},
+  });
 };
 
 const getTutorRate = (tutorId?: number) => {
@@ -135,26 +143,27 @@ const getTutorRate = (tutorId?: number) => {
     return null;
   }
   return tutorRates.value[tutorId!];
-}
+};
 
 const subjectsToStringConvert = (subjects: Subject[] = []) => {
   return subjects.join(', ');
 };
 
 const filteredTutors = computed(() => {
-  return tutorsStore.tutors.filter((tutor) => {
-    const nameMatch = tutor.name
-      ?.toLowerCase()
-      .includes(nameSearch.value.toLowerCase());
-    const universityMatch = tutor.university
-      ?.toLowerCase()
-      .includes(universitySearch.value.toLowerCase());
-    const specialityMatch = tutor.speciality
-      ?.toLowerCase()
-      .includes(specialitySearch.value.toLowerCase());
+  return tutorsStore.tutors
+    .filter((tutor) => {
+      const nameMatch = tutor.name
+        ?.toLowerCase()
+        .includes(nameSearch.value.toLowerCase());
+      const universityMatch = tutor.university
+        ?.toLowerCase()
+        .includes(universitySearch.value.toLowerCase());
+      const specialityMatch = tutor.speciality
+        ?.toLowerCase()
+        .includes(specialitySearch.value.toLowerCase());
 
-    return nameMatch && universityMatch && specialityMatch;
-  });
+      return nameMatch && universityMatch && specialityMatch;
+    });
 });
 
 onMounted(() => {
@@ -177,6 +186,5 @@ const loadRates = async () => {
         return acc;
       }, {})),
   );
-
 };
 </script>

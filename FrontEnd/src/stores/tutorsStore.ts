@@ -13,7 +13,15 @@ export const useTutorsStore = defineStore('tutorsStore', () => {
     await apiGetTutors.request();
 
     if (apiGetTutors.response.value) {
-      return apiGetTutors.response.value!;
+      return apiGetTutors.response.value!.sort((tutor1, tutor2) => {
+        if (tutor1.name! > tutor2.name!) {
+          return 1;
+        }
+        if (tutor1.name! < tutor2.name!) {
+          return -1;
+        }
+        return 0;
+      });
     }
 
     return [];
@@ -25,7 +33,10 @@ export const useTutorsStore = defineStore('tutorsStore', () => {
   };
 
   const searchTutorByName = (name: string) => {
-    return tutors.value.filter((tutor) => tutor.name?.toLocaleLowerCase().includes(name?.toLocaleLowerCase()));
+    return tutors.value.filter(
+      (tutor) =>
+        tutor.name?.toLocaleLowerCase().includes(name?.toLocaleLowerCase()),
+    );
   };
 
   const getTutorById = (id: number) => {
@@ -63,25 +74,6 @@ export const useTutorsStore = defineStore('tutorsStore', () => {
     load();
   };
 
-  const calculateRating = async (id: number, rate: number) => {
-    const apiAddTutorRating = useApi<Tutor>(
-      'tutors/' + id + '/rate',
-      {
-        method: 'PUT',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ rate: rate }),
-      },
-    );
-
-    await apiAddTutorRating.request();
-    if (apiAddTutorRating.response.value) {
-      load();
-    }
-  };
-
   const deleteTutor = async (tutor: Tutor) => {
     const deleteTutorRequest = useApiRawRequest(`tutors/${tutor.id}`, {
       method: 'DELETE',
@@ -111,7 +103,6 @@ export const useTutorsStore = defineStore('tutorsStore', () => {
     getTutorById,
     addTutor,
     updateTutor,
-    calculateRating,
     deleteTutor,
   };
 });
