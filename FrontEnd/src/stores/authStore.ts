@@ -136,12 +136,22 @@ export const useAuthStore = defineStore('authStore', () => {
     return tokenJSON.roles?.includes('Tutor');
   };
 
+  const isInRole = (roles: string[]): boolean => {
+    const tokenString = localStorage.getItem('token');
+    if (!tokenString) {
+      false;
+    }
+    const tokenJSON = JSON.parse(tokenString!);
+    return tokenJSON.roles?.filter((r: string) => roles.includes(r)).length > 0
+  }
+
   return {
     login,
     logout,
     token,
     signup,
     isStudent,
-    isTutor
+    isTutor,
+    isInRole
   };
 });
