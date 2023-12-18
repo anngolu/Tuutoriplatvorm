@@ -9,7 +9,7 @@ import ScheduleVue from '@/views/Schedule.vue';
 import AddScheduleVue from '@/views/AddSchedule.vue';
 import LoginFormVue from '@/components/LoginForm.vue';
 import loadToken from '@/model/auth';
-import SignUp from '@/components/SignUp.vue';
+import RegisterUserVue from '@/views/RegisterUser.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -77,11 +77,11 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Login',
     component: LoginFormVue
   },
-  // {
-  //   path: '/signup',
-  //   name: 'SignUp',
-  //   component: SignUp
-  // },
+  {
+    path: '/signup',
+    name: 'SignUp',
+    component: RegisterUserVue
+  },
 ];
 
 const router = createRouter({
