@@ -61,7 +61,7 @@ namespace tuutoriplatvorm.Controllers
             var schedule = new Schedule
             {
                 TutorId = scheduleForm.TutorId,
-                Name = scheduleForm.Name,
+                //Name = scheduleForm.Name,
                 Subjects = scheduleForm.Subjects,
                 HourlyPrice = scheduleForm.HourlyPrice,
                 StartTime = scheduleForm.StartTime,
@@ -72,6 +72,62 @@ namespace tuutoriplatvorm.Controllers
             return CreatedAtAction(nameof(GetScheduleById), new { Id = schedule.Id }, schedule);
 
 
+        }
+
+
+//        [HttpGet("StudentSchedule")]
+
+        [HttpGet("StudentSchedule/{id}")]
+        public IActionResult GetStudentSchedule(int? id)
+        {
+   
+            var innerJoin=_context.StudentList.Join(
+                        _context.ScheduleList,
+                        student=>student.Id,
+                        schedule=>schedule.StudentId,
+                    (student, schedule)=> new
+                    {
+                        schedule.Id,
+                        schedule.TutorId,
+                        schedule.Tutor.Name,
+                        schedule.Tutor.Speciality,
+                        schedule.HourlyPrice,
+                        schedule.IsPaid,
+                        schedule.Subjects,
+                        schedule.StudentId,
+                        schedule.StartTime,
+                        schedule.EndTime,
+                        student.StName
+                    });
+
+                     if (id == null)
+
+                    {
+                      return Ok(innerJoin);
+                    }       
+
+            return Ok(innerJoin.Where(innerJoin => innerJoin.StudentId.Equals(id)));
+          //return Ok(innerJoin);
+
+       }
+
+
+
+        [HttpPut("registerStudent/{studentId}/{scheduleId}")]
+        public IActionResult UpdateStudentIdInStudentCourses(int studentId, int scheduleId)
+        {
+            // Retrieve the StudentCourses entity by its ID
+         
+            var studentCourses = _context.ScheduleList!.FirstOrDefault(x => x.Id == scheduleId);
+
+            if (studentCourses != null)
+            {
+                // Update the StudentId property
+                studentCourses.StudentId = studentId;
+
+                // Save the changes to the database
+                return Ok(_context.SaveChanges());
+            }   return Ok();
         }
     }
 

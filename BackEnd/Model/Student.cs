@@ -15,8 +15,13 @@ namespace tuutoriplatvorm.Model
         public string? StMail { get; init; }
         public StSubject? StSubject { get; init; }
 
+         public  int? ScheduleId { get; set; } 
+
         [JsonIgnore]
         public virtual List<StudentRateTutor> StudentRateTutors { get; set; } = new();
+
+        [JsonIgnore]
+        public virtual ICollection<Schedule> Schedules { get; set; } = new List<Schedule>();
     }
     [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum StSubject

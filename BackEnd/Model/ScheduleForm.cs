@@ -7,6 +7,7 @@ namespace backend.Model
     {
         public int? Id { get; init; }
         public required int TutorId { get; init; }
+        public int? StudentId { get; init; }
         public string? Name { get; init; }
         public required List<Subject> Subjects { get; init; }
         public double? HourlyPrice { get; init; }

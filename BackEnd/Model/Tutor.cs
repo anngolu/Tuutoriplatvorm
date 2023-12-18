@@ -19,6 +19,10 @@ namespace tuutoriplatvorm.Model
         public decimal? AverageRate { get; set; }
         public int? RateCount { get; set; }
         public string? PhotoUrlId { get; set; }
+
+        public  int? ScheduleId { get; set; } 
+
+        [JsonIgnore]
         public ICollection<Schedule> Schedules { get; } = new List<Schedule>();
         [JsonIgnore]
         public virtual List<StudentRateTutor> StudentRateTutors { get; set; } = new();

@@ -1,3 +1,4 @@
+import { Student } from "./student";
 import { Tutor } from "./tutor";
 
 export interface Schedule {
@@ -7,8 +8,11 @@ export interface Schedule {
     name?: string;
     subjects?: Subject[];
     hourlyPrice?: number;
+    isPaid?:boolean;
     startTime: Date;
     endTime: Date;
+    studentId?: number;
+    student: Student;
   }
 
   export enum Subject {

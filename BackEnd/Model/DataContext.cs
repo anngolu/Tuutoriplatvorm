@@ -25,7 +25,7 @@ namespace tuutoriplatvorm.Model
                         );
             builder.Entity<Schedule>()
                         .Property(schedule => schedule.Subjects)
-                        .HasConversion(
+                         .HasConversion(
                             schedulesList => string.Join(',', schedulesList.Select(s => (int)s)),
                             scheduleString => scheduleString.Split(
                                 ',', StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).Select(s => (Subject)s).ToList()
@@ -44,7 +44,7 @@ namespace tuutoriplatvorm.Model
             var tutor1 = new Tutor
             {
                 Id = 1,
-                Name = "Levi Faster",
+                Name = "Tevi Faster_1",
                 Town = Town.Tallinn,
                 University = University.TallinnUniversity,
                 Speciality = Speciality.CyberSecurity,
@@ -64,7 +64,7 @@ namespace tuutoriplatvorm.Model
                 new Tutor
                 {
                     Id = 2,
-                    Name = "Tavel Risto",
+                    Name = "Tavel Risto_2",
                     Town = Town.KohtlaJarve,
                     University = University.UniversityOfTartu,
                     Speciality = Speciality.Science,
@@ -81,9 +81,63 @@ namespace tuutoriplatvorm.Model
                 {
                     Id = 1,
                     TutorId = 1,
-                    Name = tutor1.Name,
+                    StudentId=1,
+                    //Name = tutor1.Name,
                     Subjects = new List<Subject> { Subject.Maths },
-                    HourlyPrice = tutor1.HourlyPrice,
+                    HourlyPrice = 11,
+                    // HourlyPrice = tutor1.HourlyPrice,
+                    StartTime = DateTime.UtcNow.AddDays(1),
+                    EndTime = DateTime.UtcNow.AddDays(1).AddHours(1),
+
+                },
+
+                new Schedule
+                {
+                    Id = 2,
+                    TutorId = 2,
+                    StudentId=2,
+             //     Name = tutor1.Name,
+                    Subjects = new List<Subject> { Subject.Economics },
+                    HourlyPrice = 12,
+                    StartTime = DateTime.UtcNow.AddDays(1),
+                    EndTime = DateTime.UtcNow.AddDays(1).AddHours(1),
+
+                },
+
+                new Schedule
+                {
+                    Id = 3,
+                    TutorId = 1,
+                    StudentId=2,
+                  //  Name = tutor1.Name,
+                    Subjects = new List<Subject> { Subject.PE },
+                    HourlyPrice = 13,
+                    StartTime = DateTime.UtcNow.AddDays(1),
+                    EndTime = DateTime.UtcNow.AddDays(1).AddHours(1),
+
+                },
+
+                    new Schedule
+                {
+                    Id = 4,
+                    TutorId = 1,
+                    StudentId=null,
+                  //  Name = tutor1.Name,
+                    Subjects = new List<Subject> { Subject.PE },
+                    HourlyPrice = 14,
+                    StartTime = DateTime.UtcNow.AddDays(1),
+                    EndTime = DateTime.UtcNow.AddDays(1).AddHours(1),
+
+                },
+
+                    new Schedule
+                {
+                    Id = 5,
+                    TutorId = 1,
+                    StudentId=null,
+                  //  Name = tutor1.Name,
+                    Subjects = new List<Subject> { Subject.Economics },
+                    HourlyPrice = 15,
                     StartTime = DateTime.UtcNow.AddDays(1),
                     EndTime = DateTime.UtcNow.AddDays(1).AddHours(1),
 
@@ -94,7 +148,7 @@ namespace tuutoriplatvorm.Model
                 new Student
                 {
                     Id = 1,
-                    StName = "Alar Kaitse",
+                    StName = "Siim Kaitse_1",
                     StTown = StTown.Tallinn,
                     StUniversity = StUniversity.TallinnUniversity,
                     StSpeciality = StSpeciality.CyberSecurity,
@@ -104,7 +158,7 @@ namespace tuutoriplatvorm.Model
                 new Student
                 {
                     Id = 2,
-                    StName = "Magnus Ott",
+                    StName = "Sander Ott_2",
                     StTown = StTown.Narva,
                     StUniversity = StUniversity.TartuHigherArtSchool,
                     StSpeciality = StSpeciality.Psycho,
