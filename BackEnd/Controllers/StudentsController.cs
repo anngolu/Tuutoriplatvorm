@@ -36,19 +36,23 @@ namespace tuutoriplatvorm.Controllers
             return Ok(student);
         }
 
+        [Authorize(Roles = "Student")]
         [HttpPost]
         public IActionResult Create([FromBody] Student student)
         {
-            var dbStudent = _context.StudentList?.Find(student.Id);
+            string username = User.FindFirstValue(ClaimTypes.Name)!;
+            var dbStudent = _context.StudentList!.FirstOrDefault(s => username.Equals(s.Username));
             if (dbStudent == null)
             {
+                student.Id = null;
+                student.Username = username;
                 _context.Add(student);
                 _context.SaveChanges();
                 return CreatedAtAction(nameof(GetDetailById), new { Id = student.Id }, student);
             }
             else
             {
-                return Conflict();
+                return Conflict("Student already exists!");
             }
         }
 
@@ -134,7 +138,7 @@ namespace tuutoriplatvorm.Controllers
             var student = _context.StudentList!
                 .Include(s => s.StudentRateTutors)
                 .First(s => studentUsername.Equals(s.Username));
-            
+
             return Ok(student.StudentRateTutors.ToList());
         }
 

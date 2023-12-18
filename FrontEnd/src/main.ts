@@ -21,6 +21,8 @@ import Image from 'primevue/image';
 import Avatar from 'primevue/avatar';
 import ConfirmPopup from 'primevue/confirmpopup';
 import ConfirmationService from 'primevue/confirmationservice';
+import ProgressSpinner from 'primevue/progressspinner';
+
 
 
 const getRuntimeConf = async () => {
@@ -50,6 +52,7 @@ getRuntimeConf().then((json) => {
   app.component('Image', Image);
   app.component('Avatar', Avatar);
   app.component('ConfirmPopup', ConfirmPopup);
+  app.component('ProgressSpinner', ProgressSpinner);
 
   app.mount('#app');
 });

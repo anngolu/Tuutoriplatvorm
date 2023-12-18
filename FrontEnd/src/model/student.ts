@@ -1,4 +1,6 @@
-export interface Student {
+import { Account } from "./auth";
+
+export interface Student extends Account {
   id?: number;
   stName?: string;
   stTown?: StTown;
