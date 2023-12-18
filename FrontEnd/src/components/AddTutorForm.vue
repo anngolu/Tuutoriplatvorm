@@ -1,12 +1,12 @@
 <template>
   <div
     class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
-    >
+  >
     <form class="max-w-md w-full space-y-8">
       <div class="rounded-md shadow-sm">
-        
         <div>
-          {{tutor.id!==undefined? 'Uuendame andmed: '  :'Lisa tuutor' }} <br>
+          {{ tutor.id !== undefined ? 'Uuendame andmed: ' : 'Lisa tuutor' }}
+          <br />
           <div>
             <label for="name">Nimi</label>
             <input
@@ -113,49 +113,33 @@
             />
           </div>
         </div>
-
-      
-        <div>
-          <label for="photo">Foto lisamine:</label>
-          <input
-            type="file"
-            id="photo"
-            @change="handlePhotoChange"
-            accept="image/*"
-            class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-          />
-          <button type="button" @click.prevent="uploadPhoto">Lae üles</button>
-          <br /><br />
-        </div>
       </div>
-        
-        
-        <div>
-          <button
-            @click.prevent="submitForm"
-            class="group w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-900 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          >
-          {{tutor.id!==undefined? 'Uuenda tuutor':'Lisa tuutor' }}
-          </button>
-        </div>
-        <div class="mt-2" v-if="tutor.id">
-          <button
-            @click.prevent="deleteTutorHandler"
-            class="group w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
-          >
-            Kustuta tuutor
-          </button>
-        </div>
+
+      <div>
+        <button
+          @click.prevent="submitForm"
+          class="group w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-900 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        >
+          {{ tutor.id !== undefined ? 'Uuenda tuutor' : 'Lisa tuutor' }}
+        </button>
+      </div>
+      <div class="mt-2" v-if="tutor.id">
+        <button
+          @click.prevent="deleteTutorHandler"
+          class="group w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+        >
+          Kustuta tuutor
+        </button>
+      </div>
     </form>
-    <img :src="displayedPhoto"  style="width: 500px; height: 500px;">
   </div>
 </template>
 
 <script setup lang="ts">
 import { Tutor } from '@/model/tutor';
 import { useTutorsStore } from '@/stores/tutorsStore';
-import { Ref, ref, onMounted, computed , watch } from 'vue';
-import { useRouter,useRoute, onBeforeRouteUpdate } from 'vue-router';
+import { onMounted, Ref, ref, watch } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
 import { Subject } from '@/model/schedule';
 
 const tutor: Ref<Tutor> = ref({
@@ -169,53 +153,30 @@ const tutor: Ref<Tutor> = ref({
   id: undefined,
 });
 
-const { addTutor, deleteTutor ,getTutorById, updateTutor} = useTutorsStore();
+const { addTutor, deleteTutor, getTutorById, updateTutor, load } = useTutorsStore();
 const router = useRouter();
 const route = useRoute();
 
-
-onMounted(()=>{
-  const tutorByID=getTutorById(Number(route.params.id));
-  console.log(tutorByID, route.params.id)
-  console.log("onMounted algus")
-  console.log(tutorByID)
-
-  console.log("onMounted lõpp")
-  //tutor.value = {...tutor.value, ...tutorById}
-
-  tutor.value = {...tutor.value, ...tutorByID}
-})
-
-
 watch(
-      () => route.params.id,
-       newId => {
-        const tutorById= getTutorById(Number(newId));
-        console.log("Kontroll: ",tutorByID)
-      }
-    )
+  () => route.params.id,
+  async (id) => await getTutor(id),
+);
 
-onBeforeRouteUpdate(async (to, from) => {console.log("route change", to, from)});
+onMounted(() => {
+  getTutor(route.params.id);
+});
 
-const tutorById = computed(()=>{
-  console.log("1 computed");
- return getTutorById(Number(route.params.id));
- // console.log(tutorByID, route.params.id)
-})
+const getTutor = async (id: any) => {
+  const tutorById = await getTutorById(Number(id));
+  tutor.value = { ...tutorById };
+};
 
-watch( tutorById, ( val)=>{
 
-tutor.value={...tutor.value, ...val }
-
-console.log(tutor.value )
-})
-
-//Lisamine või uuendamine 
+//Lisamine või uuendamine
 const submitForm = () => {
-  if(tutor.value.id!==undefined){
+  if (tutor.value.id !== undefined) {
     updateTutor({ ...tutor.value });
     delete tutor.value.id;
-    
   } else {
     addTutor({ ...tutor.value });
   }
@@ -223,48 +184,28 @@ const submitForm = () => {
   clearForm();
   router.push({ name: 'Tuutorid' });
 };
+
 const subjects = ref([
-      { name: 'Economics', code: Subject.Economics},
-      { name: 'Maths', code: Subject.Maths },
-      { name: 'Programming', code: Subject.Programming },
-      { name: 'Start up', code: Subject.Startup },
-      { name: 'PE', code: Subject.PE },
-      { name: 'Discrete Maths', code: Subject.DiscMaths }
-  ]);
+  { name: 'Economics', code: Subject.Economics },
+  { name: 'Maths', code: Subject.Maths },
+  { name: 'Programming', code: Subject.Programming },
+  { name: 'Start up', code: Subject.Startup },
+  { name: 'PE', code: Subject.PE },
+  { name: 'Discrete Maths', code: Subject.DiscMaths },
+]);
 
-
-const deleteTutorHandler = () => {
+const deleteTutorHandler = async () => {
   if (tutor.value.id) {
-    deleteTutor(tutor.value.id);
+    await deleteTutor(tutor.value.id);
+    load();
+
     clearForm();
+
     router.push({ name: 'Tuutorid' });
   } else {
     console.error('');
   }
 };
-
-
-const displayedPhoto = ref('default-photo.jpg');
-
-const handlePhotoChange = (event) => {
-  // Handle photo change logic
-  const file = event.target.files[0];
-  handlePhotoUploaded(file); // Emit the file to the handlePhotoUploaded function
-};
-
-const handlePhotoUploaded = (file) => {
-  // Handle photo upload logic
-  console.log('Photo uploaded:', file);
-  // For simplicity, update the displayed photo in the client-side only
-  displayedPhoto.value = URL.createObjectURL(file);
-};
-
-const uploadPhoto = () => {
-  // You can add logic here to upload the photo if needed
-  console.log('Photo uploaded:', displayedPhoto.value);
-};
-
-
 
 const clearForm = () => {
   tutor.value.name = '';

@@ -23,8 +23,16 @@ export const useStudentsStore = defineStore('studentsStore', () => {
     students.value = allStudents;
   };
 
-  const getStudentById = (id: number) => {
-    return allStudents.find((student) => student.id === id);
+  const getStudentById = async (id: number) => {
+    const apiGetStudentById = useApi<Student>('students/' + id);
+
+    await apiGetStudentById.request();
+
+    if (apiGetStudentById.response.value) {
+      return apiGetStudentById.response.value;
+    }
+
+    return null;
   };
 
   const addStudent = async (student: Student) => {

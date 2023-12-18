@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using backend.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -33,21 +34,23 @@ namespace tuutoriplatvorm.Controllers
             return Ok(tutor);
         }
 
-        [Authorize(Roles = "Admin, Tutor")]
+        [Authorize(Roles = "Tutor")]
         [HttpPost]
         public IActionResult Create([FromBody] Tutor tutor)
         {
-            var dbTutor = _context.TutorList?.Find(tutor.Id);
+            string username = User.FindFirstValue(ClaimTypes.Name)!;
+            var dbTutor = _context.TutorList!.FirstOrDefault(s => username.Equals(s.Username));
             if (dbTutor == null)
             {
                 tutor.Id = null;
+                tutor.Username = username;
                 _context.Add(tutor);
                 _context.SaveChanges();
                 return CreatedAtAction(nameof(GetDetailById), new { Id = tutor.Id }, tutor);
             }
             else
             {
-                return Conflict();
+                return Conflict("Tutor already exists");
             }
         }
 

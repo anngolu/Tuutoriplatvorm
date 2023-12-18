@@ -35,8 +35,8 @@ const routes: Array<RouteRecordRaw> = [
     }
   },
   {
-    path: '/updateTutor',
-    name: 'Muuda tuutori andmed',
+    path: '/updateAccount',
+    name: 'Muuda minu andmed',
     component: UpdateTutor,
   },
   {
@@ -48,7 +48,7 @@ const routes: Array<RouteRecordRaw> = [
     }
   },
   {
-    path: '/newStudent',
+    path: '/newStudent/:id?',
     name: 'Lisa tudeng (tudengite registreerumine)',
     component: AddStudentVue,
     meta: {

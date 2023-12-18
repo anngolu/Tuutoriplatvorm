@@ -1,6 +1,7 @@
-import { setApiUrl } from "./api";
+import { Account } from "./auth";
 
-export interface Tutor {
+
+export interface Tutor extends Account {
   id?: number;
   name?: string;
   town?: Town;

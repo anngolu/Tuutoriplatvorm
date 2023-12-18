@@ -5,7 +5,7 @@ namespace tuutoriplatvorm.Model
 {
     public class Student
     {
-        public int? Id { get; init; }
+        public int? Id { get; set; }
         [JsonIgnore]
         public string? Username { get; set; }
         public required string StName { get; init; }

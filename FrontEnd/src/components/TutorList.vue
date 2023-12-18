@@ -27,18 +27,6 @@
           size="small"
           placeholder="Otsi teaduskonna järgi"
         />
-
-        <Column field="description" header="Kirjeldus" />
-        <Column>
-          <template #body="{ data }">
-            <button
-              class="border bg-red-400 text-red-900 py-0 px-2 border-red-900 font-bold"
-              @click="remove(data)"
-            >
-              X
-            </button>
-          </template>
-        </Column>
       </span>
     </div>
     <div class="flex flex-wrap flex-start gap-3">
@@ -57,6 +45,7 @@
             />
           </template>
           <template #title> {{ tutor.name }} </template>
+          
           <template #subtitle>
             <span class="mr-2">
               {{ tutor.averageRate ? tutor.averageRate : 0 }}
@@ -171,9 +160,6 @@ onMounted(() => {
   tutorsStore.load();
 });
 
-const remove = (tutor: Tutor) => {
-  tutorsStore.deleteTutor(tutor);
-};
 
 const loadRates = async () => {
   if (!authStore.isStudent()) {

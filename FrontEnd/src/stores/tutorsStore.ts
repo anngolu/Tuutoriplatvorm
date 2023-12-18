@@ -39,8 +39,16 @@ export const useTutorsStore = defineStore('tutorsStore', () => {
     );
   };
 
-  const getTutorById = (id: number) => {
-    return allTutors.find((tutor) => tutor.id === id);
+  const getTutorById = async (id: number) => {
+    const getTutorById = useApi<Tutor>('tutors/' + id);
+
+    await getTutorById.request();
+
+    if (getTutorById.response.value) {
+      return getTutorById.response.value;
+    }
+
+    return null;
   };
 
   const addTutor = async (tutor: Tutor) => {
@@ -74,26 +82,12 @@ export const useTutorsStore = defineStore('tutorsStore', () => {
     load();
   };
 
-  const deleteTutor = async (tutor: Tutor) => {
-    const deleteTutorRequest = useApiRawRequest(`tutors/${tutor.id}`, {
+  const deleteTutor = async (tutorId: number) => {
+    const deleteTutorRequest = useApiRawRequest(`tutors/${tutorId}`, {
       method: 'DELETE',
     });
 
-    const res = await deleteTutorRequest();
-
-    if (res.status === 204) {
-      let id = tutors.value.indexOf(tutor);
-
-      if (id !== -1) {
-        tutors.value.splice(id, 1);
-      }
-
-      id = tutors.value.indexOf(tutor);
-
-      if (id !== -1) {
-        tutors.value.splice(id, 1);
-      }
-    }
+    await deleteTutorRequest();
   };
 
   return {

@@ -127,11 +127,21 @@ export const useAuthStore = defineStore('authStore', () => {
     return tokenJSON.roles?.includes('Student');
   };
 
+  const isTutor = () => {
+    const tokenString = localStorage.getItem('token');
+    if (!tokenString) {
+      false;
+    }
+    const tokenJSON = JSON.parse(tokenString!);
+    return tokenJSON.roles?.includes('Tutor');
+  };
+
   return {
     login,
     logout,
     token,
     signup,
     isStudent,
+    isTutor
   };
 });

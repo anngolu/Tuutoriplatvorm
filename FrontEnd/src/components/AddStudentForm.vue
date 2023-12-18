@@ -3,7 +3,7 @@
     <form class="max-w-md w-full space-y-8">
       <div class="rounded-md shadow-sm -space-y-px">
         <div class="mt-8 space-y-6">
-
+          <h1> {{ student.id !== undefined ? 'Uuenda tudengit' : 'Lisa tudengit' }}</h1>
           <div>
             <label for="name">Nimi</label>
             <input
@@ -96,9 +96,7 @@
               @click.prevent="submitForm"
               class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-900 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
-              <span class="absolute left-0 inset-y-0 flex items-center pl-3">
-              </span>
-              Lisa tudeng
+              {{ student.id !== undefined ? 'Uuenda tudengit' : 'Lisa tudengit' }}
             </button>
           </div>
         </div>
@@ -110,9 +108,8 @@
 <script setup lang="ts">
 import { Student } from '@/model/student';
 import { useStudentsStore } from '@/stores/studentsStore';
-import { Ref, ref } from 'vue';
-import { useRouter } from 'vue-router';
-
+import { onMounted, Ref, ref, watch } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
 
 
 const student: Ref<Student> = ref({
@@ -124,8 +121,23 @@ const student: Ref<Student> = ref({
   stSubject: undefined,    
 });
 
-const { addStudent } = useStudentsStore();
+const { addStudent, getStudentById } = useStudentsStore();
 const router = useRouter();
+const route = useRoute()
+
+watch(
+  () => route.params.id,
+  async (id) => await getStudent(id),
+);
+
+onMounted(() => {
+  getStudent(route.params.id);
+});
+
+const getStudent = async (id: any) => {
+  const studentById = await getStudentById(Number(id));
+  student.value = { ...studentById };
+};
 
 const submitForm = () => {
   addStudent({ ...student.value });

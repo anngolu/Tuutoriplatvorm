@@ -1,14 +1,17 @@
-export interface TokenModel{
-    token: string;
-    expiration: string;
-    roles: string[];
+export interface Account {
+    id?: number;
 }
 
-export default function loadToken() : TokenModel|undefined {
+export interface TokenModel {
+  token: string;
+  expiration: string;
+  roles: string[];
+}
 
-    if(localStorage.getItem("token")){
-        return JSON.parse(localStorage.getItem("token")!);
-    }
-  
-    return undefined;
-  };
+export default function loadToken(): TokenModel | undefined {
+  if (localStorage.getItem('token')) {
+    return JSON.parse(localStorage.getItem('token')!);
+  }
+
+  return undefined;
+}
