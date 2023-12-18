@@ -44,7 +44,7 @@ namespace tuutoriplatvorm.Model
             var tutor1 = new Tutor
             {
                 Id = 1,
-                Name = "Tevi Faster_1",
+                Name = "Tevi Faster",
                 Town = Town.Tallinn,
                 University = University.TallinnUniversity,
                 Speciality = Speciality.CyberSecurity,
@@ -64,19 +64,38 @@ namespace tuutoriplatvorm.Model
                 new Tutor
                 {
                     Id = 2,
-                    Name = "Tavel Risto_2",
+                    Name = "Tavel Risto",
                     Town = Town.KohtlaJarve,
                     University = University.UniversityOfTartu,
                     Speciality = Speciality.Science,
                     Mail = "mailTaveln@gmail.com",
                     Subjects = new List<Subject> { Subject.Maths },
+                    HourlyPrice=15,
                     AverageRate = 4,
                     RateCount = 1,
                     PhotoUrlId = "102"
+                },
+
+                          new Tutor
+                {
+                    Id = 3,
+                    Name = "Daaniel Tamm",
+                    Town = Town.Tartu,
+                    University = University.UniversityOfTartu,
+                    Speciality = Speciality.Economics,
+                    Mail = "mailTaveln@gmail.com",
+                    Subjects = new List<Subject> { Subject.Maths, Subject.Programming },
+                    HourlyPrice=17,
+                    AverageRate = 1,
+                    RateCount = 1,
+                    PhotoUrlId = "103"
                 }
             );
 
             builder.Entity<Schedule>().HasData(
+
+                //UTC aeg kuu võrra erinev?
+                //Täistudnidel - kuvab mintite puhul ainult ühe nulli
                 new Schedule
                 {
                     Id = 1,
@@ -86,8 +105,8 @@ namespace tuutoriplatvorm.Model
                     Subjects = new List<Subject> { Subject.Maths },
                     HourlyPrice = 11,
                     // HourlyPrice = tutor1.HourlyPrice,
-                    StartTime = DateTime.UtcNow.AddDays(1),
-                    EndTime = DateTime.UtcNow.AddDays(1).AddHours(1),
+                    StartTime = new DateTime(2023, 12, 20, 09, 30, 0, DateTimeKind.Utc), // DateTime.UtcNow.AddDays(1),
+                    EndTime = new DateTime(2023, 12, 20, 09, 30, 0, DateTimeKind.Utc).AddHours(1), //DateTime.UtcNow.AddDays(1).AddHours(1),
 
                 },
 
@@ -99,8 +118,8 @@ namespace tuutoriplatvorm.Model
              //     Name = tutor1.Name,
                     Subjects = new List<Subject> { Subject.Economics },
                     HourlyPrice = 12,
-                    StartTime = DateTime.UtcNow.AddDays(1),
-                    EndTime = DateTime.UtcNow.AddDays(1).AddHours(1),
+                    StartTime = new DateTime(2024, 02, 10, 10, 30, 0, DateTimeKind.Utc), 
+                    EndTime =  new DateTime(2024, 02, 10, 10, 30, 0, DateTimeKind.Utc).AddHours(1),
 
                 },
 
@@ -112,8 +131,8 @@ namespace tuutoriplatvorm.Model
                   //  Name = tutor1.Name,
                     Subjects = new List<Subject> { Subject.PE },
                     HourlyPrice = 13,
-                    StartTime = DateTime.UtcNow.AddDays(1),
-                    EndTime = DateTime.UtcNow.AddDays(1).AddHours(1),
+                    StartTime = new DateTime(2023, 12, 20, 15, 00, 0, DateTimeKind.Utc), 
+                    EndTime = new DateTime(2023, 12, 20, 15, 00, 0, DateTimeKind.Utc).AddHours(1),
 
                 },
 
@@ -125,8 +144,8 @@ namespace tuutoriplatvorm.Model
                   //  Name = tutor1.Name,
                     Subjects = new List<Subject> { Subject.PE },
                     HourlyPrice = 14,
-                    StartTime = DateTime.UtcNow.AddDays(1),
-                    EndTime = DateTime.UtcNow.AddDays(1).AddHours(1),
+                    StartTime =  new DateTime(2024, 02, 20, 18, 00, 0, DateTimeKind.Utc), 
+                    EndTime = new DateTime(2024, 02, 20, 18, 00, 0, DateTimeKind.Utc).AddHours(1),
 
                 },
 
@@ -138,8 +157,8 @@ namespace tuutoriplatvorm.Model
                   //  Name = tutor1.Name,
                     Subjects = new List<Subject> { Subject.Economics },
                     HourlyPrice = 15,
-                    StartTime = DateTime.UtcNow.AddDays(1),
-                    EndTime = DateTime.UtcNow.AddDays(1).AddHours(1),
+                    StartTime = new DateTime(2024, 02, 05, 11, 00, 0, DateTimeKind.Utc), 
+                    EndTime = new DateTime(2024, 02, 05, 11, 00, 0, DateTimeKind.Utc).AddHours(1),
 
                 }
             );
@@ -148,7 +167,7 @@ namespace tuutoriplatvorm.Model
                 new Student
                 {
                     Id = 1,
-                    StName = "Siim Kaitse_1",
+                    StName = "Siim Kaitse",
                     StTown = StTown.Tallinn,
                     StUniversity = StUniversity.TallinnUniversity,
                     StSpeciality = StSpeciality.CyberSecurity,
@@ -158,7 +177,7 @@ namespace tuutoriplatvorm.Model
                 new Student
                 {
                     Id = 2,
-                    StName = "Sander Ott_2",
+                    StName = "Sander Ott",
                     StTown = StTown.Narva,
                     StUniversity = StUniversity.TartuHigherArtSchool,
                     StSpeciality = StSpeciality.Psycho,

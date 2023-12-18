@@ -18,8 +18,13 @@ namespace tuutoriplatvorm.Controllers
         [HttpGet]
         public IActionResult GetAllSchedule()
         {
+            //Schedule koos objektide Tutors ja Students väljadega
+            //return Ok(_context.ScheduleList!.Include(s => s.Tutor).ToList());
 
-            return Ok(_context.ScheduleList!.Include(s => s.Tutor).ToList());
+            
+           var result=_context.ScheduleList!.Include(s => s.Tutor).Include(s => s.Student).ToList();
+
+           return Ok(result);
 
         }
 

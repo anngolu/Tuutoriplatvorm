@@ -25,6 +25,8 @@
             {{ dateTimeFormatter(slotProps.data.endTime) }}
           </template>
         </Column>
+        <Column field="student.stName" header="Tudengi nimi" /> 
+        <Column field="isPaid" header="Kas makstud" /> 
         <Column field="" header="Broneeri">
           <template >
             <button
@@ -38,6 +40,7 @@
           </button>
           </template>
         </Column>
+
       </DataTable>
     </div>
   </div>
