@@ -24,18 +24,22 @@
               >
 
               <router-link
+                v-if="isInRole(['Tutor'])"
                 to="/newtutor"
                 class="text-blue-300 hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                 active-class="bg-blue-900 text-white"
                 >Lisa tuutor</router-link
               >
               <router-link
-              to="/updateAccount"
+                v-if="isInRole(['Tutor', 'Student'])"
+                to="/updateAccount"
                 class="text-blue-300 hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                 active-class="bg-blue-900 text-white"
-                >Muuda minu andmed</router-link>
+                >Muuda minu andmed</router-link
+              >
 
               <router-link
+                v-if="isInRole(['Student', 'Admin'])"
                 to="/students"
                 class="text-blue-300 hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                 active-class="bg-blue-900 text-white"
@@ -44,6 +48,7 @@
               >
 
               <router-link
+                v-if="isInRole(['Student'])"
                 to="/newstudent"
                 class="text-blue-300 hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                 active-class="bg-blue-900 text-white"
@@ -58,6 +63,7 @@
                 >Tunniplaan</router-link
               >
               <router-link
+                v-if="isInRole(['Tutor'])"
                 to="/newSchedule"
                 class="text-blue-300 hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                 active-class="bg-blue-900 text-white"
@@ -69,15 +75,27 @@
                 active-class="bg-blue-900 text-white"
                 >Register</router-link
               > -->
-
-              
             </div>
           </div>
         </div>
-      
-        <div class="flex flex-1 items-end justify-center sm:items-stretch sm:justify-end">
-          <Button label="Logout" icon="pi pi-sign-out" severity="danger" v-on:click="logout()" v-if="token"/>
-          <Button label="Login" icon="pi pi-sign-in" severity="primary" @click="$router.push('Login')" v-if="!token"/>
+
+        <div
+          class="flex flex-1 items-end justify-center sm:items-stretch sm:justify-end"
+        >
+          <Button
+            label="Logout"
+            icon="pi pi-sign-out"
+            severity="danger"
+            v-on:click="authLogout()"
+            v-if="token"
+          />
+          <Button
+            label="Login"
+            icon="pi pi-sign-in"
+            severity="primary"
+            @click="$router.push('Login')"
+            v-if="!token"
+          />
         </div>
       </div>
     </div>
@@ -96,18 +114,14 @@ const router = useRouter();
 const authStore = useAuthStore();
 const { token } = storeToRefs(authStore);
 
+const isInRole = authStore.isInRole;
 
-const logout = () => {
+const authLogout = () => {
   authStore.logout();
   router.push({ name: 'Pealeht' });
-}
+};
 
-
-
-onMounted(() => {
-    
-})
-
+onMounted(() => {});
 </script>
 
 <style scoped>
@@ -123,5 +137,4 @@ onMounted(() => {
 .logo.vue:hover {
   filter: drop-shadow(0 0 2em #12cc78aa);
 }
-
 </style>
