@@ -105,8 +105,8 @@ namespace tuutoriplatvorm.Model
                     Subjects = new List<Subject> { Subject.Maths },
                     HourlyPrice = 11,
                     // HourlyPrice = tutor1.HourlyPrice,
-                    StartTime = new DateTime(2023, 12, 20, 09, 30, 0, DateTimeKind.Utc), // DateTime.UtcNow.AddDays(1),
-                    EndTime = new DateTime(2023, 12, 20, 09, 30, 0, DateTimeKind.Utc).AddHours(1), //DateTime.UtcNow.AddDays(1).AddHours(1),
+                    StartTime = new DateTime(2023, 12, 20, 09, 30, 0, DateTimeKind.Utc).AddDays(30), // DateTime.UtcNow.AddDays(1),
+                    EndTime = new DateTime(2023, 12, 20, 09, 30, 0, DateTimeKind.Utc).AddDays(30).AddHours(1), //DateTime.UtcNow.AddDays(1).AddHours(1),
 
                 },
 
