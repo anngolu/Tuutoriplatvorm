@@ -28,7 +28,7 @@ onMounted(async () => {
 
   if (authStore.isTutor()) {
     setTimeout(
-      () => router.push('/newTutor/' + accoountStore.account!.id),
+      () => router.push('/newtutor/' + accoountStore.account!.id),
       1000,
     );
   }

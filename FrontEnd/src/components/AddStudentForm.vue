@@ -1,9 +1,13 @@
 <template>
-  <div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+  <div
+    class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
+  >
     <form class="max-w-md w-full space-y-8">
       <div class="rounded-md shadow-sm -space-y-px">
         <div class="mt-8 space-y-6">
-          <h1> {{ student.id !== undefined ? 'Uuenda tudengit' : 'Lisa tudengit' }}</h1>
+          <h1>
+            {{ student.id !== undefined ? 'Uuenda tudengit' : 'Lisa tudengit' }}
+          </h1>
           <div>
             <label for="name">Nimi</label>
             <input
@@ -22,7 +26,8 @@
               name="town"
               v-model="student.stTown"
               class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-              placeholder="Linn">
+              placeholder="Linn"
+            >
               <option value="Tartu">Tartu</option>
               <option value="Tallinn">Tallinn</option>
               <option value="Narva">Narva</option>
@@ -37,12 +42,19 @@
               name="university"
               v-model="student.stUniversity"
               class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-              placeholder="Ülikool">
+              placeholder="Ülikool"
+            >
               <option value="UniversityOfTartu">University of Tartu</option>
-              <option value="TallinnTechnicalUniversity">Tallinn Technical University</option>
+              <option value="TallinnTechnicalUniversity">
+                Tallinn Technical University
+              </option>
               <option value="TallinnUniversity">Tallinn University</option>
-              <option value="TallinnCollegeOfHealth">Tallinn College Of Health</option>
-              <option value="TartuHigherArtSchool">Tartu Higher Art School</option>
+              <option value="TallinnCollegeOfHealth">
+                Tallinn College Of Health
+              </option>
+              <option value="TartuHigherArtSchool">
+                Tartu Higher Art School
+              </option>
             </select>
           </div>
 
@@ -53,7 +65,8 @@
               name="faculty"
               v-model="student.stSpeciality"
               class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-              placeholder="Fakulteet">
+              placeholder="Fakulteet"
+            >
               <option value="BusinessIt">Business It</option>
               <option value="Economics">Economics</option>
               <option value="Informatics">Informatics</option>
@@ -81,7 +94,8 @@
               name="subject"
               v-model="student.stSubject"
               class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-              placeholder="Aine">
+              placeholder="Aine"
+            >
               <option value="Economics">Economics</option>
               <option value="Maths">Maths</option>
               <option value="Programming">Programming</option>
@@ -96,7 +110,16 @@
               @click.prevent="submitForm"
               class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-900 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
-              {{ student.id !== undefined ? 'Uuenda tudengit' : 'Lisa tudengit' }}
+              {{
+                student.id !== undefined ? 'Uuenda tudengit' : 'Lisa tudengit'
+              }}
+            </button>
+          </div>
+          <div class="mt-2" v-if="student.id">
+            <button
+              class="group w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+            >
+              Kustuta tuutor
             </button>
           </div>
         </div>
@@ -118,7 +141,7 @@ const student: Ref<Student> = ref({
   stUniversity: undefined,
   stSpeciality: undefined,
   stMail: '',
-  stSubject: undefined,    
+  stSubject: undefined,
 });
 
 const { addStudent, getStudentById } = useStudentsStore();
@@ -135,8 +158,12 @@ onMounted(() => {
 });
 
 const getStudent = async (id: any) => {
-  const studentById = await getStudentById(Number(id));
-  student.value = { ...studentById };
+  if (id) {
+    const studentById = await getStudentById(Number(id));
+    student.value = { ...studentById };
+  } else {
+    student.value = {};
+  } 
 };
 
 const submitForm = () => {
@@ -148,12 +175,10 @@ const submitForm = () => {
   student.value.stSpeciality = undefined;
   student.value.stMail = '';
   student.value.stSubject = undefined
-  
+
   router.push({ name: 'Tudengid' });
 };
 </script>
 
-function useStudentStore(): { addStudent: any; } {
-  throw new Error('Function not implemented.');
-}
-@/model/student @/stores/studentsStore
+function useStudentStore(): { addStudent: any; } { throw new Error('Function not
+implemented.'); } @/model/student @/stores/studentsStore

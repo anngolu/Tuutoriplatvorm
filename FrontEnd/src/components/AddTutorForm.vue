@@ -167,8 +167,12 @@ onMounted(() => {
 });
 
 const getTutor = async (id: any) => {
+ if(id){
   const tutorById = await getTutorById(Number(id));
   tutor.value = { ...tutorById };
+ } else {
+  tutor.value = {};
+ }
 };
 
 

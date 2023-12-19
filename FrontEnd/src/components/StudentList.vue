@@ -3,7 +3,6 @@
     <div class="text-center">
       <h1 class="font-bold">Tudengite nimekiri</h1>
       <DataTable :value="students">
-        <Column field="description" header="Kirjeldus" />
         <Column field="stName" header="Nimi" />
         <Column field="stTown" header="Linn" />
         <Column field="stUniversity" header="Ülikool" />

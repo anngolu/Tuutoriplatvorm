@@ -63,6 +63,8 @@ namespace tuutoriplatvorm.Controllers
             {
                 return NotFound();
             }
+            string username = User.FindFirstValue(ClaimTypes.Name)!;
+            student.Username = username;
             _context.Update(student);
             _context.SaveChanges();
 
