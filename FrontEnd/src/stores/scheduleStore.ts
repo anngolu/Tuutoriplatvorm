@@ -20,7 +20,15 @@ export const useScheduleStore = defineStore('scheduleStore', () => {
 
   const load = async () => {
     allSchedules = await loadSchedule();
-    schedules.value = allSchedules;
+    schedules.value = allSchedules.sort((prev: Schedule, current: Schedule) => {
+      if (prev.id! > current.id!) {
+        return 1;
+      }
+      if (prev.id! < current.id!) {
+        return -1;
+      }
+      return 0;
+    });
   };
 
   const getTutorSchedule = (tutorId: number) => {
@@ -48,21 +56,35 @@ export const useScheduleStore = defineStore('scheduleStore', () => {
     }
   };
 
-  // const updateSchedule = async (schedule: Schedule) => {
-  //   const apiAddSchedule = useApi<Schedule>('schedule/' + schedule.id, {
-  //     method: 'PUT',
-  //     headers: {
-  //       Accept: 'application/json',
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify(schedule),
-  //   });
+  const registerStudent = async (scheduleId: number) => {
+    const apiUpdateSchedule = useApi<Schedule>(
+      'schedule/' + scheduleId + '/register',
+      {
+        method: 'PUT',
+        headers: {
+          Accept: 'application/json'
+        }
+      },
+    );
 
-  //   await apiAddSchedule.request();
-  //   if (apiAddSchedule.response.value) {
-  //     load();
-  //   }
-  // };
+    await apiUpdateSchedule.request();
+    load();
+  };
+
+  const unregisterStudent = async (scheduleId: number) => {
+    const apiUpdateSchedule = useApi<Schedule>(
+      'schedule/' + scheduleId + '/unregister',
+      {
+        method: 'PUT',
+        headers: {
+          Accept: 'application/json'
+        }
+      },
+    );
+
+    await apiUpdateSchedule.request();
+    load();
+  };
 
   return {
     addSchedule,
@@ -70,6 +92,7 @@ export const useScheduleStore = defineStore('scheduleStore', () => {
     load,
     getScheduleById,
     getTutorSchedule,
-    //updateSchedule,
+    registerStudent,
+    unregisterStudent,
   };
 });

@@ -1,4 +1,6 @@
+using System.Security.Claims;
 using backend.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using tuutoriplatvorm.Model;
@@ -18,13 +20,9 @@ namespace tuutoriplatvorm.Controllers
         [HttpGet]
         public IActionResult GetAllSchedule()
         {
-            //Schedule koos objektide Tutors ja Students väljadega
-            //return Ok(_context.ScheduleList!.Include(s => s.Tutor).ToList());
+            var result = _context.ScheduleList!.Include(s => s.Tutor).Include(s => s.Student).ToList();
 
-            
-           var result=_context.ScheduleList!.Include(s => s.Tutor).Include(s => s.Student).ToList();
-
-           return Ok(result);
+            return Ok(result);
 
         }
 
@@ -80,59 +78,81 @@ namespace tuutoriplatvorm.Controllers
         }
 
 
-//        [HttpGet("StudentSchedule")]
-
-        [HttpGet("StudentSchedule/{id}")]
+        [Authorize]
+        [HttpGet("Students/{id}")]
         public IActionResult GetStudentSchedule(int? id)
         {
-   
-            var innerJoin=_context.StudentList.Join(
-                        _context.ScheduleList,
-                        student=>student.Id,
-                        schedule=>schedule.StudentId,
-                    (student, schedule)=> new
-                    {
-                        schedule.Id,
-                        schedule.TutorId,
-                        schedule.Tutor.Name,
-                        schedule.Tutor.Speciality,
-                        schedule.HourlyPrice,
-                        schedule.IsPaid,
-                        schedule.Subjects,
-                        schedule.StudentId,
-                        schedule.StartTime,
-                        schedule.EndTime,
-                        student.StName
-                    });
-
-                     if (id == null)
-
-                    {
-                      return Ok(innerJoin);
-                    }       
-
-            return Ok(innerJoin.Where(innerJoin => innerJoin.StudentId.Equals(id)));
-          //return Ok(innerJoin);
-
-       }
+            var shcedule = _context.ScheduleList!
+            .Where(sl => sl.StudentId == id)
+            .Include(sl => sl.Student)
+            .Include(sl => sl.Tutor);
+            return Ok(shcedule);
+        }
 
 
-
-        [HttpPut("registerStudent/{studentId}/{scheduleId}")]
-        public IActionResult UpdateStudentIdInStudentCourses(int studentId, int scheduleId)
+        [Authorize(Roles = "Student")]
+        [HttpPut("{scheduleId}/register")]
+        public IActionResult RegisterStudentToSchedule(int scheduleId)
         {
-            // Retrieve the StudentCourses entity by its ID
-         
-            var studentCourses = _context.ScheduleList!.FirstOrDefault(x => x.Id == scheduleId);
+            var schedule = _context.ScheduleList!
+            .Where(sl => sl.Id == scheduleId)
+            .Include(sl => sl.Student)
+            .FirstOrDefault();
 
-            if (studentCourses != null)
+            if (schedule == null)
             {
-                // Update the StudentId property
-                studentCourses.StudentId = studentId;
+                return NotFound("Schedule not found");
+            }
 
-                // Save the changes to the database
-                return Ok(_context.SaveChanges());
-            }   return Ok();
+            if (schedule.Student != null)
+            {
+                return Conflict("Schedule is already booked");
+            }
+
+            string studentUsername = User.FindFirstValue(ClaimTypes.Name)!;
+
+            var student = _context.StudentList!
+                .First(s => studentUsername.Equals(s.Username));
+
+            schedule.StudentId = student.Id;
+            _context.Update(schedule);
+            _context.SaveChanges();
+            return Ok();
+        }
+
+        [Authorize(Roles = "Student")]
+        [HttpPut("{scheduleId}/unregister")]
+        public IActionResult UnregisterStudentToSchedule(int scheduleId)
+        {
+            var schedule = _context.ScheduleList!
+            .Where(sl => sl.Id == scheduleId)
+            .Include(sl => sl.Student)
+            .FirstOrDefault();
+
+            if (schedule == null)
+            {
+                return NotFound("Schedule not found");
+            }
+
+            if (schedule.StudentId == null)
+            {
+                return Ok();
+            }
+
+            string studentUsername = User.FindFirstValue(ClaimTypes.Name)!;
+
+            var student = _context.StudentList!
+                .First(s => studentUsername.Equals(s.Username));
+
+            if (schedule.StudentId != student.Id)
+            {
+                return Conflict("Schedule is not booked by current student");
+            }
+
+            schedule.StudentId = null;
+            _context.Update(schedule);
+            _context.SaveChanges();
+            return Ok();
         }
     }
 
